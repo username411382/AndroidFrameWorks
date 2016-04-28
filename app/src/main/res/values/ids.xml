@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="id_volley_load_image_tag" />
+    <item type="id" name="id_volley_resize_image_tag" />
+</resources>
