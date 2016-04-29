@@ -2,7 +2,6 @@
 <resources>
 
 
-
     <!--圆形图像的自定义-->
     <declare-styleable name="RoundedImageView">
         <attr name="riv_corner_radius" format="dimension" />
@@ -56,5 +55,20 @@
     <declare-styleable name="FlowLayout_Layout">
         <attr name="android:layout_gravity" />
     </declare-styleable>
+
+
+    <!--标题的自定义样式-->
+    <declare-styleable name="ToggleButton"> <!-- ToggleButton start -->
+        <attr name="borderWidth" format="dimension"></attr>
+        <attr name="offBorderColor" format="reference|color"></attr>
+        <attr name="offColor" format="reference|color"></attr>
+        <attr name="onColor" format="reference|color"></attr>
+        <attr name="spotColor" format="reference|color"></attr>
+    </declare-styleable>  <!-- ToggleButton end -->
+
+    <declare-styleable name="TitleView">  <!-- TitleView start -->
+        <attr name="mytitle" format="string" />
+    </declare-styleable>   <!-- TitleView end -->
+
 
 </resources>

@@ -1,14 +1,13 @@
 package com.ruihe.demo.activity;
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.ruihe.demo.common.utils.Constants.MainPage;
 import com.ruihe.demo.R;
+import com.ruihe.demo.common.utils.Constants.MainPage;
 import com.ruihe.demo.fragment.FragmentFive;
 import com.ruihe.demo.fragment.FragmentFour;
 import com.ruihe.demo.fragment.FragmentOne;
@@ -28,11 +27,13 @@ public class ActivityMain extends BaseActivity implements View.OnClickListener {
     private Fragment[] mFragments;
     private LinearLayout[] mLyPages;
 
+    @Override
+    public int getViewId() {
+        return R.layout.activity_main;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public void onActivityViewCreated() {
         initVariable();
         initView();
         initListener();
@@ -78,6 +79,7 @@ public class ActivityMain extends BaseActivity implements View.OnClickListener {
                     mFragments[0] = new FragmentOne();
                     mFragmentManager.beginTransaction().add(R.id.fy_main, mFragments[0]).commitAllowingStateLoss();
                 }
+                mTitleView.setTitle(R.string.main_first);
                 break;
             case PAGE_SECOND:
                 currentFragment = 1;
@@ -85,6 +87,7 @@ public class ActivityMain extends BaseActivity implements View.OnClickListener {
                     mFragments[1] = new FragmentTwo();
                     mFragmentManager.beginTransaction().add(R.id.fy_main, mFragments[1]).commitAllowingStateLoss();
                 }
+                mTitleView.setTitle(R.string.main_second);
                 break;
 
             case PAGE_THIRD:
@@ -93,6 +96,7 @@ public class ActivityMain extends BaseActivity implements View.OnClickListener {
                     mFragments[2] = new FragmentThree();
                     mFragmentManager.beginTransaction().add(R.id.fy_main, mFragments[2]).commitAllowingStateLoss();
                 }
+                mTitleView.setTitle(R.string.main_third);
                 break;
             case PAGE_FOURTH:
                 currentFragment = 3;
@@ -100,6 +104,7 @@ public class ActivityMain extends BaseActivity implements View.OnClickListener {
                     mFragments[3] = new FragmentFour();
                     mFragmentManager.beginTransaction().add(R.id.fy_main, mFragments[3]).commitAllowingStateLoss();
                 }
+                mTitleView.setTitle(R.string.main_fourth);
                 break;
             case PAGE_FIVE:
                 currentFragment = 4;
@@ -107,6 +112,7 @@ public class ActivityMain extends BaseActivity implements View.OnClickListener {
                     mFragments[4] = new FragmentFive();
                     mFragmentManager.beginTransaction().add(R.id.fy_main, mFragments[4]).commitAllowingStateLoss();
                 }
+                mTitleView.setTitle(R.string.main_fifth);
                 break;
             default:
                 break;

@@ -13,19 +13,34 @@ public class FragmentFive extends BaseFragment {
 
 
     @Override
-    public void getFragmentView(View view, Bundle savedInstanceState) {
+    public void onAttached() {
 
     }
+
+
+    @Override
+    public void getFragmentView(View view, Bundle savedInstanceState) {
+
+        initView();
+        bindData();
+    }
+
 
     @Override
     public int getContentViewId() {
         return R.layout.fragment_five;
     }
 
-    @Override
-    public void onAttached() {
+
+    private void initView() {
 
     }
+
+    private void bindData() {
+        holder.mTitleView.removeAllMenu();
+        holder.mTitleView.setTitle(R.string.main_fifth);
+    }
+
 
     @Override
     public void onDetached() {
@@ -33,9 +48,7 @@ public class FragmentFive extends BaseFragment {
     }
 
 
-    private void initView() {
 
-    }
 
 
 }

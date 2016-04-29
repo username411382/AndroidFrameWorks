@@ -15,6 +15,8 @@ public class FragmentTwo extends BaseFragment {
     @Override
     public void getFragmentView(View view, Bundle savedInstanceState) {
 
+        bindData();
+
     }
 
     @Override
@@ -32,6 +34,12 @@ public class FragmentTwo extends BaseFragment {
 
     }
 
+
+    private void bindData() {
+        holder.mTitleView.removeAllMenu();
+        holder.mTitleView.setTitle(R.string.main_second);
+
+    }
 
     private void initView() {
 

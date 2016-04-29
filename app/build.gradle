@@ -25,7 +25,7 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:support-v4:24.0.0-alpha1'
     compile files('libs/xUtils-2.6.13.jar')
     compile 'eu.the4thfloor.volley:com.android.volley:2015.05.28'
+    compile files('libs/android-support-v4.jar')
 }

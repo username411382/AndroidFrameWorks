@@ -80,7 +80,7 @@ public class DensityUtil {
     }
 
     /**
-     * dp
+     * 设置大小dp
      */
     public static int dip(Context context, int value) {
         DisplayMetrics dm = context.getResources().getDisplayMetrics();

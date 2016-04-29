@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ruihe.demo.activity.BaseActivity;
+
 /**
  * 描述：所有碎片的基类
  * Created by ruihe on 2016/4/28.
@@ -14,10 +16,13 @@ import android.view.ViewGroup;
 public abstract class BaseFragment extends Fragment {
 
 
+    public BaseActivity holder;
+
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
+        holder = (BaseActivity) context;
         onAttached();
     }
 
@@ -37,6 +42,7 @@ public abstract class BaseFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         onDetached();
+        holder = null;
     }
 
 

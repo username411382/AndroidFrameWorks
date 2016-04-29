@@ -18,6 +18,15 @@ public class FragmentOne extends BaseFragment {
     @Override
     public void getFragmentView(View view, Bundle savedInstanceState) {
 
+        initView();
+        bindData();
+
+    }
+
+    private void bindData() {
+        holder.mTitleView.removeAllMenu();
+        holder.mTitleView.setTitle(R.string.main_first);
+
     }
 
     @Override

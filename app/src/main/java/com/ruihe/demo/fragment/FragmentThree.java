@@ -13,8 +13,14 @@ public class FragmentThree extends BaseFragment {
 
 
     @Override
-    public void getFragmentView(View view, Bundle savedInstanceState) {
+    public void onAttached() {
 
+    }
+
+    @Override
+    public void getFragmentView(View view, Bundle savedInstanceState) {
+        initView();
+        bindData();
     }
 
     @Override
@@ -22,20 +28,21 @@ public class FragmentThree extends BaseFragment {
         return R.layout.fragment_three;
     }
 
-    @Override
-    public void onAttached() {
+
+    private void bindData() {
+        holder.mTitleView.removeAllMenu();
+        holder.mTitleView.setTitle(R.string.main_third);
 
     }
-
-    @Override
-    public void onDetached() {
-
-    }
-
 
     private void initView() {
 
     }
 
+
+    @Override
+    public void onDetached() {
+
+    }
 
 }

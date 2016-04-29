@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">My Application</string>
+
+
+    <!--主页菜单栏标签-->
+
+    <string name="main_first">Venus</string>
+    <string name="main_second">mercury</string>
+    <string name="main_third">Venus</string>
+    <string name="main_fourth">Mars</string>
+    <string name="main_fifth">Saturn</string>
+
+
 </resources>
