@@ -11,4 +11,19 @@
     <string name="main_fifth">Saturn</string>
 
 
+    <!--ijkplayer-->
+    <string name="vitamio_name">Vitamio</string>
+    <string name="vitamio_init_decoders">Initializing decoders…</string>
+    <string name="vitamio_videoview_error_title">提示</string>
+    <string name="vitamio_videoview_error_text_invalid_progressive_playback">抱歉,该视频格式有问题不能播放.</string>
+    <string name="vitamio_videoview_error_text_unknown">视频播放出问题啦</string>
+    <string name="vitamio_videoview_error_button">知道了</string>
+    <string name="mediacontroller_play_pause">Play/Pause</string>
+
+
+    <!--对话框-->
+    <string name="cancel">取消</string>
+    <string name="confirm">确认</string>
+
+
 </resources>

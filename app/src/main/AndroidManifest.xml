@@ -22,6 +22,10 @@
         </activity>
 
 
+        <!--视频播放-->
+        <activity android:name=".common.utils.ijkPlayer.ActivityVideoPlayer" />
+
+
     </application>
 
 </manifest>

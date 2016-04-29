@@ -17,6 +17,7 @@
     <integer name="cpv_default_anim_steps">3</integer>
 
     <dimen name="text_size_large_small">14sp</dimen>
-
+    <dimen name="text_size_large">16sp</dimen>
+    <dimen name="text_size_title">18sp</dimen>
 
 </resources>

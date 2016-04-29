@@ -8,5 +8,14 @@
     <color name="txt_gray">#cccccc</color>
     <color name="bg_clickable_pressed_gray">#ebebeb</color>
     <color name="white">#ffffff</color>
+    <color name="pressed_black">#4000</color>
+    <color name="transparent">#00000000</color>
+
+
+    <!--自定义对话框颜色背景-->
+    <color name="title_black">#2c2c2c</color>
+    <color name="grayline">#e5e5e5</color>
+    <color name="bg_gray">#E6E6E6</color>
+    <color name="dialog_bg">#f0f0f0</color>
 
 </resources>

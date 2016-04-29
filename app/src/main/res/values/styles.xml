@@ -5,4 +5,47 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
+
+    <!-- dialog的通用style -->
+    <style name="CustomDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">#00000000</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <!--弹出窗动画-->
+    <style name="dialogWindowAnim" parent="android:Animation" mce_bogus="1">
+        <item name="android:windowEnterAnimation">@anim/activity_enter_bottom_to_top</item>
+    </style>
+
+
+    <!--视频播放的底部控制条-->
+    <style name="video_controller_bar_bottom">
+        <item name="android:windowEnterAnimation">@anim/anim_video_controller_bar_in</item>
+        <item name="android:windowExitAnimation">@anim/anim_video_controller_bar_out</item>
+    </style>
+
+
+    <style name="MediaController_SeekBar" parent="android:Widget.SeekBar">
+        <item name="android:progressDrawable">@drawable/scrubber_progress_horizontal_holo_dark
+        </item>
+        <item name="android:indeterminateDrawable">
+            @drawable/scrubber_progress_horizontal_holo_dark
+        </item>
+        <item name="android:minHeight">13dip</item>
+        <item name="android:maxHeight">13dip</item>
+        <item name="android:thumb">@drawable/scrubber_control_selector_holo</item>
+        <item name="android:thumbOffset">16dip</item>
+        <item name="android:paddingLeft">16dip</item>
+        <item name="android:paddingRight">16dip</item>
+    </style>
+
+    <style name="MediaController_Text">
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>
