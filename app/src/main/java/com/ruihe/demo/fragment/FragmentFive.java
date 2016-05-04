@@ -62,7 +62,7 @@ public class FragmentFive extends BaseFragment implements View.OnClickListener {
         switch (v.getId()) {
 
             case R.id.tv:
-                ActivityVideoPlayer.redirectToActivity(holder, "测试标题", "http://7xsg5m.media1.z0.glb.clouddn.com/fish_2jtjf.mp4");
+                ActivityVideoPlayer.redirectToActivity(holder, "http://7xsg5m.media1.z0.glb.clouddn.com/fish_2jtjf.mp4");
                 break;
             default:
                 break;
