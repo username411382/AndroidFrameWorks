@@ -6,19 +6,12 @@
 
 
     <LinearLayout
+        android:id="@+id/ly_item_column"
         android:layout_width="match_parent"
-        android:layout_height="47dp"
-        android:background="#dedede"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_height="36dp"
+        android:background="@drawable/selector_list_view_item_bg"
+        android:gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/tv_package_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="5dp"
-            android:text="套餐内容"
-            android:textSize="14sp" />
 
         <LinearLayout
             android:id="@+id/ly_head"
@@ -29,7 +22,8 @@
             <TextView
                 android:id="@+id/tv_tab_head_food_name"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="套餐" />
 
             <TextView
                 android:id="@+id/tv_tab_head_food_price"
@@ -43,6 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="数量/规格"
+                android:gravity="center"
                 android:textSize="14sp" />
 
             <TextView
@@ -56,24 +51,10 @@
 
     </LinearLayout>
 
-
-    <RelativeLayout
+    <View
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/ry_column_package"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipToPadding="false" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/ry_column_food"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipToPadding="false" />
-
-    </RelativeLayout>
+        android:layout_height="1dp"
+        android:background="#dedede" />
 
 
 </LinearLayout>
