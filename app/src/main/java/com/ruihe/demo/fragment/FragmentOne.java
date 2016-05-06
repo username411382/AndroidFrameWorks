@@ -172,10 +172,58 @@ public class FragmentOne extends BaseFragment {
         if (arrays == null || arrays.length == 0) {
             return;
         }
+        sort(arrays, 0, arrays.length - 1);
 
-        int keyPosotion = 0;
-        int keyValue = arrays[0];
+        if (strBuffer.length() > 0)
+            strBuffer.delete(0, strBuffer.length());
+        strBuffer.append("快速排序后:");
+        for (int a : arrays) {
+            strBuffer.append(a);
+            strBuffer.append(",");
+        }
+        tvSortAfter.setText(strBuffer);
+    }
 
+
+    //快速排序划分
+    private int divideArray(int[] array, int left, int right) {
+
+
+        int keyPosition = left;
+        int keyValue = array[left];
+
+        while (left < right) {
+
+            while (left < right && array[right] >= keyValue) {
+                right--;
+            }
+            // array[left] = array[right];
+            while (left < right && array[left] <= keyValue) {
+                left++;
+            }
+            // array[right] = array[left];
+            swap(array, left, right);
+        }
+
+        // array[left] = keyValue;
+
+        swap(array, keyPosition, left);
+
+        return left;
+
+    }
+
+
+    private void sort(int[] array, int left, int right) {
+
+        if (left >= right) {
+            return;
+        }
+
+        int meetingLocation = divideArray(array, left, right);
+
+        sort(array, 0, meetingLocation - 1);
+        sort(array, meetingLocation + 1, right);
 
     }
 
@@ -210,6 +258,7 @@ public class FragmentOne extends BaseFragment {
                 case 3:
                     tvSortIntroduce.setText("快速排序一听名字就觉得很高端，在实际应用当中快速排序确实也是表现最好的排序算法。快速排序虽然高端，但其实其思想是来自冒泡排序，冒泡排序是通过相邻元素的比较和交换把最小的冒泡到最顶端，而快速排序是比较和交换小数和大数，这样一来不仅把小数冒泡到上面同时也把大数沉到下面。");
                     quickSort(mArray);
+
                     break;
                 default:
                     break;
