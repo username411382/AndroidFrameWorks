@@ -1,1 +1,1 @@
-include ':app', 'extrasLib:Ijkplayer'
+include ':app', 'extrasLib:ShareSdk', 'extrasLib:Ijkplayer'

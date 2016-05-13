@@ -3,6 +3,8 @@ package com.ruihe.demo.fragment;
 import android.os.Bundle;
 import android.view.View;
 
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.MapView;
 import com.ruihe.demo.R;
 
 /**
@@ -12,8 +14,17 @@ import com.ruihe.demo.R;
 public class FragmentTwo extends BaseFragment {
 
 
+    private MapView mMapView;
+    public static BaiduMap mBaiduMap;
+
+
     @Override
     public void getFragmentView(View view, Bundle savedInstanceState) {
+
+        mMapView = (MapView) view.findViewById(R.id.view_mapView);
+        mBaiduMap = mMapView.getMap();
+        mMapView.showZoomControls(false);
+
 
         bindData();
 
@@ -38,10 +49,6 @@ public class FragmentTwo extends BaseFragment {
     private void bindData() {
         holder.mTitleView.removeAllMenu();
         holder.mTitleView.setTitle(R.string.main_second);
-
-    }
-
-    private void initView() {
 
     }
 

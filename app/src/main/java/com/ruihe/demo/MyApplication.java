@@ -4,6 +4,8 @@ import android.app.Application;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.baidu.mapapi.SDKInitializer;
+import com.liulishuo.filedownloader.FileDownloader;
 
 /**
  * 描述：全局的Application
@@ -25,5 +27,13 @@ public class MyApplication extends Application {
         super.onCreate();
         instance = this;
         mQueue = Volley.newRequestQueue(this);
+
+        /**
+         * 仅仅是缓存Application的Context，不耗时
+         */
+        FileDownloader.init(getApplicationContext());
+
+        SDKInitializer.initialize(getApplicationContext());
+
     }
 }
