@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.Locale;
 
 @SuppressLint("SimpleDateFormat")
-public class DateUtils {
+public class DateUtil {
 
     // 获取当前日期
     @SuppressLint("SimpleDateFormat")

@@ -1,8 +1,12 @@
 package com.ruihe.demo.common.utils.trace;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Looper;
+import android.os.PowerManager;
+import android.telephony.TelephonyManager;
 
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
@@ -22,7 +26,6 @@ import com.baidu.trace.OnStopTraceListener;
 import com.baidu.trace.Trace;
 import com.baidu.trace.TraceLocation;
 import com.ruihe.demo.R;
-import com.ruihe.demo.common.utils.trace.;
 import com.ruihe.demo.common.utils.ToastUtils;
 import com.ruihe.demo.fragment.FragmentTwo;
 
@@ -39,50 +42,49 @@ import java.util.List;
 public class TraceUtils {
 
 
-    public static TraceUtils instance = null;
-
-    //采集周期（单位 : 秒）
-    private int gatherInterval = 2;
-    //轨迹服务
-    protected Trace trace;
-
-    //entity标识
-    protected String entityName;
-
     //鹰眼服务ID，开发者创建的鹰眼服务对应的服务ID
-    protected static long serviceId = 116664;
+    public static long SERVICE_ID = 116664;
+    //采集周期（单位 : 秒）
+    private static int GATHER_INTERVAL = 2;
+    //打包周期（单位:秒）
+    private static int PACK_INTERVAL = 4;
 
+    public static TraceUtils instance;
+    //轨迹服务
+    public Trace trace;
+    //entity标识
+    public String mEntityName;
     // 轨迹服务类型（0 : 不建立socket长连接， 1 : 建立socket长连接但不上传位置数据，2 : 建立socket长连接并上传位置数据）
     private int traceType = 2;
-
     //轨迹服务客户端
-    protected LBSTraceClient mClient;
-
+    public LBSTraceClient mClient;
     //Entity监听器
     protected OnEntityListener entityListener;
-
-    private List<LatLng> pointList = new ArrayList<>();
-    protected boolean isInUploadFragment = true;
-    private BitmapDescriptor realTimeBitmap;
-    protected MapStatusUpdate msUpdate = null;
-    protected boolean isTraceStart = false;
     // 覆盖物
     protected OverlayOptions overlay;
     // 路线覆盖物
     private PolylineOptions polyline;
     //刷新地图线程(获取实时点)
     protected RefreshThread refreshThread;
+
     private Context mContext;
+    private List<LatLng> pointList = new ArrayList<>();
+    protected boolean isInUploadFragment = true;
+    private BitmapDescriptor realTimeBitmap;
+    protected MapStatusUpdate msUpdate;
+    protected boolean isTraceStart;
+    private Intent serviceIntent;
+    private static boolean isRegister;
+    protected PowerManager pm;
+    protected PowerManager.WakeLock wakeLock;
+    private PowerReceiver powerReceiver = new PowerReceiver();
 
-    /**
-     * 开启轨迹服务监听器
-     */
-    protected OnStartTraceListener startTraceListener = null;
 
-    /**
-     * 停止轨迹服务监听器
-     */
-    protected OnStopTraceListener stopTraceListener = null;
+    //开启轨迹服务监听器
+    protected OnStartTraceListener startTraceListener;
+
+    // 停止轨迹服务监听器
+    protected OnStopTraceListener stopTraceListener;
 
 
     public static TraceUtils getInstance() {
@@ -96,21 +98,14 @@ public class TraceUtils {
 
     public void initTraceParameters(Context context) {
         mContext = context;
-
-        // 初始化轨迹服务客户端
         mClient = new LBSTraceClient(mContext);
-
-        // 设置定位模式
         mClient.setLocationMode(LocationMode.High_Accuracy);
-
-        // 初始化entity标识
-        entityName = DateUtils.getStringByFormat(System.currentTimeMillis(), "yyyy-MM-dd HH:mm:ss");
-
-        // 初始化轨迹服务
-        trace = new Trace(mContext, serviceId, entityName, traceType);
-
-        // 初始化OnEntityListener
+        mEntityName = "ruihe";
+        trace = new Trace(mContext, SERVICE_ID, mEntityName, traceType);
+        mClient.setInterval(GATHER_INTERVAL, PACK_INTERVAL);
+        mClient.setProtocolType(0);//http请求协议
         initOnEntityListener();
+        initTraceListener();
     }
 
 
@@ -146,6 +141,15 @@ public class TraceUtils {
     }
 
 
+    /**
+     * 初始化轨迹监听
+     */
+    private void initTraceListener() {
+        initOnStartTraceListener();
+        initOnStopTraceListener();
+    }
+
+
     //显示实时轨迹
     protected void showRealTimeTrack(TraceLocation location) {
 
@@ -170,12 +174,10 @@ public class TraceUtils {
                         CoordinateConverter();
                 converter.from(CoordinateConverter.CoordType.GPS);
                 converter.coord(sourceLatLng);
-                latLng =
-                        converter.convert();
+                latLng = converter.convert();
             }
 
             pointList.add(latLng);
-
             if (isInUploadFragment) {
                 // 绘制实时点
                 drawRealTimePoint(latLng);
@@ -222,21 +224,21 @@ public class TraceUtils {
             FragmentTwo.mBaiduMap.addOverlay(polyline);
         }
 
-    /*    // 围栏覆盖物
+      /*  // 围栏覆盖物
         if (null != Geofence.fenceOverlay) {
             MainActivity.mBaiduMap.addOverlay(Geofence.fenceOverlay);
-        }
+        }*/
 
         // 实时点覆盖物
         if (null != overlay) {
-            MainActivity.mBaiduMap.addOverlay(overlay);
-        }*/
+            FragmentTwo.mBaiduMap.addOverlay(overlay);
+        }
     }
 
 
     //查询实时轨迹
     private void queryRealTimeLoc() {
-        mClient.queryRealtimeLoc(serviceId, entityListener);
+        mClient.queryRealtimeLoc(SERVICE_ID, entityListener);
     }
 
 
@@ -251,7 +253,7 @@ public class TraceUtils {
                 // 查询实时位置
                 queryRealTimeLoc();
                 try {
-                    Thread.sleep(gatherInterval * 1000);
+                    Thread.sleep(GATHER_INTERVAL * 1000);
                 } catch (InterruptedException e) {
                     System.out.println("线程休眠失败");
                 }
@@ -264,9 +266,9 @@ public class TraceUtils {
     /**
      * 开启轨迹服务
      */
-    private void startTrace() {
+    public void startTrace() {
         // 通过轨迹服务客户端client开启轨迹服务
-        client.startTrace(trace, startTraceListener);
+        mClient.startTrace(trace, startTraceListener);
 
         if (!MonitorService.isRunning) {
             // 开启监听service
@@ -274,19 +276,44 @@ public class TraceUtils {
             MonitorService.isRunning = true;
             startMonitorService();
         }
+
+        if (!isRegister) {
+            if (null == pm) {
+                pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
+            }
+            if (null == wakeLock) {
+                wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "track upload");
+            }
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(Intent.ACTION_SCREEN_OFF);
+            filter.addAction(Intent.ACTION_SCREEN_ON);
+            mContext.registerReceiver(powerReceiver, filter);
+            isRegister = true;
+        }
+
     }
 
     /**
      * 停止轨迹服务
      */
-    private void stopTrace() {
+    public void stopTrace() {
         // 通过轨迹服务客户端client停止轨迹服务
-        client.stopTrace(trace, stopTraceListener);
+        mClient.stopTrace(trace, stopTraceListener);
 
         // 停止监听service
         MonitorService.isCheck = false;
         MonitorService.isRunning = false;
-        MainActivity.mContext.stopService(serviceIntent);
+        mContext.stopService(serviceIntent);
+
+        if (isRegister) {
+            try {
+                mContext.unregisterReceiver(powerReceiver);
+                isRegister = false;
+            } catch (Exception e) {
+            }
+        }
+
+
     }
 
 
@@ -302,20 +329,19 @@ public class TraceUtils {
                 ToastUtils.show("开启轨迹服务回调接口消息 [消息编码 : " + arg0 + "，消息内容 : " + arg1 + "]");
                 if (0 == arg0 || 10006 == arg0 || 10008 == arg0 || 10009 == arg0) {
                     isTraceStart = true;
-                    // startRefreshThread(true);
+                    startRefreshThread(true);
                 }
             }
 
             // 轨迹服务推送接口（用于接收服务端推送消息，arg0 : 消息类型，arg1 : 消息内容，详情查看类参考）
             public void onTracePushCallback(byte arg0, String arg1) {
-                // TODO Auto-generated method stub
                 if (0x03 == arg0) {
                     try {
                         JSONObject dataJson = new JSONObject(arg1);
                         if (null != dataJson) {
                             String mPerson = dataJson.getString("monitored_person");
                             String action = dataJson.getInt("action") == 1 ? "进入" : "离开";
-                            String date = DateUtils.getDate(dataJson.getInt("time"));
+                            String date = DateUtil.getDate(dataJson.getInt("time"));
                             ToastUtils.show("监控对象[" + mPerson + "]于" + date + " 【" + action + "】围栏");
                         }
 
@@ -352,6 +378,14 @@ public class TraceUtils {
         };
     }
 
+
+    public void startMonitorService() {
+        serviceIntent = new Intent(mContext,
+                MonitorService.class);
+        mContext.startService(serviceIntent);
+    }
+
+
     protected void startRefreshThread(boolean isStart) {
         if (null == refreshThread) {
             refreshThread = new RefreshThread();
@@ -364,6 +398,19 @@ public class TraceUtils {
         } else {
             refreshThread = null;
         }
+    }
+
+    //获取设备IMEI码
+    public String getImei(Context context) {
+        String mImei = "NULL";
+        try {
+            mImei = ((TelephonyManager) context
+                    .getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
+        } catch (Exception e) {
+            System.out.println("获取IMEI码失败");
+            mImei = "NULL";
+        }
+        return mImei;
     }
 
 
