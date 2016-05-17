@@ -139,8 +139,7 @@ public class TitleView extends FrameLayout {
 
 
     //标题栏右侧加文字
-    public void addRightText(Activity context,
-                             OnClickListener onMenuClickListener, String text) {
+    public void addRightText(OnClickListener onMenuClickListener, String text) {
         textRight.setVisibility(View.VISIBLE);
         textRight.setOnClickListener(onMenuClickListener);
         textRight.setText(text);
@@ -185,7 +184,7 @@ public class TitleView extends FrameLayout {
         button.setText(textId);
         button.setTextSize(16);
         button.setGravity(Gravity.CENTER);
-        button.setTextColor(Color.GRAY);
+        button.setTextColor(Color.BLACK);
         button.setBackgroundColor(Color.TRANSPARENT);
 
         LinearLayout.LayoutParams btnLP = new LinearLayout.LayoutParams(
@@ -206,6 +205,10 @@ public class TitleView extends FrameLayout {
     }
 
     public void removeAllLeftMenu() {
+
+        if (textRight.getVisibility() == VISIBLE) {
+            textRight.setVisibility(INVISIBLE);
+        }
         layLeft.removeAllViews();
     }
 

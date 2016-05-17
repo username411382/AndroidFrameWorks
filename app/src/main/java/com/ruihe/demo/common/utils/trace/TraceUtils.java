@@ -4,9 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
+import android.os.Handler;
 import android.os.Looper;
 import android.os.PowerManager;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
@@ -23,9 +25,12 @@ import com.baidu.trace.LocationMode;
 import com.baidu.trace.OnEntityListener;
 import com.baidu.trace.OnStartTraceListener;
 import com.baidu.trace.OnStopTraceListener;
+import com.baidu.trace.OnTrackListener;
 import com.baidu.trace.Trace;
 import com.baidu.trace.TraceLocation;
 import com.ruihe.demo.R;
+import com.ruihe.demo.bean.ItemTrace;
+import com.ruihe.demo.common.utils.DateUtils;
 import com.ruihe.demo.common.utils.ToastUtils;
 import com.ruihe.demo.fragment.FragmentTwo;
 
@@ -34,6 +39,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 描述：百度轨迹工具类
@@ -41,6 +47,8 @@ import java.util.List;
  */
 public class TraceUtils {
 
+    public static int SIMPLE_RETURN_ONLY_DISTANCE = 2;
+    public static int IS_PROCESSED_SURE = 1;
 
     //鹰眼服务ID，开发者创建的鹰眼服务对应的服务ID
     public static long SERVICE_ID = 116664;
@@ -72,20 +80,25 @@ public class TraceUtils {
     protected boolean isInUploadFragment = true;
     private BitmapDescriptor realTimeBitmap;
     protected MapStatusUpdate msUpdate;
-    protected boolean isTraceStart;
     private Intent serviceIntent;
     private static boolean isRegister;
-    protected PowerManager pm;
-    protected PowerManager.WakeLock wakeLock;
-    private PowerReceiver powerReceiver = new PowerReceiver();
-
+    protected PowerManager mPower;
+    protected PowerManager.WakeLock mWakeLock;
+    private PowerReceiver mPowerReceiver;
+    public long mQueryTraceStartTime;
+    public long mQueryTraceEndTime;
+    private ItemTrace mItemTrace;
 
     //开启轨迹服务监听器
     protected OnStartTraceListener startTraceListener;
-
     // 停止轨迹服务监听器
     protected OnStopTraceListener stopTraceListener;
 
+    private QueryDistanceRunnable mQueryDistanceRunnable;
+
+
+    public Handler mHandler = new Handler();
+    private OnReceiveTraceDistanceListener mOnReceiveTraceDistance;
 
     public static TraceUtils getInstance() {
 
@@ -98,6 +111,8 @@ public class TraceUtils {
 
     public void initTraceParameters(Context context) {
         mContext = context;
+        mQueryTraceStartTime = System.currentTimeMillis() / 1000;
+        mPowerReceiver = new PowerReceiver();
         mClient = new LBSTraceClient(mContext);
         mClient.setLocationMode(LocationMode.High_Accuracy);
         mEntityName = "ruihe";
@@ -224,9 +239,9 @@ public class TraceUtils {
             FragmentTwo.mBaiduMap.addOverlay(polyline);
         }
 
-      /*  // 围栏覆盖物
-        if (null != Geofence.fenceOverlay) {
-            MainActivity.mBaiduMap.addOverlay(Geofence.fenceOverlay);
+        // 围栏覆盖物
+       /* if (null != Geofence.fenceOverlay) {
+            mBaiduMap.addOverlay(Geofence.fenceOverlay);
         }*/
 
         // 实时点覆盖物
@@ -239,27 +254,6 @@ public class TraceUtils {
     //查询实时轨迹
     private void queryRealTimeLoc() {
         mClient.queryRealtimeLoc(SERVICE_ID, entityListener);
-    }
-
-
-    protected class RefreshThread extends Thread {
-
-        protected boolean refresh = true;
-
-        @Override
-        public void run() {
-            Looper.prepare();
-            while (refresh) {
-                // 查询实时位置
-                queryRealTimeLoc();
-                try {
-                    Thread.sleep(GATHER_INTERVAL * 1000);
-                } catch (InterruptedException e) {
-                    System.out.println("线程休眠失败");
-                }
-            }
-            Looper.loop();
-        }
     }
 
 
@@ -278,16 +272,16 @@ public class TraceUtils {
         }
 
         if (!isRegister) {
-            if (null == pm) {
-                pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
+            if (null == mPower) {
+                mPower = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
             }
-            if (null == wakeLock) {
-                wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "track upload");
+            if (null == mWakeLock) {
+                mWakeLock = mPower.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "track upload");
             }
             IntentFilter filter = new IntentFilter();
             filter.addAction(Intent.ACTION_SCREEN_OFF);
             filter.addAction(Intent.ACTION_SCREEN_ON);
-            mContext.registerReceiver(powerReceiver, filter);
+            mContext.registerReceiver(mPowerReceiver, filter);
             isRegister = true;
         }
 
@@ -307,11 +301,12 @@ public class TraceUtils {
 
         if (isRegister) {
             try {
-                mContext.unregisterReceiver(powerReceiver);
+                mContext.unregisterReceiver(mPowerReceiver);
                 isRegister = false;
             } catch (Exception e) {
             }
         }
+        removeQueryDistanceRunnable();
 
 
     }
@@ -328,7 +323,6 @@ public class TraceUtils {
             public void onTraceCallback(int arg0, String arg1) {
                 ToastUtils.show("开启轨迹服务回调接口消息 [消息编码 : " + arg0 + "，消息内容 : " + arg1 + "]");
                 if (0 == arg0 || 10006 == arg0 || 10008 == arg0 || 10009 == arg0) {
-                    isTraceStart = true;
                     startRefreshThread(true);
                 }
             }
@@ -366,7 +360,6 @@ public class TraceUtils {
             // 轨迹服务停止成功
             public void onStopTraceSuccess() {
                 ToastUtils.show("停止轨迹服务成功");
-                isTraceStart = false;
                 startRefreshThread(false);
             }
 
@@ -411,6 +404,96 @@ public class TraceUtils {
             mImei = "NULL";
         }
         return mImei;
+    }
+
+
+    public void queryHistoryTrack(OnReceiveTraceDistanceListener onReceiveTraceDistance) {
+        mOnReceiveTraceDistance = onReceiveTraceDistance;
+        mQueryTraceStartTime = System.currentTimeMillis() / 1000;
+
+        if (mQueryDistanceRunnable == null) {
+            mQueryDistanceRunnable = new QueryDistanceRunnable();
+        }
+        mHandler.post(mQueryDistanceRunnable);
+    }
+
+
+    private void removeQueryDistanceRunnable() {
+        mHandler.removeCallbacks(mQueryDistanceRunnable);
+    }
+
+    protected class RefreshThread extends Thread {
+
+        protected boolean refresh = true;
+
+        @Override
+        public void run() {
+            Looper.prepare();
+            while (refresh) {
+                // 查询实时位置
+                queryRealTimeLoc();
+                try {
+                    Thread.sleep(GATHER_INTERVAL * 1000);
+                } catch (InterruptedException e) {
+                    System.out.println("线程休眠失败");
+                }
+            }
+            Looper.loop();
+        }
+    }
+
+
+    private class QueryDistanceRunnable implements Runnable {
+
+        @Override
+        public void run() {
+            mQueryTraceEndTime = System.currentTimeMillis() / 1000;
+            mClient.queryProcessedHistoryTrack(SERVICE_ID, mEntityName, SIMPLE_RETURN_ONLY_DISTANCE, IS_PROCESSED_SURE,
+                    1463389200, (int) mQueryTraceEndTime, 1000, 1, new OnTrackListener() {
+                        @Override
+                        public void onRequestFailedCallback(String s) {
+                        }
+
+                        @Override
+                        public void onQueryHistoryTrackCallback(String s) {
+                            super.onQueryHistoryTrackCallback(s);
+
+                            Log.d("ruihe", "------轨迹Json-------" + s);
+                            try {
+                                JSONObject jsonData = new JSONObject(s);
+
+                                if (jsonData.getInt("status") == 0) {
+
+                                    Double traceDistance = jsonData.getDouble("distance");
+                                    if (traceDistance > 1.0) {
+                                        realTimeBitmap = BitmapDescriptorFactory
+                                                .fromResource(R.drawable.ic_trace_go);
+                                    }
+                                    String distance = String.format("%.2f", traceDistance);
+                                    if (mItemTrace == null) {
+                                        mItemTrace = new ItemTrace();
+                                    }
+                                    mItemTrace.totalDistance = distance;
+                                    mItemTrace.totalTime = DateUtils.getStringByFormat(mQueryTraceEndTime * 1000 - mQueryTraceStartTime * 1000, "mm:ss");
+                                    mOnReceiveTraceDistance.getDistance(mItemTrace);
+                                }
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        @Override
+                        public Map onTrackAttrCallback() {
+                            return super.onTrackAttrCallback();
+                        }
+                    });
+            mHandler.postDelayed(this, 5000);
+        }
+    }
+
+    public interface OnReceiveTraceDistanceListener {
+        void getDistance(ItemTrace itemTrace);
     }
 
 

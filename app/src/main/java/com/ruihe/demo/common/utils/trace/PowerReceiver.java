@@ -14,13 +14,13 @@ public class PowerReceiver extends BroadcastReceiver {
 
         if (Intent.ACTION_SCREEN_OFF.equals(action)) {
             System.out.println("screen off,acquire wake lock!");
-            if (null != TraceUtils.getInstance().wakeLock && !(TraceUtils.getInstance().wakeLock.isHeld())) {
-                TraceUtils.getInstance().wakeLock.acquire();
+            if (null != TraceUtils.getInstance().mWakeLock && !(TraceUtils.getInstance().mWakeLock.isHeld())) {
+                TraceUtils.getInstance().mWakeLock.acquire();
             }
         } else if (Intent.ACTION_SCREEN_ON.equals(action)) {
             System.out.println("screen on,release wake lock!");
-            if (null != TraceUtils.getInstance().wakeLock && TraceUtils.getInstance().wakeLock.isHeld()) {
-                TraceUtils.getInstance().wakeLock.release();
+            if (null != TraceUtils.getInstance().mWakeLock && TraceUtils.getInstance().mWakeLock.isHeld()) {
+                TraceUtils.getInstance().mWakeLock.release();
             }
         }
     }

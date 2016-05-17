@@ -33,7 +33,7 @@ public class FragmentOne extends BaseFragment {
         tvSortAfter = (TextView) view.findViewById(R.id.tv_sort_after);
         lySortType = (LinearLayout) view.findViewById(R.id.ly_sort_type);
 
-        holder.mTitleView.addRightText(holder, new View.OnClickListener() {
+        holder.mTitleView.addRightText(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 tvSortAfter.setText("排序后:");
