@@ -15,4 +15,12 @@ public class Constants {
     }
 
 
+    public static String URL_ROOT = getRootUrl();// 请求地址
+    public static final String API_LOGIN = "/app/login";//登录接口
+
+    public static String getRootUrl() {
+        return "";
+    }
+
+
 }

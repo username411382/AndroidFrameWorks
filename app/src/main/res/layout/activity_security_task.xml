@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ededed"
+    android:orientation="vertical">
+
+    <com.ruihe.demo.common.utils.view.TitleView
+        android:id="@+id/common_title_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_security_task_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.ruihe.demo.common.utils.view.FooterListView
+                android:id="@+id/foot_lv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="#ededed"
+                android:dividerHeight="10dp"
+                android:paddingTop="10dp"
+                android:scrollbars="none" />
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <LinearLayout
+            android:id="@+id/ly_empty_page"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="92dp"
+                android:layout_height="92dp"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_no_security_task" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:text="暂无任务"
+                android:textColor="#b5b5b5"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

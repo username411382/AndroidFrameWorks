@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.ruihe.demo.common.utils.view.TitleView
+        android:id="@+id/common_title_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.baidu.mapapi.map.MapView
+            android:id="@+id/view_mapView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true" />
+
+
+        <RelativeLayout
+            android:layout_width="280dp"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp">
+
+            <SeekBar
+                android:id="@+id/seek_move_shot_map"
+                style="@style/style_slide_to_right_unlock"
+                android:layout_width="280dp"
+                android:layout_height="60dp"
+                android:alpha="0.8"
+                android:padding="0dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.8"
+                android:gravity="center"
+                android:paddingLeft="35dip"
+                android:text="右滑完成任务"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/ry_reminder_view"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:background="#50cd6d">
+
+            <ImageView
+                android:id="@+id/iv_trace_record_ing"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ic_map_record" />
+
+            <TextView
+                android:id="@+id/tv_trace_record_ing"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/iv_trace_record_ing"
+                android:gravity="center_vertical"
+                android:text="正在记录"
+                android:textColor="@color/white"
+                android:textSize="13sp" />
+
+
+            <TextView
+                android:id="@+id/tv_trace_time"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:gravity="center_vertical"
+                android:text="15分钟"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_trace_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="26dp"
+                android:layout_toLeftOf="@+id/tv_trace_time"
+                android:gravity="center_vertical"
+                android:text="1.5公里"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+</LinearLayout>

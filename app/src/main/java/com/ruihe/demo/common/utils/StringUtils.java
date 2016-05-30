@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.security.MessageDigest;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -463,6 +464,27 @@ public class StringUtils {
      */
     public static void main(String[] args) {
         System.out.println(dateTimeFormat("2012-3-2 12:2:20"));
+    }
+
+
+    /**
+     * 对字符串进行MD5加密
+     */
+    public static String md5(String string) {
+        byte[] hash = null;
+        try {
+            hash = MessageDigest.getInstance("MD5").digest(
+                    string.getBytes("UTF-8"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        StringBuilder hex = new StringBuilder(hash.length * 2);
+        for (byte b : hash) {
+            if ((b & 0xFF) < 0x10)
+                hex.append("0");
+            hex.append(Integer.toHexString(b & 0xFF));
+        }
+        return hex.toString().toLowerCase();
     }
 
 }

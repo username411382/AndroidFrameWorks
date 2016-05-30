@@ -7,6 +7,6 @@ package com.ruihe.demo.bean;
 public class ItemTrace {
 
     public String totalTime;
-    public String totalDistance;
+    public int totalDistance;
 
 }

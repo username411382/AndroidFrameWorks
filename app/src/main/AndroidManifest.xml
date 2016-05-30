@@ -48,9 +48,15 @@
             </intent-filter>
         </activity>
 
-        +
         <!--视频播放-->
         <activity android:name=".common.utils.ijkPlayer.ActivityVideoPlayer" />
+
+        <!--安保任务-->
+        <activity android:name=".activity.ActivitySecurityTask" />
+        <!--鹰眼轨迹-->
+        <activity android:name=".activity.ActivityPatrolTrace" />
+        <!--鹰眼轨迹截图-->
+        <activity android:name=".activity.ActivityFinishSecurityTask" />
 
 
         <meta-data

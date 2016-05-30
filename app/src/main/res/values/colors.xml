@@ -10,7 +10,7 @@
     <color name="white">#ffffff</color>
     <color name="pressed_black">#4000</color>
     <color name="transparent">#00000000</color>
-
+    <color name="base_blue">#288eff</color>
 
     <!--自定义对话框颜色背景-->
     <color name="title_black">#2c2c2c</color>

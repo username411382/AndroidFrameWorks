@@ -1,60 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center">
 
-
-    <com.baidu.mapapi.map.MapView
-        android:id="@+id/view_mapView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clickable="true" />
-
-    <Button
-        android:id="@+id/btn_shot_map"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_second"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:background="#fff"
-        android:text="点击解锁" />
+        android:background="@drawable/shape_map_shot"
+        android:padding="15dp"
+        android:textColor="@color/white"
+        android:text="点击跳转至鹰眼轨迹" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#fff">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:text="正在记录..." />
-
-        <TextView
-            android:id="@+id/tv_trace_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerHorizontal="true"
-            android:background="#fff"
-            android:padding="15dp" />
-
-        <TextView
-            android:id="@+id/tv_trace_distance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/tv_trace_time"
-            android:padding="15dp" />
-
-    </RelativeLayout>
-
-    <ImageView
-        android:id="@+id/iv_shot_map"
-        android:layout_width="180dp"
-        android:layout_height="90dp"
-        android:layout_centerInParent="true"
-        android:scaleType="centerCrop" />
-
-</RelativeLayout>
+</LinearLayout>

@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.PowerManager;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import com.baidu.mapapi.map.BitmapDescriptor;
@@ -29,10 +28,11 @@ import com.baidu.trace.OnTrackListener;
 import com.baidu.trace.Trace;
 import com.baidu.trace.TraceLocation;
 import com.ruihe.demo.R;
+import com.ruihe.demo.activity.ActivityPatrolTrace;
 import com.ruihe.demo.bean.ItemTrace;
 import com.ruihe.demo.common.utils.DateUtils;
 import com.ruihe.demo.common.utils.ToastUtils;
-import com.ruihe.demo.fragment.FragmentTwo;
+import com.ruihe.demo.test.SPUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,6 +47,7 @@ import java.util.Map;
  */
 public class TraceUtils {
 
+    public static final String TRACE_TAG = "trace_log";
     public static int SIMPLE_RETURN_ONLY_DISTANCE = 2;
     public static int IS_PROCESSED_SURE = 1;
 
@@ -77,7 +78,6 @@ public class TraceUtils {
 
     private Context mContext;
     private List<LatLng> pointList = new ArrayList<>();
-    protected boolean isInUploadFragment = true;
     private BitmapDescriptor realTimeBitmap;
     protected MapStatusUpdate msUpdate;
     private Intent serviceIntent;
@@ -88,6 +88,7 @@ public class TraceUtils {
     public long mQueryTraceStartTime;
     public long mQueryTraceEndTime;
     private ItemTrace mItemTrace;
+    private boolean isMove;
 
     //开启轨迹服务监听器
     protected OnStartTraceListener startTraceListener;
@@ -98,7 +99,7 @@ public class TraceUtils {
 
 
     public Handler mHandler = new Handler();
-    private OnReceiveTraceDistanceListener mOnReceiveTraceDistance;
+    private OnReceiveTraceListener mOnReceiveTraceDistance;
 
     public static TraceUtils getInstance() {
 
@@ -111,11 +112,10 @@ public class TraceUtils {
 
     public void initTraceParameters(Context context) {
         mContext = context;
-        mQueryTraceStartTime = System.currentTimeMillis() / 1000;
         mPowerReceiver = new PowerReceiver();
         mClient = new LBSTraceClient(mContext);
         mClient.setLocationMode(LocationMode.High_Accuracy);
-        mEntityName = "ruihe";
+        mEntityName = SPUtils.getInstance().getInt(SPUtils.USER_ID, 0) + "";
         trace = new Trace(mContext, SERVICE_ID, mEntityName, traceType);
         mClient.setInterval(GATHER_INTERVAL, PACK_INTERVAL);
         mClient.setProtocolType(0);//http请求协议
@@ -133,18 +133,19 @@ public class TraceUtils {
             // 请求失败回调接口
             @Override
             public void onRequestFailedCallback(String arg0) {
-                ToastUtils.show("entity请求失败回调接口消息 : " + arg0);
+                Log.d(TRACE_TAG, "entity请求失败回调接口消息 " + arg0);
+                mOnReceiveTraceDistance.refreshReminderView();
             }
 
             // 添加entity回调接口
             public void onAddEntityCallback(String arg0) {
-                ToastUtils.show("添加entity回调接口消息 : " + arg0);
+                Log.d(TRACE_TAG, "添加entity回调接口消息 : " + arg0);
             }
 
             // 查询entity列表回调接口
             @Override
             public void onQueryEntityListCallback(String message) {
-                ToastUtils.show("entityList回调消息 : " + message);
+                Log.d(TRACE_TAG, "entityList回调消息 : " + message);
             }
 
             @Override
@@ -178,7 +179,6 @@ public class TraceUtils {
 
         if (Math.abs(latitude - 0.0) < 0.000001 && Math.abs(longitude - 0.0) < 0.000001) {
             ToastUtils.show("当前查询无轨迹点");
-
         } else {
 
             LatLng latLng = new LatLng(latitude, longitude);
@@ -193,10 +193,8 @@ public class TraceUtils {
             }
 
             pointList.add(latLng);
-            if (isInUploadFragment) {
-                // 绘制实时点
-                drawRealTimePoint(latLng);
-            }
+            // 绘制实时点
+            drawRealTimePoint(latLng);
 
         }
 
@@ -206,14 +204,19 @@ public class TraceUtils {
     // 绘制实时点
     private void drawRealTimePoint(LatLng point) {
 
-        FragmentTwo.mBaiduMap.clear();
+        ActivityPatrolTrace.mBaiduMap.clear();
 
         MapStatus mMapStatus = new MapStatus.Builder().target(point).zoom(19).build();
 
         msUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
 
-        realTimeBitmap = BitmapDescriptorFactory
-                .fromResource(R.drawable.icon_gcoding);
+        if (isMove) {
+            realTimeBitmap = BitmapDescriptorFactory
+                    .fromResource(R.drawable.ic_trace_go);
+        } else {
+            realTimeBitmap = BitmapDescriptorFactory
+                    .fromResource(R.drawable.icon_gcoding);
+        }
 
         overlay = new MarkerOptions().position(point)
                 .icon(realTimeBitmap).zIndex(9).draggable(true);
@@ -231,12 +234,12 @@ public class TraceUtils {
     protected void addMarker() {
 
         if (null != msUpdate) {
-            FragmentTwo.mBaiduMap.setMapStatus(msUpdate);
+            ActivityPatrolTrace.mBaiduMap.setMapStatus(msUpdate);
         }
 
         // 路线覆盖物
         if (null != polyline) {
-            FragmentTwo.mBaiduMap.addOverlay(polyline);
+            ActivityPatrolTrace.mBaiduMap.addOverlay(polyline);
         }
 
         // 围栏覆盖物
@@ -246,7 +249,7 @@ public class TraceUtils {
 
         // 实时点覆盖物
         if (null != overlay) {
-            FragmentTwo.mBaiduMap.addOverlay(overlay);
+            ActivityPatrolTrace.mBaiduMap.addOverlay(overlay);
         }
     }
 
@@ -291,6 +294,8 @@ public class TraceUtils {
      * 停止轨迹服务
      */
     public void stopTrace() {
+
+        Log.d(TRACE_TAG, "正在停止轨迹服务，请稍候");
         // 通过轨迹服务客户端client停止轨迹服务
         mClient.stopTrace(trace, stopTraceListener);
 
@@ -306,8 +311,8 @@ public class TraceUtils {
             } catch (Exception e) {
             }
         }
+        isMove = false;
         removeQueryDistanceRunnable();
-
 
     }
 
@@ -321,8 +326,8 @@ public class TraceUtils {
 
             // 开启轨迹服务回调接口（arg0 : 消息编码，arg1 : 消息内容，详情查看类参考）
             public void onTraceCallback(int arg0, String arg1) {
-                ToastUtils.show("开启轨迹服务回调接口消息 [消息编码 : " + arg0 + "，消息内容 : " + arg1 + "]");
                 if (0 == arg0 || 10006 == arg0 || 10008 == arg0 || 10009 == arg0) {
+                    Log.d(TRACE_TAG, "开启轨迹服务回调接口消息 [消息编码 : " + arg0 + "，消息内容 : " + arg1 + "]");
                     startRefreshThread(true);
                 }
             }
@@ -336,14 +341,14 @@ public class TraceUtils {
                             String mPerson = dataJson.getString("monitored_person");
                             String action = dataJson.getInt("action") == 1 ? "进入" : "离开";
                             String date = DateUtil.getDate(dataJson.getInt("time"));
-                            ToastUtils.show("监控对象[" + mPerson + "]于" + date + " 【" + action + "】围栏");
+                            Log.d(TRACE_TAG, "监控对象[" + mPerson + "]于" + date + " 【" + action + "】围栏");
                         }
 
                     } catch (JSONException e) {
-                        ToastUtils.show("轨迹服务推送接口消息 [消息类型 : " + arg0 + "，消息内容 : " + arg1 + "]");
+                        Log.d(TRACE_TAG, "轨迹服务推送接口消息 [消息类型 : " + arg0 + "，消息内容 : " + arg1 + "]");
                     }
                 } else {
-                    ToastUtils.show("轨迹服务推送接口消息 [消息类型 : " + arg0 + "，消息内容 : " + arg1 + "]");
+                    Log.d(TRACE_TAG, "轨迹服务推送接口消息 [消息类型 : " + arg0 + "，消息内容 : " + arg1 + "]");
                 }
             }
 
@@ -359,13 +364,13 @@ public class TraceUtils {
 
             // 轨迹服务停止成功
             public void onStopTraceSuccess() {
-                ToastUtils.show("停止轨迹服务成功");
+                Log.d(TRACE_TAG, "停止轨迹服务成功");
                 startRefreshThread(false);
             }
 
             // 轨迹服务停止失败（arg0 : 错误编码，arg1 : 消息内容，详情查看类参考）
             public void onStopTraceFailed(int arg0, String arg1) {
-                ToastUtils.show("停止轨迹服务接口消息 [错误编码 : " + arg0 + "，消息内容 : " + arg1 + "]");
+                Log.d(TRACE_TAG, "停止轨迹服务接口消息 [错误编码 : " + arg0 + "，消息内容 : " + arg1 + "]");
                 startRefreshThread(false);
             }
         };
@@ -390,24 +395,20 @@ public class TraceUtils {
             }
         } else {
             refreshThread = null;
+            ((ActivityPatrolTrace) mContext).finish();
         }
     }
 
-    //获取设备IMEI码
-    public String getImei(Context context) {
-        String mImei = "NULL";
-        try {
-            mImei = ((TelephonyManager) context
-                    .getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
-        } catch (Exception e) {
-            System.out.println("获取IMEI码失败");
-            mImei = "NULL";
-        }
-        return mImei;
+    /**
+     * 获取总的行走时间
+     *
+     * @return
+     */
+    public String getTotalRecordTime() {
+        return DateUtils.getStringByFormat((mQueryTraceEndTime * 1000 - mQueryTraceStartTime * 1000), "mm");
     }
 
-
-    public void queryHistoryTrack(OnReceiveTraceDistanceListener onReceiveTraceDistance) {
+    public void queryHistoryTrack(OnReceiveTraceListener onReceiveTraceDistance) {
         mOnReceiveTraceDistance = onReceiveTraceDistance;
         mQueryTraceStartTime = System.currentTimeMillis() / 1000;
 
@@ -435,7 +436,7 @@ public class TraceUtils {
                 try {
                     Thread.sleep(GATHER_INTERVAL * 1000);
                 } catch (InterruptedException e) {
-                    System.out.println("线程休眠失败");
+                    Log.d(TRACE_TAG, "线程休眠失败");
                 }
             }
             Looper.loop();
@@ -449,7 +450,7 @@ public class TraceUtils {
         public void run() {
             mQueryTraceEndTime = System.currentTimeMillis() / 1000;
             mClient.queryProcessedHistoryTrack(SERVICE_ID, mEntityName, SIMPLE_RETURN_ONLY_DISTANCE, IS_PROCESSED_SURE,
-                    1463389200, (int) mQueryTraceEndTime, 1000, 1, new OnTrackListener() {
+                    (int) mQueryTraceStartTime, (int) mQueryTraceEndTime, 1000, 1, new OnTrackListener() {
                         @Override
                         public void onRequestFailedCallback(String s) {
                         }
@@ -457,23 +458,20 @@ public class TraceUtils {
                         @Override
                         public void onQueryHistoryTrackCallback(String s) {
                             super.onQueryHistoryTrackCallback(s);
-
-                            Log.d("ruihe", "------轨迹Json-------" + s);
+                            Log.d(TRACE_TAG, "------轨迹Json-------" + s);
                             try {
                                 JSONObject jsonData = new JSONObject(s);
 
                                 if (jsonData.getInt("status") == 0) {
-
                                     Double traceDistance = jsonData.getDouble("distance");
                                     if (traceDistance > 1.0) {
-                                        realTimeBitmap = BitmapDescriptorFactory
-                                                .fromResource(R.drawable.ic_trace_go);
+                                        isMove = true;
                                     }
-                                    String distance = String.format("%.2f", traceDistance);
+                                    //String distance = String.format("%.2f", traceDistance);
                                     if (mItemTrace == null) {
                                         mItemTrace = new ItemTrace();
                                     }
-                                    mItemTrace.totalDistance = distance;
+                                    mItemTrace.totalDistance = traceDistance.intValue();
                                     mItemTrace.totalTime = DateUtils.getStringByFormat(mQueryTraceEndTime * 1000 - mQueryTraceStartTime * 1000, "mm:ss");
                                     mOnReceiveTraceDistance.getDistance(mItemTrace);
                                 }
@@ -492,9 +490,10 @@ public class TraceUtils {
         }
     }
 
-    public interface OnReceiveTraceDistanceListener {
+    public interface OnReceiveTraceListener {
         void getDistance(ItemTrace itemTrace);
-    }
 
+        void refreshReminderView();
+    }
 
 }

@@ -25,5 +25,10 @@
     <string name="cancel">取消</string>
     <string name="confirm">确认</string>
 
+    <!--安保任务-->
+    <string name="security_task_going">正在进行</string>
+    <string name="security_task_no_signal">无信号</string>
+    <string name="security_task_total_time">时间</string>
+    <string name="security_task_total_distance">米</string>
 
 </resources>

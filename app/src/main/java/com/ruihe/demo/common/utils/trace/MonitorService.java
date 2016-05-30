@@ -6,9 +6,11 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
 
 import com.baidu.trace.LBSTraceClient;
 import com.baidu.trace.Trace;
+import com.ruihe.demo.test.SPUtils;
 
 import java.util.List;
 
@@ -38,23 +40,23 @@ public class MonitorService extends Service {
                         Thread.sleep(30 * 1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
-                        System.out.println("thread sleep failed");
+                        Log.d(TraceUtils.TRACE_TAG, "thread sleep failed");
                     }
 
                     if (!isServiceWork(getApplicationContext(), SERVICE_NAME)) {
-                        System.out.println("轨迹服务已停止，重启轨迹服务");
+                        Log.d(TraceUtils.TRACE_TAG, "轨迹服务已停止，重启轨迹服务");
                         if (null != TraceUtils.getInstance().mClient && null != TraceUtils.getInstance().trace) {
                             TraceUtils.getInstance().mClient.startTrace(TraceUtils.getInstance().trace);
                         } else {
                             TraceUtils.getInstance().mClient = null;
                             TraceUtils.getInstance().mClient = new LBSTraceClient(getApplicationContext());
-                            TraceUtils.getInstance().mEntityName = TraceUtils.getInstance().getImei(getApplicationContext());
+                            TraceUtils.getInstance().mEntityName = SPUtils.getInstance().getInt(SPUtils.USER_ID, 0) + "";
                             TraceUtils.getInstance().trace = new Trace(getApplicationContext(), TraceUtils.getInstance().SERVICE_ID,
                                     TraceUtils.getInstance().mEntityName);
                             TraceUtils.getInstance().mClient.startTrace(TraceUtils.getInstance().trace);
                         }
                     } else {
-                        System.out.println("轨迹服务正在运行");
+                        Log.d(TraceUtils.TRACE_TAG, "轨迹服务正在运行");
                     }
 
                 }
@@ -88,7 +90,7 @@ public class MonitorService extends Service {
         }
         for (int i = 0; i < myList.size(); i++) {
             String mName = myList.get(i).service.getClassName().toString();
-            System.out.println("serviceName : " + mName);
+            Log.d(TraceUtils.TRACE_TAG, "serviceName : " + mName);
             if (mName.equals(serviceName)) {
                 isWork = true;
                 break;

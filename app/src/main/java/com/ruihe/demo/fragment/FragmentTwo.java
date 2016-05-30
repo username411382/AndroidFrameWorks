@@ -1,88 +1,47 @@
 package com.ruihe.demo.fragment;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.baidu.mapapi.map.BaiduMap;
-import com.baidu.mapapi.map.BaiduMap.SnapshotReadyCallback;
-import com.baidu.mapapi.map.MapView;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
 import com.ruihe.demo.R;
-import com.ruihe.demo.bean.ItemTrace;
-import com.ruihe.demo.common.utils.DateUtils;
+import com.ruihe.demo.activity.ActivityPatrolTrace;
+import com.ruihe.demo.activity.ActivitySecurityTask;
+import com.ruihe.demo.common.utils.Constants;
+import com.ruihe.demo.common.utils.StringUtils;
 import com.ruihe.demo.common.utils.ToastUtils;
-import com.ruihe.demo.common.utils.trace.TraceUtils;
+import com.ruihe.demo.common.utils.json.JsonParserBase;
+import com.ruihe.demo.common.utils.net.VolleyUtils;
+import com.ruihe.demo.test.ItemResponseBase;
+import com.ruihe.demo.test.ItemUser;
+import com.ruihe.demo.test.SPUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 
 /**
  * 描述：首页二
  * Created by ruihe on 2016/4/28.
  */
-public class FragmentTwo extends BaseFragment implements View.OnClickListener, TraceUtils.OnReceiveTraceDistanceListener {
+public class FragmentTwo extends BaseFragment implements View.OnClickListener {
 
 
-    private static final int MSG_CURRENT_DISTANCE = 100;
-
-
-    private MapView mMapView;
-    public static BaiduMap mBaiduMap;
-
-
-    private TextView tvTraceTime;
-    private TextView tvTraceDistance;
-    private Button btnShot;
-    private ItemTrace mItemTrace;
-    private ImageView ivShotMap;
-
-    private ShotMapViewListener mShotMapViewListener;
-
-
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-
-            switch (msg.what) {
-
-                case MSG_CURRENT_DISTANCE:
-                    tvTraceTime.setText("时间" + DateUtils.getStringByFormat(System.currentTimeMillis(), "mm:ss"));
-                    tvTraceDistance.setText(mItemTrace.totalDistance + "米");
-                    break;
-                default:
-                    break;
-            }
-
-        }
-    };
-
+    private TextView tvSecond;
 
     @Override
     public void getFragmentView(View view, Bundle savedInstanceState) {
 
-        mItemTrace = new ItemTrace();
-        mShotMapViewListener = new ShotMapViewListener();
+        tvSecond = (TextView) view.findViewById(R.id.tv_second);
+        tvSecond.setOnClickListener(this);
 
-
-        mMapView = (MapView) view.findViewById(R.id.view_mapView);
-        mBaiduMap = mMapView.getMap();
-        mMapView.showZoomControls(false);
-
-        tvTraceTime = (TextView) view.findViewById(R.id.tv_trace_time);
-        tvTraceDistance = (TextView) view.findViewById(R.id.tv_trace_distance);
-        ivShotMap = (ImageView) view.findViewById(R.id.iv_shot_map);
-        btnShot = (Button) view.findViewById(R.id.btn_shot_map);
-        initListener();
-        bindData();
 
     }
 
-    private void initListener() {
-        btnShot.setOnClickListener(this);
-    }
 
     @Override
     public int getContentViewId() {
@@ -100,53 +59,50 @@ public class FragmentTwo extends BaseFragment implements View.OnClickListener, T
     }
 
 
-    private void bindData() {
-        holder.mTitleView.removeAllMenu();
-        holder.mTitleView.addRightText(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mBaiduMap.clear();
-            }
-        }, "清除轨迹");
-        holder.mTitleView.addLeftTextMenu(holder, R.string.cancel, 15, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ToastUtils.show("正在停止轨迹服务，请稍候");
-                TraceUtils.getInstance().stopTrace();
-            }
-        });
-
-        holder.mTitleView.setTitle(R.string.main_second);
-
-        TraceUtils.getInstance().initTraceParameters(getActivity());
-        tvTraceTime.setText(TraceUtils.getInstance().mEntityName);
-
-        TraceUtils.getInstance().startTrace();
-        TraceUtils.getInstance().queryHistoryTrack(this);
-
-    }
-
-
-    /**
-     * 地图截屏回调接口
-     */
-    private class ShotMapViewListener implements SnapshotReadyCallback {
-        @Override
-        public void onSnapshotReady(Bitmap bitmap) {
-            ivShotMap.setImageBitmap(bitmap);
-        }
-    }
-
-
     @Override
     public void onClick(View v) {
-        mBaiduMap.snapshotScope(null, mShotMapViewListener);
+        // login();
+        ActivityPatrolTrace.redirectToActivity(holder, "", 0, 0, 0, 0);
+    }
+
+    private void login() {
+        RequestQueue mQueue = Volley.newRequestQueue(holder);
+        HashMap<String, String> params = VolleyUtils.getBaseHttpParams();
+        params.put("username", "13618062160");
+        params.put("password", StringUtils.md5("123456"));
+        VolleyUtils.post(mQueue, Constants.URL_ROOT + Constants.API_LOGIN, params, new
+
+                        VolleyUtils.OnResponseListener() {
+                            @Override
+                            public void onSuccess(String response) {
+                                try {
+                                    ItemResponseBase base = ItemResponseBase.parserBaseResponse(response);
+                                    if (base.cn == 0) {
+                                        parserSuccessData(base.data);
+                                    }
+                                } catch (JSONException e) {
+                                    ToastUtils.show("解析失败");
+                                }
+
+                            }
+
+                            @Override
+                            public void onError(VolleyError error) {
+                                ToastUtils.show("连接失败");
+                            }
+                        }
+                , "tag_login");
     }
 
 
-    @Override
-    public void getDistance(ItemTrace itemTrace) {
-        mItemTrace = itemTrace;
-        mHandler.sendEmptyMessage(MSG_CURRENT_DISTANCE);
+    private void parserSuccessData(JSONObject data) throws JSONException {
+        ItemUser user = ItemUser.parserUser(data.getJSONObject("user"));
+        user.sess = JsonParserBase.getString(data, "sess");
+        user.password = StringUtils.md5("123456");
+        SPUtils.getInstance().saveCurrentUser(user);
+        ActivitySecurityTask.redirectToActivity(holder);
     }
+
+
 }
+

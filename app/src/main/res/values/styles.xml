@@ -16,7 +16,7 @@
     </style>
 
     <!--弹出窗动画-->
-    <style name="dialogWindowAnim" parent="android:Animation" mce_bogus="1">
+    <style name="dialogWindowAnim" mce_bogus="1" parent="android:Animation">
         <item name="android:windowEnterAnimation">@anim/activity_enter_bottom_to_top</item>
     </style>
 
@@ -47,5 +47,23 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+
+    <!--滑动截图的Style-->
+
+    <style name="style_slide_to_right_unlock" parent="@android:style/Widget.SeekBar">
+        <item name="android:maxHeight">280dp</item>
+        <item name="android:minHeight">280dp</item>
+        <item name="android:maxWidth">60dp</item>
+        <item name="android:minWidth">60dp</item>
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:indeterminateDrawable">
+            @android:drawable/progress_indeterminate_horizontal
+        </item>
+        <item name="android:progressDrawable">@drawable/shape_map_shot</item>
+        <item name="android:thumb">@drawable/ic_map_slide</item>
+        <item name="android:thumbOffset">-3dp</item>
+    </style>
+
 
 </resources>
