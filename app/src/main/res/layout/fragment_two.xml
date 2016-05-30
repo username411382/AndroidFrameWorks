@@ -2,16 +2,55 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/tv_second"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:background="@drawable/shape_map_shot"
         android:padding="15dp"
-        android:textColor="@color/white"
-        android:text="点击跳转至鹰眼轨迹" />
+        android:text="点击跳转至鹰眼轨迹"
+        android:textColor="@color/white" />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
+
+        <View
+            android:id="@+id/view_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#4c000000" />
+
+
+        <RelativeLayout
+            android:layout_width="280dp"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp">
+
+            <com.ruihe.demo.common.utils.view.SlidingSeekBar
+                android:id="@+id/seek_bar"
+                style="@style/style_slide_to_right_unlock"
+                android:layout_width="280dp"
+                android:layout_height="60dp"
+                android:padding="0dp" />
+
+            <TextView
+                android:id="@+id/tv_slide_to_right"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="80dp"
+                android:gravity="center"
+                android:text="右滑解锁"
+                android:textColor="#CCFFFFFF"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 </LinearLayout>

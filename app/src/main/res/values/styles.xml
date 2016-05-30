@@ -64,6 +64,4 @@
         <item name="android:thumb">@drawable/ic_map_slide</item>
         <item name="android:thumbOffset">-3dp</item>
     </style>
-
-
 </resources>

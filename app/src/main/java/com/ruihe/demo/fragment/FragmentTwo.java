@@ -1,8 +1,11 @@
 package com.ruihe.demo.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
@@ -15,6 +18,7 @@ import com.ruihe.demo.common.utils.StringUtils;
 import com.ruihe.demo.common.utils.ToastUtils;
 import com.ruihe.demo.common.utils.json.JsonParserBase;
 import com.ruihe.demo.common.utils.net.VolleyUtils;
+import com.ruihe.demo.common.utils.view.SlidingSeekBar;
 import com.ruihe.demo.test.ItemResponseBase;
 import com.ruihe.demo.test.ItemUser;
 import com.ruihe.demo.test.SPUtils;
@@ -28,18 +32,32 @@ import java.util.HashMap;
  * 描述：首页二
  * Created by ruihe on 2016/4/28.
  */
-public class FragmentTwo extends BaseFragment implements View.OnClickListener {
+public class FragmentTwo extends BaseFragment implements View.OnClickListener, SlidingSeekBar.OnSeekBarStatusListener {
 
 
     private TextView tvSecond;
+    private View mView;
+    private View viewBg;
+    private TextView tvSlideToRightHint;
+    private SlidingSeekBar slideSeekBar;
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            slideSeekBar.setProgress(0);
+            tvSlideToRightHint.setAlpha(1.0f);
+            viewBg.setAlpha(0.0f);
+        }
+    };
 
     @Override
     public void getFragmentView(View view, Bundle savedInstanceState) {
-
+        mView = view;
         tvSecond = (TextView) view.findViewById(R.id.tv_second);
-        tvSecond.setOnClickListener(this);
-
-
+        initView();
+        initListener();
+        bindData();
     }
 
 
@@ -55,6 +73,26 @@ public class FragmentTwo extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void onDetached() {
+
+    }
+
+
+    private void initView() {
+        viewBg = mView.findViewById(R.id.view_bg);
+        tvSlideToRightHint = (TextView) mView.findViewById(R.id.tv_slide_to_right);
+        slideSeekBar = (SlidingSeekBar) mView.findViewById(R.id.seek_bar);
+
+    }
+
+    private void initListener() {
+        slideSeekBar.initSlideToRightUnlock(holder, tvSlideToRightHint, viewBg, this);
+        tvSecond.setOnClickListener(this);
+    }
+
+
+    private void bindData() {
+        holder.mTitleView.removeAllMenu();
+        holder.mTitleView.setTitle(R.string.main_third);
 
     }
 
@@ -104,5 +142,10 @@ public class FragmentTwo extends BaseFragment implements View.OnClickListener {
     }
 
 
+    @Override
+    public void onFinishUnlock() {
+        Toast.makeText(holder, "恭喜，解锁成功！", Toast.LENGTH_SHORT).show();
+        mHandler.sendEmptyMessageDelayed(0, 3000);
+    }
 }
 

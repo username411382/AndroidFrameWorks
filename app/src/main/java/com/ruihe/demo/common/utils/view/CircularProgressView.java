@@ -24,12 +24,12 @@ import java.util.List;
 
 
 /**
- * TODO: document your custom view class.
+ * 自定义的圆形进度条
  */
 public class CircularProgressView extends View {
 
     private static final float INDETERMINANT_MIN_SWEEP = 35f;
-    
+
     private Paint paint;
     private int size = 0;
     private RectF bounds;
@@ -45,7 +45,7 @@ public class CircularProgressView extends View {
     private ValueAnimator startAngleRotate;
     private ValueAnimator progressAnimator;
     private AnimatorSet indeterminateAnimator;
-    
+
     private boolean isCapRound = false;
 
     public CircularProgressView(Context context) {
@@ -74,8 +74,7 @@ public class CircularProgressView extends View {
         bounds = new RectF();
     }
 
-    private void initAttributes(AttributeSet attrs, int defStyle)
-    {
+    private void initAttributes(AttributeSet attrs, int defStyle) {
         final TypedArray a = getContext().obtainStyledAttributes(
                 attrs, R.styleable.CircularProgressView, defStyle, 0);
 
@@ -102,17 +101,16 @@ public class CircularProgressView extends View {
             color = a.getColor(R.styleable.CircularProgressView_cpv_color, resources.getColor(R.color.cpv_default_color));
         }
         // If using support library v7 accentColor
-        else if(accentColor != 0) {
+        else if (accentColor != 0) {
             TypedValue t = new TypedValue();
             getContext().getTheme().resolveAttribute(accentColor, t, true);
             color = t.data;
         }
         // If using native accentColor (SDK >21)
         else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            TypedArray t = getContext().obtainStyledAttributes(new int[] { android.R.attr.colorAccent });
+            TypedArray t = getContext().obtainStyledAttributes(new int[]{android.R.attr.colorAccent});
             color = t.getColor(0, resources.getColor(R.color.cpv_default_color));
-        }
-        else {
+        } else {
             //Use default color
             color = resources.getColor(R.color.cpv_default_color);
         }
@@ -147,23 +145,21 @@ public class CircularProgressView extends View {
         updateBounds();
     }
 
-    private void updateBounds()
-    {
+    private void updateBounds() {
         int paddingLeft = getPaddingLeft();
         int paddingTop = getPaddingTop();
         bounds.set(paddingLeft + thickness, paddingTop + thickness, size - paddingLeft - thickness, size - paddingTop - thickness);
     }
 
-    private void updatePaint()
-    {
+    private void updatePaint() {
         paint.setColor(color);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(thickness);
         if (isCapRound) {
             paint.setStrokeCap(Paint.Cap.ROUND);
-		} else {
-	        paint.setStrokeCap(Paint.Cap.BUTT);
-		}
+        } else {
+            paint.setStrokeCap(Paint.Cap.BUTT);
+        }
     }
 
     @Override
@@ -171,8 +167,8 @@ public class CircularProgressView extends View {
         super.onDraw(canvas);
 
         // Draw the arc
-        float sweepAngle = (isInEditMode()) ? currentProgress/maxProgress*360 : actualProgress/maxProgress*360;
-        if(!isIndeterminate)
+        float sweepAngle = (isInEditMode()) ? currentProgress / maxProgress * 360 : actualProgress / maxProgress * 360;
+        if (!isIndeterminate)
             canvas.drawArc(bounds, startAngle - 90, sweepAngle, false, paint);
         else
             canvas.drawArc(bounds, startAngle + indeterminateRotateOffset - 90, indeterminateSweep, false, paint);
@@ -180,6 +176,7 @@ public class CircularProgressView extends View {
 
     /**
      * Returns the mode of this view (determinate or indeterminate).
+     *
      * @return true if this view is in indeterminate mode.
      */
     public boolean isIndeterminate() {
@@ -189,6 +186,7 @@ public class CircularProgressView extends View {
     /**
      * Sets whether this CircularProgressView is indeterminate or not.
      * It will reset the animation if the mode has changed.
+     *
      * @param isIndeterminate True if indeterminate.
      */
     public void setIndeterminate(boolean isIndeterminate) {
@@ -197,8 +195,8 @@ public class CircularProgressView extends View {
         this.isIndeterminate = isIndeterminate;
         if (reset)
             resetAnimation();
-        if(old != isIndeterminate) {
-            for(CircularProgressViewListener listener : listeners) {
+        if (old != isIndeterminate) {
+            for (CircularProgressViewListener listener : listeners) {
                 listener.onModeChanged(isIndeterminate);
             }
         }
@@ -206,6 +204,7 @@ public class CircularProgressView extends View {
 
     /**
      * Get the thickness of the progress bar arc.
+     *
      * @return the thickness of the progress bar arc
      */
     public int getThickness() {
@@ -214,6 +213,7 @@ public class CircularProgressView extends View {
 
     /**
      * Sets the thickness of the progress bar arc.
+     *
      * @param thickness the thickness of the progress bar arc
      */
     public void setThickness(int thickness) {
@@ -222,19 +222,18 @@ public class CircularProgressView extends View {
         updateBounds();
         invalidate();
     }
-    
-    public boolean isCapRound(){
-    	return isCapRound;
+
+    public boolean isCapRound() {
+        return isCapRound;
     }
 
-    public void setCapRound(boolean isCapRound){
-    	this.isCapRound = isCapRound;
-    	updatePaint();
+    public void setCapRound(boolean isCapRound) {
+        this.isCapRound = isCapRound;
+        updatePaint();
         invalidate();
     }
 
     /**
-     *
      * @return the color of the progress bar
      */
     public int getColor() {
@@ -243,6 +242,7 @@ public class CircularProgressView extends View {
 
     /**
      * Sets the color of the progress bar.
+     *
      * @param color the color of the progress bar
      */
     public void setColor(int color) {
@@ -253,6 +253,7 @@ public class CircularProgressView extends View {
 
     /**
      * Gets the progress value considered to be 100% of the progress bar.
+     *
      * @return the maximum progress
      */
     public float getMaxProgress() {
@@ -261,6 +262,7 @@ public class CircularProgressView extends View {
 
     /**
      * Sets the progress value considered to be 100% of the progress bar.
+     *
      * @param maxProgress the maximum progress
      */
     public void setMaxProgress(float maxProgress) {
@@ -299,7 +301,7 @@ public class CircularProgressView extends View {
             progressAnimator.addListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    for(CircularProgressViewListener listener : listeners) {
+                    for (CircularProgressViewListener listener : listeners) {
                         listener.onProgressUpdateEnd(currentProgress);
                     }
                 }
@@ -308,22 +310,24 @@ public class CircularProgressView extends View {
             progressAnimator.start();
         }
         invalidate();
-        for(CircularProgressViewListener listener : listeners) {
+        for (CircularProgressViewListener listener : listeners) {
             listener.onProgressUpdate(currentProgress);
         }
     }
 
     /**
      * Register a CircularProgressViewListener with this View
+     *
      * @param listener The listener to register
      */
     public void addListener(CircularProgressViewListener listener) {
-        if(listener != null)
+        if (listener != null)
             listeners.add(listener);
     }
 
     /**
      * Unregister a CircularProgressViewListener with this View
+     *
      * @param listener The listener to unregister
      */
     public void removeListener(CircularProgressViewListener listener) {
@@ -343,16 +347,15 @@ public class CircularProgressView extends View {
      */
     public void resetAnimation() {
         // Cancel all the old animators
-        if(startAngleRotate != null && startAngleRotate.isRunning())
+        if (startAngleRotate != null && startAngleRotate.isRunning())
             startAngleRotate.cancel();
-        if(progressAnimator != null && progressAnimator.isRunning())
+        if (progressAnimator != null && progressAnimator.isRunning())
             progressAnimator.cancel();
-        if(indeterminateAnimator != null && indeterminateAnimator.isRunning())
+        if (indeterminateAnimator != null && indeterminateAnimator.isRunning())
             indeterminateAnimator.cancel();
 
         // Determinate animation
-        if(!isIndeterminate)
-        {
+        if (!isIndeterminate) {
             // The cool 360 swoop animation at the start of the animation
             startAngle = -90f;
             startAngleRotate = ValueAnimator.ofFloat(-90f, 270f);
@@ -382,18 +385,16 @@ public class CircularProgressView extends View {
             progressAnimator.start();
         }
         // Indeterminate animation
-        else
-        {
+        else {
             startAngle = -90f;
             indeterminateSweep = INDETERMINANT_MIN_SWEEP;
             // Build the whole AnimatorSet
             indeterminateAnimator = new AnimatorSet();
             AnimatorSet prevSet = null, nextSet;
-            for(int k=0;k<animSteps;k++)
-            {
+            for (int k = 0; k < animSteps; k++) {
                 nextSet = createIndeterminateAnimator(k);
                 AnimatorSet.Builder builder = indeterminateAnimator.play(nextSet);
-                if(prevSet != null)
+                if (prevSet != null)
                     builder.after(prevSet);
                 prevSet = nextSet;
             }
@@ -401,6 +402,7 @@ public class CircularProgressView extends View {
             // Listen to end of animation so we can infinitely loop
             indeterminateAnimator.addListener(new AnimatorListenerAdapter() {
                 boolean wasCancelled = false;
+
                 @Override
                 public void onAnimationCancel(Animator animation) {
                     wasCancelled = true;
@@ -408,12 +410,12 @@ public class CircularProgressView extends View {
 
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    if(!wasCancelled)
+                    if (!wasCancelled)
                         resetAnimation();
                 }
             });
             indeterminateAnimator.start();
-            for(CircularProgressViewListener listener : listeners) {
+            for (CircularProgressViewListener listener : listeners) {
                 listener.onAnimationReset();
             }
         }
@@ -422,14 +424,13 @@ public class CircularProgressView extends View {
     }
 
     // Creates the animators for one step of the animation
-    private AnimatorSet createIndeterminateAnimator(float step)
-    {
-        final float maxSweep = 360f*(animSteps-1)/animSteps + INDETERMINANT_MIN_SWEEP;
-        final float start = -90f + step*(maxSweep-INDETERMINANT_MIN_SWEEP);
+    private AnimatorSet createIndeterminateAnimator(float step) {
+        final float maxSweep = 360f * (animSteps - 1) / animSteps + INDETERMINANT_MIN_SWEEP;
+        final float start = -90f + step * (maxSweep - INDETERMINANT_MIN_SWEEP);
 
         // Extending the front of the arc
         ValueAnimator frontEndExtend = ValueAnimator.ofFloat(INDETERMINANT_MIN_SWEEP, maxSweep);
-        frontEndExtend.setDuration(animDuration/animSteps/2);
+        frontEndExtend.setDuration(animDuration / animSteps / 2);
         frontEndExtend.setInterpolator(new DecelerateInterpolator(1));
         frontEndExtend.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -440,28 +441,28 @@ public class CircularProgressView extends View {
         });
 
         // Overall rotation
-        ValueAnimator rotateAnimator1 = ValueAnimator.ofFloat(step*720f/animSteps, (step+.5f)*720f/animSteps);
-        rotateAnimator1.setDuration(animDuration/animSteps/2);
+        ValueAnimator rotateAnimator1 = ValueAnimator.ofFloat(step * 720f / animSteps, (step + .5f) * 720f / animSteps);
+        rotateAnimator1.setDuration(animDuration / animSteps / 2);
         rotateAnimator1.setInterpolator(new LinearInterpolator());
         rotateAnimator1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-            indeterminateRotateOffset = (Float) animation.getAnimatedValue();
+                indeterminateRotateOffset = (Float) animation.getAnimatedValue();
             }
         });
 
         // Followed by...
 
         // Retracting the back end of the arc
-        ValueAnimator backEndRetract = ValueAnimator.ofFloat(start, start+maxSweep-INDETERMINANT_MIN_SWEEP);
-        backEndRetract.setDuration(animDuration/animSteps/2);
+        ValueAnimator backEndRetract = ValueAnimator.ofFloat(start, start + maxSweep - INDETERMINANT_MIN_SWEEP);
+        backEndRetract.setDuration(animDuration / animSteps / 2);
         backEndRetract.setInterpolator(new DecelerateInterpolator(1));
         backEndRetract.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-            startAngle = (Float) animation.getAnimatedValue();
-            indeterminateSweep = maxSweep - startAngle + start;
-            invalidate();
+                startAngle = (Float) animation.getAnimatedValue();
+                indeterminateSweep = maxSweep - startAngle + start;
+                invalidate();
             }
         });
 
@@ -485,22 +486,22 @@ public class CircularProgressView extends View {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        if(autoStartAnimation)
+        if (autoStartAnimation)
             startAnimation();
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        if(startAngleRotate != null) {
+        if (startAngleRotate != null) {
             startAngleRotate.cancel();
             startAngleRotate = null;
         }
-        if(progressAnimator != null) {
+        if (progressAnimator != null) {
             progressAnimator.cancel();
             progressAnimator = null;
         }
-        if(indeterminateAnimator != null) {
+        if (indeterminateAnimator != null) {
             indeterminateAnimator.cancel();
             indeterminateAnimator = null;
         }
