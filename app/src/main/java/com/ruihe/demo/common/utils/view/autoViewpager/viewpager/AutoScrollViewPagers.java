@@ -17,7 +17,7 @@ import java.lang.reflect.Field;
 /**
  * 可自动滚动viewpager的适配器
  */
-public class AutoScrollViewPager extends ViewPager {
+public class AutoScrollViewPagers extends ViewPager {
 
     public static final int DEFAULT_INTERVAL = 1500;
 
@@ -74,18 +74,18 @@ public class AutoScrollViewPager extends ViewPager {
     private boolean isAutoScroll = false;
     private boolean isStopByTouch = false;
     private float touchX = 0f, downX = 0f;
-    private CustomDurationScroller scroller = null;
+    private AutoScrollViewPagerScroller scroller = null;
 
     public static final int SCROLL_WHAT = 0;
 
     private int viewPagerStartItem = 30;
 
-    public AutoScrollViewPager(Context paramContext) {
+    public AutoScrollViewPagers(Context paramContext) {
         super(paramContext);
         init();
     }
 
-    public AutoScrollViewPager(Context paramContext, AttributeSet paramAttributeSet) {
+    public AutoScrollViewPagers(Context paramContext, AttributeSet paramAttributeSet) {
         super(paramContext, paramAttributeSet);
         init();
     }
@@ -112,7 +112,6 @@ public class AutoScrollViewPager extends ViewPager {
         scrollOnce();
         scrollOnce();
         startAutoScroll();
-        // setAutoScrollDurationFactor(10);
 
         postDelayed(new Runnable() {
             @Override
@@ -219,7 +218,7 @@ public class AutoScrollViewPager extends ViewPager {
             Field interpolatorField = ViewPager.class.getDeclaredField("sInterpolator");
             interpolatorField.setAccessible(true);
 
-            scroller = new CustomDurationScroller(getContext(), (Interpolator) interpolatorField.get(null));
+            scroller = new AutoScrollViewPagerScroller(getContext(), (Interpolator) interpolatorField.get(null));
             scrollerField.set(this, scroller);
         } catch (Exception e) {
             e.printStackTrace();

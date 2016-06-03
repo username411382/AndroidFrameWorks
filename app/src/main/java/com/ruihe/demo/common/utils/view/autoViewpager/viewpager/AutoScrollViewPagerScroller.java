@@ -8,15 +8,15 @@ import android.widget.Scroller;
 /**
  * 自定义滚动Viewpager的Scroller
  */
-public class CustomDurationScroller extends Scroller {
+public class AutoScrollViewPagerScroller extends Scroller {
 
     private double scrollFactor = 1;
 
-    public CustomDurationScroller(Context context) {
+    public AutoScrollViewPagerScroller(Context context) {
         super(context);
     }
 
-    public CustomDurationScroller(Context context, Interpolator interpolator) {
+    public AutoScrollViewPagerScroller(Context context, Interpolator interpolator) {
         super(context, interpolator);
     }
 

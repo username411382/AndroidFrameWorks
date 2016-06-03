@@ -16,9 +16,10 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="200dip"
-        android:background="@android:color/darker_gray">
+        android:background="@android:color/darker_gray"
+        android:visibility="gone">
 
-        <com.ruihe.demo.common.utils.view.autoViewpager.viewpager.AutoScrollViewPager
+        <com.ruihe.demo.common.utils.view.autoViewpager.viewpager.AutoScrollViewPagers
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
@@ -30,7 +31,30 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="10dip"
-            android:orientation="horizontal"></LinearLayout>
+            android:orientation="horizontal"
+            android:visibility="visible"></LinearLayout>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:background="@android:color/darker_gray">
+
+        <com.ruihe.demo.common.utils.view.customViewPager.AutoScrollViewPager
+            android:id="@+id/view_pager_auto"
+            android:layout_width="match_parent"
+            android:layout_height="180dp" />
+
+        <com.ruihe.demo.common.utils.view.customViewPager.CirclePageIndicator
+            android:id="@+id/indicator_auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/view_pager_auto"
+            android:layout_centerHorizontal="true"
+            android:padding="8dp" />
 
     </RelativeLayout>
 

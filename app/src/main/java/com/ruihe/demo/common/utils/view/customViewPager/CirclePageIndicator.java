@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ruihe.demo.common.utils.view.autoViewpager.indicator;
+package com.ruihe.demo.common.utils.view.customViewPager;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -39,9 +39,9 @@ import static android.graphics.Paint.ANTI_ALIAS_FLAG;
 import static android.widget.LinearLayout.HORIZONTAL;
 import static android.widget.LinearLayout.VERTICAL;
 
+
 /**
- * Draws circles (one for each view). The current view position is filled and
- * others are only stroked.
+ * viewpager的圆圈指示器，当前选中为实心，其他为空心
  */
 public class CirclePageIndicator extends View implements PageIndicator {
     private static final int INVALID_POINTER = -1;
