@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.ruihe.demo.R;
+import com.ruihe.demo.activity.ActivityShoppingCart;
 import com.ruihe.demo.common.utils.ijkPlayer.ActivityVideoPlayer;
 
 /**
@@ -14,8 +15,8 @@ import com.ruihe.demo.common.utils.ijkPlayer.ActivityVideoPlayer;
 public class FragmentFive extends BaseFragment implements View.OnClickListener {
 
 
-    private TextView tv;
-
+    private TextView tvVideo;
+    private TextView tvShoppingCar;
 
     @Override
     public void onAttached() {
@@ -26,9 +27,11 @@ public class FragmentFive extends BaseFragment implements View.OnClickListener {
     @Override
     public void getFragmentView(View view, Bundle savedInstanceState) {
 
-        tv = (TextView) view.findViewById(R.id.tv);
-        tv.setOnClickListener(this);
+        tvVideo = (TextView) view.findViewById(R.id.tv_video);
+        tvVideo.setOnClickListener(this);
 
+        tvShoppingCar = (TextView) view.findViewById(R.id.tv_shopping_car);
+        tvShoppingCar.setOnClickListener(this);
 
         bindData();
     }
@@ -61,8 +64,11 @@ public class FragmentFive extends BaseFragment implements View.OnClickListener {
 
         switch (v.getId()) {
 
-            case R.id.tv:
+            case R.id.tv_video:
                 ActivityVideoPlayer.redirectToActivity(holder, "http://7xsg5m.media1.z0.glb.clouddn.com/fish_2jtjf.mp4");
+                break;
+            case R.id.tv_shopping_car:
+                ActivityShoppingCart.redirectToActivity(holder);
                 break;
             default:
                 break;

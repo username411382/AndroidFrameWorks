@@ -34,4 +34,6 @@ dependencies {
     compile 'com.liulishuo.filedownloader:library:0.2.7'
     compile files('libs/BaiduTraceSDK_v2_1_7.jar')
     compile files('libs/BaiduLBS_Android.jar')
+    compile 'se.emilsjolander:stickylistheaders:2.7.0'
+    compile 'com.flipboard:bottomsheet-core:1.5.1'
 }
