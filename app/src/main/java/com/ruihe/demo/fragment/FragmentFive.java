@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.ruihe.demo.R;
 import com.ruihe.demo.activity.ActivityShoppingCart;
+import com.ruihe.demo.activity.ActivitySortByLetter;
 import com.ruihe.demo.common.utils.ijkPlayer.ActivityVideoPlayer;
 
 /**
@@ -17,6 +18,7 @@ public class FragmentFive extends BaseFragment implements View.OnClickListener {
 
     private TextView tvVideo;
     private TextView tvShoppingCar;
+    private TextView tvContactSort;
 
     @Override
     public void onAttached() {
@@ -33,6 +35,9 @@ public class FragmentFive extends BaseFragment implements View.OnClickListener {
         tvShoppingCar = (TextView) view.findViewById(R.id.tv_shopping_car);
         tvShoppingCar.setOnClickListener(this);
 
+        tvContactSort = (TextView) view.findViewById(R.id.tv_sort);
+        tvContactSort.setOnClickListener(this);
+
         bindData();
     }
 
@@ -41,9 +46,6 @@ public class FragmentFive extends BaseFragment implements View.OnClickListener {
     public int getContentViewId() {
         return R.layout.fragment_five;
     }
-
-
-
 
 
     private void bindData() {
@@ -69,6 +71,9 @@ public class FragmentFive extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.tv_shopping_car:
                 ActivityShoppingCart.redirectToActivity(holder);
+                break;
+            case R.id.tv_sort:
+                holder.redirectToActivity(holder, ActivitySortByLetter.class);
                 break;
             default:
                 break;

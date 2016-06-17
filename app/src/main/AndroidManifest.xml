@@ -32,6 +32,8 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <!--允许应用程序更改主屏幕中的设置和快捷方式-->
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <!--允许应用程序访问联系人-->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
 
     <application
@@ -63,6 +65,9 @@
         <activity android:name=".activity.ActivityPatrolTrace" />
         <!--鹰眼轨迹截图-->
         <activity android:name=".activity.ActivityFinishSecurityTask" />
+
+        <!--联系人列表按字母排序-->
+        <activity android:name=".activity.ActivitySortByLetter" />
 
 
         <meta-data

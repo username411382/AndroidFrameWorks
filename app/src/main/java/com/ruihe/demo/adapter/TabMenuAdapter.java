@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.ruihe.demo.R;
 import com.ruihe.demo.bean.ItemTabColumn;
 import com.ruihe.demo.common.utils.DensityUtil;
-import com.ruihe.demo.common.utils.ToastUtils;
+import com.ruihe.demo.common.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,7 +107,7 @@ public class TabMenuAdapter extends RecyclerView.Adapter<TabMenuAdapter.TabMenuH
 
             int position = (int) v.getTag();
             ItemTabColumn itemTabColumn = mItems.get(position);
-            ToastUtils.show("--" + itemTabColumn.foodName);
+            ToastUtil.show("--" + itemTabColumn.foodName);
 
         }
     }

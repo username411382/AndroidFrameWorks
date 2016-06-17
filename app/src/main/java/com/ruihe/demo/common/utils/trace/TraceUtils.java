@@ -30,8 +30,8 @@ import com.baidu.trace.TraceLocation;
 import com.ruihe.demo.R;
 import com.ruihe.demo.activity.ActivityPatrolTrace;
 import com.ruihe.demo.bean.ItemTrace;
-import com.ruihe.demo.common.utils.DateUtils;
-import com.ruihe.demo.common.utils.ToastUtils;
+import com.ruihe.demo.common.utils.DateUtil;
+import com.ruihe.demo.common.utils.ToastUtil;
 import com.ruihe.demo.test.SPUtils;
 
 import org.json.JSONException;
@@ -178,7 +178,7 @@ public class TraceUtils {
         double longitude = location.getLongitude();
 
         if (Math.abs(latitude - 0.0) < 0.000001 && Math.abs(longitude - 0.0) < 0.000001) {
-            ToastUtils.show("当前查询无轨迹点");
+            ToastUtil.show("当前查询无轨迹点");
         } else {
 
             LatLng latLng = new LatLng(latitude, longitude);
@@ -340,7 +340,7 @@ public class TraceUtils {
                         if (null != dataJson) {
                             String mPerson = dataJson.getString("monitored_person");
                             String action = dataJson.getInt("action") == 1 ? "进入" : "离开";
-                            String date = DateUtil.getDate(dataJson.getInt("time"));
+                            String date = com.ruihe.demo.common.utils.trace.DateUtil.getDate(dataJson.getInt("time"));
                             Log.d(TRACE_TAG, "监控对象[" + mPerson + "]于" + date + " 【" + action + "】围栏");
                         }
 
@@ -405,7 +405,7 @@ public class TraceUtils {
      * @return
      */
     public String getTotalRecordTime() {
-        return DateUtils.getStringByFormat((mQueryTraceEndTime * 1000 - mQueryTraceStartTime * 1000), "mm");
+        return DateUtil.getStringByFormat((mQueryTraceEndTime * 1000 - mQueryTraceStartTime * 1000), "mm");
     }
 
     public void queryHistoryTrack(OnReceiveTraceListener onReceiveTraceDistance) {
@@ -472,7 +472,7 @@ public class TraceUtils {
                                         mItemTrace = new ItemTrace();
                                     }
                                     mItemTrace.totalDistance = traceDistance.intValue();
-                                    mItemTrace.totalTime = DateUtils.getStringByFormat(mQueryTraceEndTime * 1000 - mQueryTraceStartTime * 1000, "mm:ss");
+                                    mItemTrace.totalTime = DateUtil.getStringByFormat(mQueryTraceEndTime * 1000 - mQueryTraceStartTime * 1000, "mm:ss");
                                     mOnReceiveTraceDistance.getDistance(mItemTrace);
                                 }
 

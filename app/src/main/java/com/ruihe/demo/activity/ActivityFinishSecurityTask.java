@@ -15,7 +15,7 @@ import com.android.volley.toolbox.Volley;
 import com.ruihe.demo.R;
 import com.ruihe.demo.common.utils.Constants;
 import com.ruihe.demo.common.utils.DensityUtil;
-import com.ruihe.demo.common.utils.ToastUtils;
+import com.ruihe.demo.common.utils.ToastUtil;
 import com.ruihe.demo.common.utils.file.ImageFileUtils;
 import com.ruihe.demo.common.utils.net.VolleyUtils;
 import com.ruihe.demo.test.ImageUtils;
@@ -144,7 +144,7 @@ public class ActivityFinishSecurityTask extends BaseActivity {
         @Override
         public void onGetUpYunSecretFail() {
 
-            ToastUtils.show("上传安全巡检图片失败");
+            ToastUtil.show("上传安全巡检图片失败");
         }
 
         @Override
@@ -160,7 +160,7 @@ public class ActivityFinishSecurityTask extends BaseActivity {
 
         @Override
         public void onUploadImageError(String message) {
-            ToastUtils.show("上传安全巡检图片失败" + message);
+            ToastUtil.show("上传安全巡检图片失败" + message);
         }
 
         @Override
@@ -190,7 +190,7 @@ public class ActivityFinishSecurityTask extends BaseActivity {
                 try {
                     ItemResponseBase itemResponseBase = ItemResponseBase.parserBaseResponse(response);
                     if (itemResponseBase.cn == 0) {
-                        ToastUtils.show("提交成功");
+                        ToastUtil.show("提交成功");
                         mActivity.finish();
                     }
 
@@ -202,7 +202,7 @@ public class ActivityFinishSecurityTask extends BaseActivity {
 
             @Override
             public void onError(VolleyError error) {
-                ToastUtils.show("提交失败，请重试");
+                ToastUtil.show("提交失败，请重试");
             }
         });
 

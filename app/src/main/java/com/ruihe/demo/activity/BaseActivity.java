@@ -1,5 +1,8 @@
 package com.ruihe.demo.activity;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -16,6 +19,7 @@ import com.ruihe.demo.common.utils.view.TitleView;
 public abstract class BaseActivity extends FragmentActivity {
 
 
+    public static final String INTENT_BUNDLE_EXTRA = "intent_bundle";
     public TitleView mTitleView;
 
 
@@ -50,6 +54,19 @@ public abstract class BaseActivity extends FragmentActivity {
         // 结束Activity&从栈中移除该Activity
         ActivitiesContainer.getInstance().removeActivity(this);
         super.onDestroy();
+    }
+
+
+    public void redirectToActivity(Context context, Class<? extends Activity> targetActivity) {
+        redirectToActivity(context, null, targetActivity);
+    }
+
+    public void redirectToActivity(Context context, Bundle bundle, Class<? extends Activity> targetActivity) {
+        Intent intent = new Intent(context, targetActivity);
+        if (bundle != null) {
+            intent.putExtra(INTENT_BUNDLE_EXTRA, bundle);
+        }
+        startActivity(intent);
     }
 
 

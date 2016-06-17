@@ -8,7 +8,7 @@ import java.security.MessageDigest;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StringUtils {
+public class StringUtil {
 
     /**
      * 描述：将null转化为“”.

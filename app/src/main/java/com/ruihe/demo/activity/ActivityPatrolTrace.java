@@ -16,7 +16,7 @@ import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MapView;
 import com.ruihe.demo.R;
 import com.ruihe.demo.bean.ItemTrace;
-import com.ruihe.demo.common.utils.DateUtils;
+import com.ruihe.demo.common.utils.DateUtil;
 import com.ruihe.demo.common.utils.trace.TraceUtils;
 
 /**
@@ -87,7 +87,7 @@ public class ActivityPatrolTrace extends BaseActivity implements TraceUtils.OnRe
                 default:
                     break;
             }
-            tvTraceTime.setText(getResources().getString(R.string.security_task_total_time) + DateUtils.getStringByFormat(System.currentTimeMillis(), "mm:ss"));
+            tvTraceTime.setText(getResources().getString(R.string.security_task_total_time) + DateUtil.getStringByFormat(System.currentTimeMillis(), "mm:ss"));
             tvTraceDistance.setText(mItemTrace.totalDistance + getResources().getString(R.string.security_task_total_distance));
         }
     };

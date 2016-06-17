@@ -16,7 +16,7 @@ import com.ruihe.demo.R;
 import com.ruihe.demo.adapter.AdapterSecurityTask;
 import com.ruihe.demo.bean.ItemSecurityTask;
 import com.ruihe.demo.common.utils.Constants;
-import com.ruihe.demo.common.utils.ToastUtils;
+import com.ruihe.demo.common.utils.ToastUtil;
 import com.ruihe.demo.common.utils.net.VolleyUtils;
 import com.ruihe.demo.common.utils.view.FooterListView;
 import com.ruihe.demo.test.ItemResponseBase;
@@ -78,7 +78,7 @@ public class ActivitySecurityTask extends BaseActivity implements AdapterView.On
                     break;
                 case MSG_REFRESH_FAIL:
                     swipe.setRefreshing(false);
-                    ToastUtils.show("刷新失败，请重试");
+                    ToastUtil.show("刷新失败，请重试");
                     break;
                 case MSG_LOAD_MORE_SUCCESS:
 

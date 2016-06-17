@@ -7,7 +7,7 @@ import android.content.pm.PackageManager;
 /**
  * 版本更新相关功能
  */
-public class VersionUtils {
+public class VersionUtil {
 
     private static final String SP_LAST_REMAIND_UPDATE_DATE = "SP_LAST_REMAIND_UPDATE_DATE";
 

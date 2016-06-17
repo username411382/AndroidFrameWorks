@@ -14,8 +14,8 @@ import com.ruihe.demo.R;
 import com.ruihe.demo.activity.ActivityPatrolTrace;
 import com.ruihe.demo.bean.ItemSecurityTask;
 import com.ruihe.demo.common.utils.Constants;
-import com.ruihe.demo.common.utils.DateUtils;
-import com.ruihe.demo.common.utils.ToastUtils;
+import com.ruihe.demo.common.utils.DateUtil;
+import com.ruihe.demo.common.utils.ToastUtil;
 import com.ruihe.demo.common.utils.json.JsonParserBase;
 import com.ruihe.demo.common.utils.net.VolleyUtils;
 import com.ruihe.demo.test.ItemResponseBase;
@@ -99,7 +99,7 @@ public class AdapterSecurityTask extends BaseAdapter {
         }
 
         holder.tvSecurityTaskName.setText(itemSecurityTask.securityTaskName);
-        String taskTime = DateUtils.getTimeByOutput((double) itemSecurityTask.lastPatrolTime);
+        String taskTime = DateUtil.getTimeByOutput((double) itemSecurityTask.lastPatrolTime);
         holder.tvSecurityTaskTime.setText(taskTime);
         if (taskTime.contains("发布")) {
             holder.tvSecurityTaskTime.setText(taskTime.substring(0, taskTime.length() - 2));
@@ -146,7 +146,7 @@ public class AdapterSecurityTask extends BaseAdapter {
 
             @Override
             public void onError(VolleyError error) {
-                ToastUtils.show("任务开始失败,请重试");
+                ToastUtil.show("任务开始失败,请重试");
             }
         });
     }

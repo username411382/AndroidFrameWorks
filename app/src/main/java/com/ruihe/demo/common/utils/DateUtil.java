@@ -19,7 +19,7 @@ import java.util.GregorianCalendar;
  * Class containing some static utility methods.
  */
 @SuppressLint("SimpleDateFormat")
-public class DateUtils {
+public class DateUtil {
 
     /** 时间日期格式化到年月日时分秒. */
     public static final String dateFormatYMDHMS = "yyyy-MM-dd HH:mm:ss";
@@ -187,7 +187,7 @@ public class DateUtils {
             }
 
             String out = getStringByFormat(strDate,outFormat);
-            if(!StringUtils.isEmpty(out)){
+            if (!StringUtil.isEmpty(out)) {
                 return out;
             }
         } catch (Exception e) {

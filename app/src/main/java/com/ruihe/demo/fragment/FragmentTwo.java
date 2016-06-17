@@ -14,8 +14,8 @@ import com.ruihe.demo.R;
 import com.ruihe.demo.activity.ActivityPatrolTrace;
 import com.ruihe.demo.activity.ActivitySecurityTask;
 import com.ruihe.demo.common.utils.Constants;
-import com.ruihe.demo.common.utils.StringUtils;
-import com.ruihe.demo.common.utils.ToastUtils;
+import com.ruihe.demo.common.utils.StringUtil;
+import com.ruihe.demo.common.utils.ToastUtil;
 import com.ruihe.demo.common.utils.json.JsonParserBase;
 import com.ruihe.demo.common.utils.net.VolleyUtils;
 import com.ruihe.demo.common.utils.view.SlidingSeekBar;
@@ -107,7 +107,7 @@ public class FragmentTwo extends BaseFragment implements View.OnClickListener, S
         RequestQueue mQueue = Volley.newRequestQueue(holder);
         HashMap<String, String> params = VolleyUtils.getBaseHttpParams();
         params.put("username", "13618062160");
-        params.put("password", StringUtils.md5("123456"));
+        params.put("password", StringUtil.md5("123456"));
         VolleyUtils.post(mQueue, Constants.URL_ROOT + Constants.API_LOGIN, params, new
 
                         VolleyUtils.OnResponseListener() {
@@ -119,14 +119,14 @@ public class FragmentTwo extends BaseFragment implements View.OnClickListener, S
                                         parserSuccessData(base.data);
                                     }
                                 } catch (JSONException e) {
-                                    ToastUtils.show("解析失败");
+                                    ToastUtil.show("解析失败");
                                 }
 
                             }
 
                             @Override
                             public void onError(VolleyError error) {
-                                ToastUtils.show("连接失败");
+                                ToastUtil.show("连接失败");
                             }
                         }
                 , "tag_login");
@@ -136,7 +136,7 @@ public class FragmentTwo extends BaseFragment implements View.OnClickListener, S
     private void parserSuccessData(JSONObject data) throws JSONException {
         ItemUser user = ItemUser.parserUser(data.getJSONObject("user"));
         user.sess = JsonParserBase.getString(data, "sess");
-        user.password = StringUtils.md5("123456");
+        user.password = StringUtil.md5("123456");
         SPUtils.getInstance().saveCurrentUser(user);
         ActivitySecurityTask.redirectToActivity(holder);
     }

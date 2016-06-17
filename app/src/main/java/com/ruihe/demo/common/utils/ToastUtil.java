@@ -12,7 +12,7 @@ import com.ruihe.demo.R;
  * 描述：弹窗
  * Created by ruihe on 2016/5/4.
  */
-public class ToastUtils {
+public class ToastUtil {
 
     private static long lastShowTime;
     private static Toast toast;

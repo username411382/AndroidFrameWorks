@@ -23,7 +23,7 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.ruihe.demo.MyApplication;
 import com.ruihe.demo.R;
-import com.ruihe.demo.common.utils.VersionUtils;
+import com.ruihe.demo.common.utils.VersionUtil;
 import com.ruihe.demo.common.utils.view.RoundedImageView;
 import com.ruihe.demo.common.utils.view.TransitionFadeInDrawable;
 import com.ruihe.demo.test.SPUtils;
@@ -244,7 +244,7 @@ public class VolleyUtils {
         pa.put("cli_v", VersionUtils.getVersionName(MyApplication.getInstance()));// 客户端安装的应用的版本
          String sess = SPUtils.getInstance().getString(SPUtils.USER_SESS, "");
 		pa.put("sess", sess);// 加密的会话id*/
-        pa.put("v", VersionUtils.getVersionName(MyApplication.getInstance()));
+        pa.put("v", VersionUtil.getVersionName(MyApplication.getInstance()));
         pa.put("sys", "a");
         String sess = SPUtils.getInstance().getString(SPUtils.SESS, "");
         pa.put("sess", sess);

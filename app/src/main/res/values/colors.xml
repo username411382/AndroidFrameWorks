@@ -24,4 +24,11 @@
     <color name="bg_indicator_stroke">#c0999999</color>
 
 
+    <!--联系人按字母排序-->
+    <color name="gray">#AFAFAF</color>
+    <color name="yellow">#F99503</color>
+    <color name="gray_color">#ffe8ecef</color>
+    <color name="bg_sort_color">#EDEDED</color>
+
+
 </resources>
