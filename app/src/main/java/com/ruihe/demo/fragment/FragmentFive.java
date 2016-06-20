@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.ruihe.demo.R;
+import com.ruihe.demo.activity.ActivityPullToRefresh;
 import com.ruihe.demo.activity.ActivityShoppingCart;
 import com.ruihe.demo.activity.ActivitySortByLetter;
 import com.ruihe.demo.common.utils.ijkPlayer.ActivityVideoPlayer;
@@ -37,6 +38,9 @@ public class FragmentFive extends BaseFragment implements View.OnClickListener {
 
         tvContactSort = (TextView) view.findViewById(R.id.tv_sort);
         tvContactSort.setOnClickListener(this);
+
+        view.findViewById(R.id.tv_custom_pull_to_refresh).setOnClickListener(this);
+
 
         bindData();
     }
@@ -74,6 +78,9 @@ public class FragmentFive extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.tv_sort:
                 holder.redirectToActivity(holder, ActivitySortByLetter.class);
+                break;
+            case R.id.tv_custom_pull_to_refresh:
+                holder.redirectToActivity(holder, ActivityPullToRefresh.class);
                 break;
             default:
                 break;

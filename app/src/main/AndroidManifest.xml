@@ -69,6 +69,8 @@
         <!--联系人列表按字母排序-->
         <activity android:name=".activity.ActivitySortByLetter" />
 
+        <!--自定义下拉刷新-->
+        <activity android:name=".activity.ActivityPullToRefresh" />
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
