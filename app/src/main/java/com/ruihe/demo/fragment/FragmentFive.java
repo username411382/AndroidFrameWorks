@@ -5,10 +5,14 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.ruihe.demo.R;
+import com.ruihe.demo.activity.ActivityMain;
 import com.ruihe.demo.activity.ActivityPullToRefresh;
 import com.ruihe.demo.activity.ActivityShoppingCart;
 import com.ruihe.demo.activity.ActivitySortByLetter;
+import com.ruihe.demo.common.utils.Constants;
+import com.ruihe.demo.common.utils.chat.activity.ActivityChat;
 import com.ruihe.demo.common.utils.ijkPlayer.ActivityVideoPlayer;
+import com.ruihe.demo.test.SPUtils;
 
 /**
  * 描述：首页五
@@ -40,7 +44,8 @@ public class FragmentFive extends BaseFragment implements View.OnClickListener {
         tvContactSort.setOnClickListener(this);
 
         view.findViewById(R.id.tv_custom_pull_to_refresh).setOnClickListener(this);
-
+        view.findViewById(R.id.tv_first_user).setOnClickListener(this);
+        view.findViewById(R.id.tv_second_user).setOnClickListener(this);
 
         bindData();
     }
@@ -82,6 +87,17 @@ public class FragmentFive extends BaseFragment implements View.OnClickListener {
             case R.id.tv_custom_pull_to_refresh:
                 holder.redirectToActivity(holder, ActivityPullToRefresh.class);
                 break;
+            case R.id.tv_first_user:
+                SPUtils.getInstance().putString(SPUtils.CURRENT_USER_ID, "1001");
+                ((ActivityMain) holder).connectRongIM(Constants.userTokens[0]);
+                holder.redirectToActivity(holder, ActivityChat.class);
+                break;
+            case R.id.tv_second_user:
+                SPUtils.getInstance().putString(SPUtils.CURRENT_USER_ID, "1002");
+                ((ActivityMain) holder).connectRongIM(Constants.userTokens[1]);
+                holder.redirectToActivity(holder, ActivityChat.class);
+                break;
+
             default:
                 break;
 

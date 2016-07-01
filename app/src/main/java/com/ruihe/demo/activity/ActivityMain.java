@@ -3,16 +3,20 @@ package com.ruihe.demo.activity;
 import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.ruihe.demo.R;
 import com.ruihe.demo.common.utils.Constants.MainPage;
+import com.ruihe.demo.common.utils.chat.util.RongIMUtil;
 import com.ruihe.demo.fragment.FragmentFive;
 import com.ruihe.demo.fragment.FragmentFour;
 import com.ruihe.demo.fragment.FragmentOne;
 import com.ruihe.demo.fragment.FragmentThree;
 import com.ruihe.demo.fragment.FragmentTwo;
+
+import io.rong.imlib.RongIMClient;
 
 /**
  * 描述：
@@ -64,6 +68,36 @@ public class ActivityMain extends BaseActivity implements View.OnClickListener {
     private void bindData() {
         mLyPages[0].setSelected(true);
         refreshFragment(MainPage.PAGE_FIRST);
+
+        //连接融云
+        //connectRongIM(Constants.userTokens[0]);
+
+    }
+
+    public void connectRongIM(String token) {
+
+        if (getApplicationInfo().packageName.equals(RongIMUtil.getCurProcessName(getApplicationContext()))) {
+
+            RongIMClient.connect(token, new RongIMClient.ConnectCallback() {
+
+                @Override
+                public void onTokenIncorrect() {
+
+                    Log.d("ruihe", "--onTokenIncorrect");
+                }
+
+                @Override
+                public void onSuccess(String userid) {
+                    Log.d("ruihe", "--onSuccess---" + userid);
+                }
+
+                @Override
+                public void onError(RongIMClient.ErrorCode errorCode) {
+                    Log.d("ruihe", "--onError" + errorCode);
+                }
+            });
+        }
+
     }
 
     private void refreshFragment(MainPage currentPage) {

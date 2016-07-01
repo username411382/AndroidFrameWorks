@@ -6,6 +6,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.baidu.mapapi.SDKInitializer;
 import com.liulishuo.filedownloader.FileDownloader;
+import com.ruihe.demo.common.utils.chat.util.RongIMUtil;
 
 /**
  * 描述：全局的Application
@@ -13,7 +14,7 @@ import com.liulishuo.filedownloader.FileDownloader;
  */
 public class MyApplication extends Application {
 
-    private static MyApplication instance ;
+    private static MyApplication instance;
     private RequestQueue mQueue;
 
 
@@ -28,12 +29,14 @@ public class MyApplication extends Application {
         instance = this;
         mQueue = Volley.newRequestQueue(this);
 
-        /**
-         * 仅仅是缓存Application的Context，不耗时
-         */
+        //仅仅是缓存Application的Context，不耗时
         FileDownloader.init(getApplicationContext());
 
+        //百度SDK初始化
         SDKInitializer.initialize(getApplicationContext());
+
+        //融云初始化
+        RongIMUtil.initRongIMClient(getApplicationContext());
 
     }
 }

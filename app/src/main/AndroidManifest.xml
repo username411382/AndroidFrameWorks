@@ -36,6 +36,13 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
 
+    <!--融云IM-->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -51,7 +58,6 @@
         </activity>
 
         <!--视频播放-->
-
         <activity android:name=".common.utils.ijkPlayer.ActivityVideoPlayer" />
 
         <!--购物车-->
@@ -65,12 +71,12 @@
         <activity android:name=".activity.ActivityPatrolTrace" />
         <!--鹰眼轨迹截图-->
         <activity android:name=".activity.ActivityFinishSecurityTask" />
-
         <!--联系人列表按字母排序-->
         <activity android:name=".activity.ActivitySortByLetter" />
-
         <!--自定义下拉刷新-->
         <activity android:name=".activity.ActivityPullToRefresh" />
+        <!--聊天界面-->
+        <activity android:name=".common.utils.chat.activity.ActivityChat" />
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
@@ -85,6 +91,61 @@
             android:name=".common.utils.trace.MonitorService"
             android:enabled="true"
             android:process=":monitor"></service>
+
+
+        <!--融云IM-->
+        <!-- imlib config begin -->
+        <meta-data
+            android:name="RONG_CLOUD_APP_KEY"
+            android:value="c9kqb3rdkdjxj" />
+
+        <service
+            android:name="io.rong.imlib.ipc.RongService"
+            android:exported="true"
+            android:process=":ipc" />
+
+        <service android:name="io.rong.imlib.ReConnectService" />
+
+        <receiver android:name="io.rong.imlib.ConnectChangeReceiver" />
+
+        <receiver
+            android:name="io.rong.imlib.HeartbeatReceiver"
+            android:process=":ipc" />
+        <!-- imlib config end -->
+
+        <!--必选： SDK 核心功能-->
+        <service
+            android:name="io.rong.push.core.PushRegistrationService"
+            android:exported="false"></service>
+        <service
+            android:name="io.rong.push.PushService"
+            android:exported="false"
+            android:process="io.rong.push"></service>
+
+        <service
+            android:name="io.rong.push.core.MessageHandleService"
+            android:exported="true"></service>
+
+        <receiver
+            android:name="io.rong.push.PushReceiver"
+            android:process="io.rong.push">
+            <intent-filter>
+                <action android:name="io.rong.push.intent.action.HEART_BEAT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+            </intent-filter>
+        </receiver>
+        <!--必选： SDK 核心功能-->
+
 
     </application>
 

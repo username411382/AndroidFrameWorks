@@ -16,6 +16,10 @@ public class SPUtils {
     private Context mContext;
     private static SPUtils instance;
 
+
+    public static final String CURRENT_USER_ID = "user_id";
+
+
     /**
      * 所在小区
      */

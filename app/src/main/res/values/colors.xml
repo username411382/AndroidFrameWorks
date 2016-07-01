@@ -31,4 +31,8 @@
     <color name="bg_sort_color">#EDEDED</color>
 
 
+    <!--聊天-->
+    <color name="chat_bg">#dedede</color>
+
+
 </resources>
