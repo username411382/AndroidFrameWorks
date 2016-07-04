@@ -14,13 +14,19 @@ import java.util.List;
 
 import io.rong.imlib.model.Message;
 import io.rong.imlib.model.MessageContent;
+import io.rong.message.ImageMessage;
 import io.rong.message.TextMessage;
+import io.rong.message.VoiceMessage;
 
 /**
  * 描述：聊天适配器
  * Created by ruihe on 2016/6/30.
  */
 public class AdapterChat extends BaseAdapter {
+
+    private static final int MESSAGE_TYPE_TEXT_LEFT = 0;
+    private static final int MESSAGE_TYPE_TEXT_RIGHT = 1;
+
 
     private Context mContext;
     private List<Message> mList;
@@ -33,6 +39,17 @@ public class AdapterChat extends BaseAdapter {
     @Override
     public int getViewTypeCount() {
         return 2;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+
+        MessageContent messageContent = getItem(position).getContent();
+
+        if (messageContent instanceof TextMessage) {
+            return getItem(position).getMessageDirection() == Message.MessageDirection.SEND ? MESSAGE_TYPE_TEXT_RIGHT : MESSAGE_TYPE_TEXT_LEFT;
+        }
+        return -1;
     }
 
     @Override
@@ -57,21 +74,11 @@ public class AdapterChat extends BaseAdapter {
         if (convertView == null) {
             holder = new ViewHolder();
             MessageContent messageContent = uiMessage.getContent();
-
+            convertView = createItemView(uiMessage);
             if (messageContent instanceof TextMessage) {
-                switch (uiMessage.getMessageDirection()) {
-                    case SEND:
-                        convertView = View.inflate(mContext, R.layout.item_chat_right_text_message, null);
-                        holder.tvMessageContent = (TextView) convertView.findViewById(R.id.tv_item_message_content);
-                        break;
-                    case RECEIVE:
-                        convertView = View.inflate(mContext, R.layout.item_chat_left_text_message, null);
-                        holder.tvMessageContent = (TextView) convertView.findViewById(R.id.tv_item_message_left_content);
-                        break;
-                    default:
-                        break;
-                }
+                holder.tvMessageContent = (TextView) convertView.findViewById(R.id.tv_item_message_content);
             }
+
             convertView.setTag(holder);
         }
         holder = (ViewHolder) convertView.getTag();
@@ -81,6 +88,21 @@ public class AdapterChat extends BaseAdapter {
         holder.tvMessageContent.setText(((TextMessage) messageContent).getContent());
 
         return convertView;
+    }
+
+
+    private View createItemView(Message message) {
+
+        MessageContent messageContent = message.getContent();
+        if (messageContent instanceof TextMessage) {
+            return View.inflate(mContext, message.getMessageDirection() == Message.MessageDirection.SEND
+                    ? R.layout.item_chat_right_text_message : R.layout.item_chat_left_text_message, null);
+        } else if (messageContent instanceof ImageMessage) {
+
+        } else if (messageContent instanceof VoiceMessage) {
+
+        }
+        return null;
     }
 
 
@@ -97,7 +119,6 @@ public class AdapterChat extends BaseAdapter {
 
         if (message != null) {
             mList.add(message);
-            Collections.reverse(mList);
         }
         notifyDataSetChanged();
     }

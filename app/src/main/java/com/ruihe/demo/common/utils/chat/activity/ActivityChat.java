@@ -48,18 +48,16 @@ public class ActivityChat extends BaseActivity implements RongIMClient.OnReceive
         @Override
         public void handleMessage(android.os.Message msg) {
             super.handleMessage(msg);
-
-
             switch (msg.what) {
-
                 case MESSAGE_REFRESH:
 
                     if (mTempMessage != null) {
                         mAdapter.notifyMessageData(mTempMessage);
                         mTempMessage = null;
-                        return;
+                    } else {
+                        mAdapter.notifyMessageData(mItems);
                     }
-                    mAdapter.notifyMessageData(mItems);
+                    listView.setSelection(mAdapter.getCount());
                     break;
                 default:
                     break;

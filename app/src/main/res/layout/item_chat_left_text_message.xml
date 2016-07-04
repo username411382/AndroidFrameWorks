@@ -6,7 +6,7 @@
 
 
     <TextView
-        android:id="@+id/tv_item_message_left_content"
+        android:id="@+id/tv_item_message_content"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginRight="100dp"
