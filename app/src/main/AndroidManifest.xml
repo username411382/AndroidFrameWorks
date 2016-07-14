@@ -76,8 +76,9 @@
         <!--自定义下拉刷新-->
         <activity android:name=".activity.ActivityPullToRefresh" />
         <!--聊天界面-->
-        <activity android:name=".common.utils.chat.activity.ActivityChat" />
-
+        <activity
+            android:name=".common.utils.chat.activity.ActivityChat"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="fopVkGIAlfoBklbtRHUxqbG0ECl3LTnz" />

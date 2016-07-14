@@ -109,7 +109,6 @@ public class ActivityChat extends BaseActivity implements RongIMClient.OnReceive
             @Override
             public void onSuccess(List<Message> messages) {
                 mItems = messages;
-                Log.d("ruihe", "-----获取的消息数-----" + messages.size());
                 mHandler.sendEmptyMessage(MESSAGE_REFRESH);
             }
 

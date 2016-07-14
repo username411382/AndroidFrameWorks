@@ -7,9 +7,11 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.ruihe.demo.R;
+import com.ruihe.demo.common.utils.chat.util.DateUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import io.rong.imlib.model.Message;
@@ -77,6 +79,12 @@ public class AdapterChat extends BaseAdapter {
             convertView = createItemView(uiMessage);
             if (messageContent instanceof TextMessage) {
                 holder.tvMessageContent = (TextView) convertView.findViewById(R.id.tv_item_message_content);
+                holder.tvTime = (TextView) convertView.findViewById(R.id.tv_time);
+            } else if (messageContent instanceof ImageMessage) {
+
+
+            } else if (messageContent instanceof VoiceMessage) {
+
             }
 
             convertView.setTag(holder);
@@ -86,6 +94,13 @@ public class AdapterChat extends BaseAdapter {
         MessageContent messageContent = uiMessage.getContent();
 
         holder.tvMessageContent.setText(((TextMessage) messageContent).getContent());
+
+        long currentTime = uiMessage.getSentTime();
+        holder.tvTime.setVisibility(View.VISIBLE);
+        holder.tvTime.setText(DateUtil.getTimestampString(new Date(currentTime)));
+        if (position > 0 && currentTime - getItem(position - 1).getSentTime() < 60 * 1000) {
+            holder.tvTime.setVisibility(View.GONE);
+        }
 
         return convertView;
     }
@@ -126,6 +141,7 @@ public class AdapterChat extends BaseAdapter {
 
     class ViewHolder {
         TextView tvMessageContent;
+        TextView tvTime;
 
     }
 
