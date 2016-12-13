@@ -33,7 +33,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="30dp">
 
-            <com.ruihe.demo.common.utils.view.SlidingSeekBar
+            <com.ruihe.demo.common.view.SlidingSeekBar
                 android:id="@+id/seek_bar"
                 style="@style/style_slide_to_right_unlock"
                 android:layout_width="280dp"

@@ -8,11 +8,9 @@ import com.ruihe.demo.R;
 import com.ruihe.demo.activity.ActivityMain;
 import com.ruihe.demo.activity.ActivityPullToRefresh;
 import com.ruihe.demo.activity.ActivityShoppingCart;
-import com.ruihe.demo.activity.ActivitySortByLetter;
-import com.ruihe.demo.common.utils.Constants;
-import com.ruihe.demo.common.utils.chat.activity.ActivityChat;
-import com.ruihe.demo.common.utils.ijkPlayer.ActivityVideoPlayer;
-import com.ruihe.demo.test.SPUtils;
+import com.ruihe.demo.common.Constants;
+import com.ruihe.demo.common.chat.activity.ActivityChat;
+import com.ruihe.demo.common.utils.SPUtils;
 
 /**
  * 描述：首页五
@@ -76,13 +74,13 @@ public class FragmentFive extends BaseFragment implements View.OnClickListener {
         switch (v.getId()) {
 
             case R.id.tv_video:
-                ActivityVideoPlayer.redirectToActivity(holder, "http://7xsg5m.media1.z0.glb.clouddn.com/fish_2jtjf.mp4");
+               // ActivityVideoPlayer.redirectToActivity(holder, "http://7xsg5m.media1.z0.glb.clouddn.com/fish_2jtjf.mp4");
                 break;
             case R.id.tv_shopping_car:
                 ActivityShoppingCart.redirectToActivity(holder);
                 break;
             case R.id.tv_sort:
-                holder.redirectToActivity(holder, ActivitySortByLetter.class);
+
                 break;
             case R.id.tv_custom_pull_to_refresh:
                 holder.redirectToActivity(holder, ActivityPullToRefresh.class);

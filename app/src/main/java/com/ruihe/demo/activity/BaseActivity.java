@@ -9,8 +9,8 @@ import android.support.v4.app.FragmentActivity;
 import android.view.Window;
 
 import com.ruihe.demo.R;
-import com.ruihe.demo.common.utils.ActivitiesContainer;
-import com.ruihe.demo.common.utils.view.TitleView;
+import com.ruihe.demo.common.ActivitiesContainer;
+import com.ruihe.demo.common.view.TitleView;
 
 
 /**

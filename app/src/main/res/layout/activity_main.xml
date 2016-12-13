@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
 
-    <com.ruihe.demo.common.utils.view.TitleView
+    <com.ruihe.demo.common.view.TitleView
         android:id="@+id/common_title_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

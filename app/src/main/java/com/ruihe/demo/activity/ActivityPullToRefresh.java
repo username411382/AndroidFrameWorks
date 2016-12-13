@@ -5,8 +5,8 @@ import android.os.Message;
 import android.widget.ArrayAdapter;
 
 import com.ruihe.demo.R;
-import com.ruihe.demo.common.utils.DateUtil;
-import com.ruihe.demo.common.utils.view.customPullToRefresh.PullToRefreshListView;
+import com.ruihe.demo.common.DateUtil;
+import com.ruihe.demo.common.view.customPullToRefresh.PullToRefreshListView;
 
 import java.util.ArrayList;
 import java.util.Arrays;

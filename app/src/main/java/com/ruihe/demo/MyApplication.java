@@ -6,7 +6,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.baidu.mapapi.SDKInitializer;
 import com.liulishuo.filedownloader.FileDownloader;
-import com.ruihe.demo.common.utils.chat.util.RongIMUtil;
+import com.ruihe.demo.common.chat.util.RongIMUtil;
 
 /**
  * 描述：全局的Application

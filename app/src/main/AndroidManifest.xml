@@ -57,41 +57,16 @@
             </intent-filter>
         </activity>
 
-        <!--视频播放-->
-        <activity android:name=".common.utils.ijkPlayer.ActivityVideoPlayer" />
 
         <!--购物车-->
         <activity
             android:name=".activity.ActivityShoppingCart"
             android:screenOrientation="portrait" />
-
-        <!--安保任务-->
-        <activity android:name=".activity.ActivitySecurityTask" />
-        <!--鹰眼轨迹-->
-        <activity android:name=".activity.ActivityPatrolTrace" />
-        <!--鹰眼轨迹截图-->
-        <activity android:name=".activity.ActivityFinishSecurityTask" />
-        <!--联系人列表按字母排序-->
-        <activity android:name=".activity.ActivitySortByLetter" />
         <!--自定义下拉刷新-->
         <activity android:name=".activity.ActivityPullToRefresh" />
-        <!--聊天界面-->
-        <activity
-            android:name=".common.utils.chat.activity.ActivityChat"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="fopVkGIAlfoBklbtRHUxqbG0ECl3LTnz" />
-
-        <!--鹰眼轨迹的Serveice-->
-        <service
-            android:name="com.baidu.trace.LBSTraceService"
-            android:enabled="true"
-            android:exported="true"></service>
-        <service
-            android:name=".common.utils.trace.MonitorService"
-            android:enabled="true"
-            android:process=":monitor"></service>
 
 
         <!--融云IM-->

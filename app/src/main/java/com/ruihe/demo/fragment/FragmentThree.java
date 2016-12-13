@@ -10,12 +10,12 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.ruihe.demo.R;
-import com.ruihe.demo.common.utils.ToastUtil;
-import com.ruihe.demo.common.utils.view.autoViewpager.adapter.AutoScrollViewPagerAdapter;
-import com.ruihe.demo.common.utils.view.autoViewpager.viewpager.AutoScrollViewPagers;
-import com.ruihe.demo.common.utils.view.customViewPager.AutoScrollViewPager;
-import com.ruihe.demo.common.utils.view.customViewPager.CirclePageIndicator;
-import com.ruihe.demo.common.utils.view.customViewPager.SinglePagerAdapter;
+import com.ruihe.demo.common.ToastUtil;
+import com.ruihe.demo.common.view.autoViewpager.adapter.AutoScrollViewPagerAdapter;
+import com.ruihe.demo.common.view.autoViewpager.viewpager.AutoScrollViewPagers;
+import com.ruihe.demo.common.view.customViewPager.AutoScrollViewPager;
+import com.ruihe.demo.common.view.customViewPager.CirclePageIndicator;
+import com.ruihe.demo.common.view.customViewPager.SinglePagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

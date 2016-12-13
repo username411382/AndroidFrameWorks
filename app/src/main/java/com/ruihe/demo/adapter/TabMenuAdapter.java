@@ -9,8 +9,8 @@ import android.widget.TextView;
 
 import com.ruihe.demo.R;
 import com.ruihe.demo.bean.ItemTabColumn;
+import com.ruihe.demo.common.ToastUtil;
 import com.ruihe.demo.common.utils.DensityUtil;
-import com.ruihe.demo.common.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
