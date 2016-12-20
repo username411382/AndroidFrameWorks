@@ -64,6 +64,9 @@
             android:screenOrientation="portrait" />
         <!--自定义下拉刷新-->
         <activity android:name=".activity.ActivityPullToRefresh" />
+        <!--拖动控件-->
+        <activity android:name=".activity.ActivityDragView" />
+
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="fopVkGIAlfoBklbtRHUxqbG0ECl3LTnz" />

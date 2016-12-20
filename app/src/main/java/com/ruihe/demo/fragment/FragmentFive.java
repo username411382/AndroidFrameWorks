@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.ruihe.demo.R;
+import com.ruihe.demo.activity.ActivityDragView;
 import com.ruihe.demo.activity.ActivityMain;
 import com.ruihe.demo.activity.ActivityPullToRefresh;
 import com.ruihe.demo.activity.ActivityShoppingCart;
@@ -44,6 +45,7 @@ public class FragmentFive extends BaseFragment implements View.OnClickListener {
         view.findViewById(R.id.tv_custom_pull_to_refresh).setOnClickListener(this);
         view.findViewById(R.id.tv_first_user).setOnClickListener(this);
         view.findViewById(R.id.tv_second_user).setOnClickListener(this);
+        view.findViewById(R.id.tv_custom_view).setOnClickListener(this);
 
         bindData();
     }
@@ -74,7 +76,7 @@ public class FragmentFive extends BaseFragment implements View.OnClickListener {
         switch (v.getId()) {
 
             case R.id.tv_video:
-               // ActivityVideoPlayer.redirectToActivity(holder, "http://7xsg5m.media1.z0.glb.clouddn.com/fish_2jtjf.mp4");
+                // ActivityVideoPlayer.redirectToActivity(holder, "http://7xsg5m.media1.z0.glb.clouddn.com/fish_2jtjf.mp4");
                 break;
             case R.id.tv_shopping_car:
                 ActivityShoppingCart.redirectToActivity(holder);
@@ -96,6 +98,9 @@ public class FragmentFive extends BaseFragment implements View.OnClickListener {
                 holder.redirectToActivity(holder, ActivityChat.class);
                 break;
 
+            case R.id.tv_custom_view://自定义View
+                holder.redirectToActivity(holder, ActivityDragView.class);
+                break;
             default:
                 break;
 

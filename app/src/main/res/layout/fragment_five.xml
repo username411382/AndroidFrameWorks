@@ -60,4 +60,13 @@
         android:text="用户二"
         android:textColor="@color/white" />
 
+    <TextView
+        android:id="@+id/tv_custom_view"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:background="@drawable/selector_five_page_text_view"
+        android:gravity="center"
+        android:text="自定义View"
+        android:textColor="@color/white" />
+
 </LinearLayout>
