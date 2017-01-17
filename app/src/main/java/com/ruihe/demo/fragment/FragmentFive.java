@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.ruihe.demo.R;
+import com.ruihe.demo.activity.ActivityAnimation;
 import com.ruihe.demo.activity.ActivityDragView;
 import com.ruihe.demo.activity.ActivityMain;
 import com.ruihe.demo.activity.ActivityPullToRefresh;
@@ -82,7 +83,7 @@ public class FragmentFive extends BaseFragment implements View.OnClickListener {
                 ActivityShoppingCart.redirectToActivity(holder);
                 break;
             case R.id.tv_sort:
-
+                holder.redirectToActivity(holder, ActivityAnimation.class);
                 break;
             case R.id.tv_custom_pull_to_refresh:
                 holder.redirectToActivity(holder, ActivityPullToRefresh.class);

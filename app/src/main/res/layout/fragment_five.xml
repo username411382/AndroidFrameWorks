@@ -30,7 +30,7 @@
         android:layout_height="50dp"
         android:background="@drawable/selector_five_page_text_view"
         android:gravity="center"
-        android:text="联系人按\n字母排序"
+        android:text="动画"
         android:textColor="@color/white" />
 
     <TextView

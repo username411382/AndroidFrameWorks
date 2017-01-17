@@ -43,7 +43,7 @@ public class FragmentThree extends BaseFragment implements ViewPager.OnPageChang
             "http://fitimg.yunimg.cn//post//146405632530861.jpg",
             "http://fitimg.yunimg.cn//post//146440221124513.jpg",
             "http://fitimg.yunimg.cn//post//videoPost//cover//145639865537095.jpg"};
-    private int[] ids = {R.drawable.bg_guide_page0, R.drawable.bg_guide_page1, R.drawable.bg_guide_page2, R.drawable.bg_guide_page3, R.drawable.bg_guide_page4};
+    private int[] ids = {R.drawable.bg_guide_page0, R.drawable.bg_page1, R.drawable.bg_page2, R.drawable.bg_page3, R.drawable.bg_guide_page4};
 
     private int realPageCount;
 
