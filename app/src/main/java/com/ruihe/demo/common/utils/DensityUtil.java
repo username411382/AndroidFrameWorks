@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.View;
 import android.view.WindowManager;
 
 /**
@@ -85,6 +86,21 @@ public class DensityUtil {
     public static int dip(Context context, int value) {
         DisplayMetrics dm = context.getResources().getDisplayMetrics();
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, dm);
+    }
+
+    public static int getMeasureHeight(View targetView) {
+        int width = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        int height = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        targetView.measure(width, height);
+        return targetView.getMeasuredHeight();
+    }
+
+
+    public static int getMeasureWidth(View targetView) {
+        int width = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        int height = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        targetView.measure(width, height);
+        return targetView.getMeasuredWidth();
     }
 
 }

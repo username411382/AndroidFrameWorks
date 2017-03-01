@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.ruihe.demo.R;
-import com.ruihe.demo.common.Constants.MainPage;
+import com.ruihe.demo.common.utils.Constants.MainPage;
 import com.ruihe.demo.common.chat.util.RongIMUtil;
 import com.ruihe.demo.fragment.FragmentFive;
 import com.ruihe.demo.fragment.FragmentFour;

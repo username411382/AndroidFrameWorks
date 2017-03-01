@@ -1,21 +1,6 @@
 package com.ruihe.demo.activity;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.IntEvaluator;
-import android.animation.ValueAnimator;
-import android.app.Activity;
-import android.util.Log;
-import android.view.View;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.LinearInterpolator;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-
 import com.ruihe.demo.R;
-import com.ruihe.demo.common.DensityUtil;
 import com.ruihe.demo.common.view.UpMoveAnimationView;
 
 /**

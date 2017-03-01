@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.ruihe.demo.R;
-import com.ruihe.demo.common.ToastUtil;
+import com.ruihe.demo.common.utils.ToastUtil;
 import com.ruihe.demo.common.chat.activity.ActivityChat;
 import com.ruihe.demo.common.utils.SPUtils;
 import com.ruihe.demo.fragment.BaseFragment;

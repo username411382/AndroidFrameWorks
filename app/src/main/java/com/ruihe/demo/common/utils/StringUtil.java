@@ -1,4 +1,4 @@
-package com.ruihe.demo.common;
+package com.ruihe.demo.common.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;

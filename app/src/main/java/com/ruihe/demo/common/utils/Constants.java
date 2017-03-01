@@ -1,4 +1,4 @@
-package com.ruihe.demo.common;
+package com.ruihe.demo.common.utils;
 
 /**
  * 描述：全局常量

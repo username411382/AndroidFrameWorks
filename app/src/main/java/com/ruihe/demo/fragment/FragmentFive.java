@@ -10,7 +10,7 @@ import com.ruihe.demo.activity.ActivityDragView;
 import com.ruihe.demo.activity.ActivityMain;
 import com.ruihe.demo.activity.ActivityPullToRefresh;
 import com.ruihe.demo.activity.ActivityShoppingCart;
-import com.ruihe.demo.common.Constants;
+import com.ruihe.demo.common.utils.Constants;
 import com.ruihe.demo.common.chat.activity.ActivityChat;
 import com.ruihe.demo.common.utils.SPUtils;
 

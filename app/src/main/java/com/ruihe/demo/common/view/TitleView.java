@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ruihe.demo.R;
-import com.ruihe.demo.common.DensityUtil;
+import com.ruihe.demo.common.utils.DensityUtil;
 
 /**
  * 描述：标题栏

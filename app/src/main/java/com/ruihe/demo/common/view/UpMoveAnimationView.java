@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.ruihe.demo.R;
-import com.ruihe.demo.common.DensityUtil;
+import com.ruihe.demo.common.utils.DensityUtil;
 
 /**
  * 上移背景动画

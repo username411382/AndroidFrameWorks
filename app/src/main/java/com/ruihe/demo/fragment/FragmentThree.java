@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.ruihe.demo.R;
-import com.ruihe.demo.common.ToastUtil;
+import com.ruihe.demo.common.utils.ToastUtil;
 import com.ruihe.demo.common.view.autoViewpager.adapter.AutoScrollViewPagerAdapter;
 import com.ruihe.demo.common.view.autoViewpager.viewpager.AutoScrollViewPagers;
 import com.ruihe.demo.common.view.customViewPager.AutoScrollViewPager;

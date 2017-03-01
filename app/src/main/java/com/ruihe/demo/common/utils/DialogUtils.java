@@ -1,4 +1,4 @@
-package com.ruihe.demo.common;
+package com.ruihe.demo.common.utils;
 
 import android.app.Dialog;
 import android.content.Context;

@@ -1,5 +1,5 @@
 
-package com.ruihe.demo.common;
+package com.ruihe.demo.common.utils;
 
 /**
  * 汉字转换为拼音
