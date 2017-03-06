@@ -54,10 +54,10 @@ public class SinglePagerAdapter extends PagerAdapter {
                 .setFadeDuration(300)
                 .setPlaceholderImage(R.drawable.default_img)
                 .build();
-
         Uri uri = Uri.parse(mUrls.get(position));
         drawView.setHierarchy(hierarchy);
         drawView.setImageURI(uri);
+        container.addView(drawView);
 
         return drawView;
     }

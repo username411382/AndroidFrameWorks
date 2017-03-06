@@ -54,7 +54,7 @@ public class AdapterReuseViewPager extends FragmentPagerAdapter implements ViewP
     public void onPageSelected(int position) {
         LogUtil.d("onPageSelected: " + position);
         if (mFragmentReusePagers[position] == null) {
-           return;
+            return;
         }
 
         mFragmentReusePagers[position].setPageValue(mCurrentValue);
@@ -69,9 +69,11 @@ public class AdapterReuseViewPager extends FragmentPagerAdapter implements ViewP
             LogUtil.d("onPageScrollStateChanged: " + position);
             if (position == 2) {
                 mCurrentValue++;
+                mFragmentReusePagers[position].setPageValue(mCurrentValue);
                 viewPager.setCurrentItem(1, false);
             } else if (position == 0) {
                 mCurrentValue--;
+                mFragmentReusePagers[position].setPageValue(mCurrentValue);
                 viewPager.setCurrentItem(1, false);
             }
         }
