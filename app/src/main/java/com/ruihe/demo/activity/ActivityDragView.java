@@ -1,6 +1,9 @@
 package com.ruihe.demo.activity;
 
+import android.support.v4.view.ViewPager;
+
 import com.ruihe.demo.R;
+import com.ruihe.demo.adapter.AdapterReuseViewPager;
 
 /**
  * description:拖动控件
@@ -8,6 +11,9 @@ import com.ruihe.demo.R;
  */
 
 public class ActivityDragView extends BaseActivity {
+
+
+    private ViewPager viewPager;
 
 
     @Override
@@ -18,5 +24,17 @@ public class ActivityDragView extends BaseActivity {
     @Override
     public void onActivityViewCreated() {
 
+        viewPager = (ViewPager) findViewById(R.id.vp);
+        new AdapterReuseViewPager(getSupportFragmentManager(), viewPager);
     }
+
+
+    private String getCalculateResult() {
+
+
+        String result = "计算结果: " + (3 / 2 + 5 / 2);
+
+        return result;
+    }
+
 }

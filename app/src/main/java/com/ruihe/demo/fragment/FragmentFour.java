@@ -109,7 +109,7 @@ public class FragmentFour extends BaseFragment {
 
         mOnScrollistener = new OnRecycleViewScrollListener();
 
-        ryFood.addOnScrollListener(mOnScrollistener);
+        ryFood.setOnScrollListener(mOnScrollistener);
 
         bindData();
     }
