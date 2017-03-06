@@ -27,6 +27,7 @@ public class AdapterReuseViewPager extends FragmentPagerAdapter implements ViewP
         viewPager.setAdapter(this);
         viewPager.setCurrentItem(1, false);
         viewPager.addOnPageChangeListener(this);
+        viewPager.setOffscreenPageLimit(2);
     }
 
     @Override
@@ -52,9 +53,13 @@ public class AdapterReuseViewPager extends FragmentPagerAdapter implements ViewP
     @Override
     public void onPageSelected(int position) {
         LogUtil.d("onPageSelected: " + position);
-        if (mFragmentReusePagers[position] != null) {
-            mFragmentReusePagers[position].setPageValue(mCurrentValue);
+        if (mFragmentReusePagers[position] == null) {
+           return;
         }
+
+        mFragmentReusePagers[position].setPageValue(mCurrentValue);
+
+
     }
 
     @Override

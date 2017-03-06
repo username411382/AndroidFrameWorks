@@ -5,6 +5,7 @@ import android.app.Application;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.baidu.mapapi.SDKInitializer;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.ruihe.demo.common.chat.util.RongIMUtil;
 
@@ -37,6 +38,8 @@ public class MyApplication extends Application {
 
         //融云初始化
         RongIMUtil.initRongIMClient(getApplicationContext());
+
+        Fresco.initialize(this);
 
     }
 }

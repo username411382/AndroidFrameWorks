@@ -1,13 +1,17 @@
 package com.ruihe.demo.common.view.customViewPager;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.facebook.drawee.generic.GenericDraweeHierarchy;
+import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.ruihe.demo.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,10 +44,22 @@ public class SinglePagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        ImageView view = new ImageView(container.getContext());
+       /* ImageView view = new ImageView(container.getContext());
         view.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        container.addView(view);
-        return view;
+        container.addView(view);*/
+        SimpleDraweeView drawView = new SimpleDraweeView(container.getContext());
+        GenericDraweeHierarchyBuilder builder =
+                new GenericDraweeHierarchyBuilder(container.getResources());
+        GenericDraweeHierarchy hierarchy = builder
+                .setFadeDuration(300)
+                .setPlaceholderImage(R.drawable.default_img)
+                .build();
+
+        Uri uri = Uri.parse(mUrls.get(position));
+        drawView.setHierarchy(hierarchy);
+        drawView.setImageURI(uri);
+
+        return drawView;
     }
 
     @Override
