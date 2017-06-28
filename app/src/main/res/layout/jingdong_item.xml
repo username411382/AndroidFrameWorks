@@ -5,12 +5,12 @@
     android:gravity="center"
     android:orientation="horizontal">
 
-    <com.ruihe.demo.common.utils.view.customPullToRefresh.FirstSetpView
+    <com.ruihe.demo.common.view.customPullToRefresh.FirstSetpView
         android:id="@+id/first_step_view"
         android:layout_width="45dp"
         android:layout_height="70dp" />
 
-    <com.ruihe.demo.common.utils.view.customPullToRefresh.SecondStepView
+    <com.ruihe.demo.common.view.customPullToRefresh.SecondStepView
         android:id="@+id/second_step_view"
         android:layout_width="45dp"
         android:layout_height="70dp"

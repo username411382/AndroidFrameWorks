@@ -21,7 +21,6 @@ import com.ruihe.demo.common.utils.SPUtils;
 public class FragmentFive extends BaseFragment implements View.OnClickListener {
 
 
-    private TextView tvVideo;
     private TextView tvShoppingCar;
     private TextView tvContactSort;
 
@@ -34,8 +33,6 @@ public class FragmentFive extends BaseFragment implements View.OnClickListener {
     @Override
     public void getFragmentView(View view, Bundle savedInstanceState) {
 
-        tvVideo = (TextView) view.findViewById(R.id.tv_video);
-        tvVideo.setOnClickListener(this);
 
         tvShoppingCar = (TextView) view.findViewById(R.id.tv_shopping_car);
         tvShoppingCar.setOnClickListener(this);
@@ -75,10 +72,6 @@ public class FragmentFive extends BaseFragment implements View.OnClickListener {
 
 
         switch (v.getId()) {
-
-            case R.id.tv_video:
-                // ActivityVideoPlayer.redirectToActivity(holder, "http://7xsg5m.media1.z0.glb.clouddn.com/fish_2jtjf.mp4");
-                break;
             case R.id.tv_shopping_car:
                 ActivityShoppingCart.redirectToActivity(holder);
                 break;

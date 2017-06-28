@@ -4,7 +4,6 @@ import android.app.Application;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.baidu.mapapi.SDKInitializer;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.ruihe.demo.common.chat.util.RongIMUtil;
@@ -20,6 +19,9 @@ public class MyApplication extends Application {
 
 
     public static synchronized MyApplication getInstance() {
+        if (instance == null) {
+            instance = new MyApplication();
+        }
         return instance;
     }
 
@@ -32,9 +34,6 @@ public class MyApplication extends Application {
 
         //仅仅是缓存Application的Context，不耗时
         FileDownloader.init(getApplicationContext());
-
-        //百度SDK初始化
-        SDKInitializer.initialize(getApplicationContext());
 
         //融云初始化
         RongIMUtil.initRongIMClient(getApplicationContext());

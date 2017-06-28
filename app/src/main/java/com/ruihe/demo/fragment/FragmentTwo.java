@@ -17,7 +17,6 @@ import com.ruihe.demo.common.view.SlidingSeekBar;
 public class FragmentTwo extends BaseFragment implements View.OnClickListener, SlidingSeekBar.OnSeekBarStatusListener {
 
 
-    private TextView tvSecond;
     private View mView;
     private View viewBg;
     private TextView tvSlideToRightHint;
@@ -36,7 +35,6 @@ public class FragmentTwo extends BaseFragment implements View.OnClickListener, S
     @Override
     public void getFragmentView(View view, Bundle savedInstanceState) {
         mView = view;
-        tvSecond = (TextView) view.findViewById(R.id.tv_second);
         initView();
         initListener();
         bindData();
@@ -68,7 +66,6 @@ public class FragmentTwo extends BaseFragment implements View.OnClickListener, S
 
     private void initListener() {
         slideSeekBar.initSlideToRightUnlock(holder, tvSlideToRightHint, viewBg, this);
-        tvSecond.setOnClickListener(this);
     }
 
 
