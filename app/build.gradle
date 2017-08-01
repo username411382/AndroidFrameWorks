@@ -28,5 +28,5 @@ dependencies {
     compile 'com.flipboard:bottomsheet-core:1.5.1'
     compile 'com.facebook.fresco:fresco:1.1.0'
     compile "com.android.support:recyclerview-v7:${versions.supportLib}"
-
+    compile "com.android.support:support-v4:${versions.supportLib}"
 }

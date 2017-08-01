@@ -1,5 +1,6 @@
 package com.ruihe.demo.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -48,6 +49,7 @@ public class FragmentFour extends BaseFragment {
     private OnRecycleViewScrollListener mOnScrollistener;
 
 
+    @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
