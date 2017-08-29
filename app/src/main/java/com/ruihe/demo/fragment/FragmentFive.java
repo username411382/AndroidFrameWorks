@@ -8,6 +8,7 @@ import com.ruihe.demo.R;
 import com.ruihe.demo.activity.ActivityAnimation;
 import com.ruihe.demo.activity.ActivityDragView;
 import com.ruihe.demo.activity.ActivityMain;
+import com.ruihe.demo.activity.ActivityPay;
 import com.ruihe.demo.activity.ActivityPullToRefresh;
 import com.ruihe.demo.activity.ActivityShoppingCart;
 import com.ruihe.demo.common.utils.Constants;
@@ -44,6 +45,7 @@ public class FragmentFive extends BaseFragment implements View.OnClickListener {
         view.findViewById(R.id.tv_first_user).setOnClickListener(this);
         view.findViewById(R.id.tv_second_user).setOnClickListener(this);
         view.findViewById(R.id.tv_custom_view).setOnClickListener(this);
+        view.findViewById(R.id.tv_pay_view).setOnClickListener(this);
 
         bindData();
     }
@@ -94,6 +96,10 @@ public class FragmentFive extends BaseFragment implements View.OnClickListener {
 
             case R.id.tv_custom_view://自定义View
                 holder.redirectToActivity(holder, ActivityDragView.class);
+                break;
+
+            case R.id.tv_pay_view:
+                holder.redirectToActivity(holder, ActivityPay.class);
                 break;
             default:
                 break;

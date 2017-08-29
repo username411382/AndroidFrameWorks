@@ -71,8 +71,8 @@
         <activity android:name=".activity.ActivityAnimation" />
 
         <!--聊天-->
-        <activity android:name=".common.chat.activity.ActivityChat"/>
-
+        <activity android:name=".common.chat.activity.ActivityChat" />
+        <activity android:name=".activity.ActivityPay" />
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
