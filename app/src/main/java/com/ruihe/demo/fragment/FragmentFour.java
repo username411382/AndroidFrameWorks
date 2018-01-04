@@ -76,12 +76,12 @@ public class FragmentFour extends BaseFragment {
     @Override
     public void getFragmentView(View view, Bundle savedInstanceState) {
 
-        tvTabHeadPackageContent = (TextView) view.findViewById(R.id.tv_package_content);
-        tvTabHeadFoodName = (TextView) view.findViewById(R.id.tv_tab_head_food_name);
-        tvTabHeadFoodPrice = (TextView) view.findViewById(R.id.tv_tab_head_food_price);
-        tvTabHeadFoodCount = (TextView) view.findViewById(R.id.tv_tab_head_food_count);
-        tvTabHeadFoodTotal = (TextView) view.findViewById(R.id.tv_tab_head_food_total);
-        lyHead = (LinearLayout) view.findViewById(R.id.ly_head);
+        tvTabHeadPackageContent = view.findViewById(R.id.tv_package_content);
+        tvTabHeadFoodName = view.findViewById(R.id.tv_tab_head_food_name);
+        tvTabHeadFoodPrice = view.findViewById(R.id.tv_tab_head_food_price);
+        tvTabHeadFoodCount = view.findViewById(R.id.tv_tab_head_food_count);
+        tvTabHeadFoodTotal = view.findViewById(R.id.tv_tab_head_food_total);
+        lyHead = view.findViewById(R.id.ly_head);
 
         LayoutParams ly = (LayoutParams) lyHead.getLayoutParams();
         ly.width = (DensityUtil.getScreenWidth(holder) - DensityUtil.dip2px(holder, 1)) * 11 / 14;
@@ -94,8 +94,8 @@ public class FragmentFour extends BaseFragment {
         TabMenuAdapter.setTabHeadLayoutParams(holder, tvTabHeadFoodTotal, TabMenuColumn.TAB_COLUMN_TOTAL);
 
 
-        ryPackage = (RecyclerView) view.findViewById(R.id.ry_column_package);
-        ryFood = (RecyclerView) view.findViewById(R.id.ry_column_food);
+        ryPackage = view.findViewById(R.id.ry_column_package);
+        ryFood = view.findViewById(R.id.ry_column_food);
 
         RelativeLayout.LayoutParams rpPackage = (RelativeLayout.LayoutParams) ryPackage.getLayoutParams();
         rpPackage.width = (DensityUtil.getScreenWidth(holder) - DensityUtil.dip2px(holder, 1)) * 3 / 14;

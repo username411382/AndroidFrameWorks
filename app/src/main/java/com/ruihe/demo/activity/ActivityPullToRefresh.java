@@ -1,5 +1,6 @@
 package com.ruihe.demo.activity;
 
+import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Message;
 import android.widget.ArrayAdapter;
@@ -24,6 +25,7 @@ public class ActivityPullToRefresh extends BaseActivity implements PullToRefresh
     private final static int REFRESH_COMPLETE = 0;
 
 
+    @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {

@@ -6,10 +6,5 @@
     android:orientation="vertical">
 
 
-    <com.ruihe.demo.common.view.UpMoveAnimationView
-        android:id="@+id/ry_bg"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
 
 </LinearLayout>

@@ -11,6 +11,8 @@
     <color name="pressed_black">#4000</color>
     <color name="transparent">#00000000</color>
     <color name="base_blue">#288eff</color>
+    <color name="bg_default_color">#dedede</color>
+
 
     <!--自定义对话框颜色背景-->
     <color name="title_black">#2c2c2c</color>
@@ -18,18 +20,15 @@
     <color name="bg_gray">#E6E6E6</color>
     <color name="dialog_bg">#f0f0f0</color>
 
-
     <color name="bg_indicator_selected">#41acff</color>
     <color name="bg_indicator">#c0ffffff</color>
     <color name="bg_indicator_stroke">#c0999999</color>
-
 
     <!--联系人按字母排序-->
     <color name="gray">#AFAFAF</color>
     <color name="yellow">#F99503</color>
     <color name="gray_color">#ffe8ecef</color>
     <color name="bg_sort_color">#EDEDED</color>
-
 
     <!--聊天-->
     <color name="chat_bg">#dedede</color>

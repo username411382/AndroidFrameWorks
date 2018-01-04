@@ -65,7 +65,7 @@
         <!--自定义下拉刷新-->
         <activity android:name=".activity.ActivityPullToRefresh" />
         <!--拖动控件-->
-        <activity android:name=".activity.ActivityDragView" />
+        <activity android:name=".activity.ActivityShowCustomView" />
 
         <!--向上动画-->
         <activity android:name=".activity.ActivityAnimation" />
@@ -73,6 +73,9 @@
         <!--聊天-->
         <activity android:name=".common.chat.activity.ActivityChat" />
         <activity android:name=".activity.ActivityPay" />
+
+        <!--监听软键盘弹起-->
+        <activity android:name=".activity.ActivityObservedSoftInput" />
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
@@ -102,15 +105,15 @@
         <!--必选： SDK 核心功能-->
         <service
             android:name="io.rong.push.core.PushRegistrationService"
-            android:exported="false"></service>
+            android:exported="false" />
         <service
             android:name="io.rong.push.PushService"
             android:exported="false"
-            android:process="io.rong.push"></service>
+            android:process="io.rong.push" />
 
         <service
             android:name="io.rong.push.core.MessageHandleService"
-            android:exported="true"></service>
+            android:exported="true" />
 
         <receiver
             android:name="io.rong.push.PushReceiver"

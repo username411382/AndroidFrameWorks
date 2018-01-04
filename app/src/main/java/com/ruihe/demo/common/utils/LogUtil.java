@@ -10,7 +10,7 @@ import android.util.Log;
 
 public class LogUtil {
 
-    private static final String TAG = "ruihe";
+    private static final String TAG = "frameworkInfo";
 
 
     public static void d(String printValue) {

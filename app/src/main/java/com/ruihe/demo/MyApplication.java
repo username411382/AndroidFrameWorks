@@ -7,6 +7,7 @@ import com.android.volley.toolbox.Volley;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.ruihe.demo.common.chat.util.RongIMUtil;
+import com.ruihe.demo.common.utils.CrashHandler;
 
 /**
  * 描述：全局的Application
@@ -40,5 +41,7 @@ public class MyApplication extends Application {
 
         Fresco.initialize(this);
 
+        //全局异常处理
+        CrashHandler.getInstance().init(this);
     }
 }

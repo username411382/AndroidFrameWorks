@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AndroidFrameWorks.iml" filepath="$PROJECT_DIR$/AndroidFrameWorks.iml" />
-      <module fileurl="file://$PROJECT_DIR$/extrasLib/Ijkplayer/Ijkplayer.iml" filepath="$PROJECT_DIR$/extrasLib/Ijkplayer/Ijkplayer.iml" />
-      <module fileurl="file://$PROJECT_DIR$/extrasLib/ShareSdk/ShareSdk.iml" filepath="$PROJECT_DIR$/extrasLib/ShareSdk/ShareSdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/AndroidFrameWorks.iml" filepath="$PROJECT_DIR$/.idea/AndroidFrameWorks.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/extrasLib/extrasLib.iml" filepath="$PROJECT_DIR$/extrasLib/extrasLib.iml" />
     </modules>
   </component>
 </project>

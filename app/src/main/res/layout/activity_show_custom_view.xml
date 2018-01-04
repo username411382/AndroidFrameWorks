@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--<com.ruihe.demo.common.customview.MoveViewByLayoutMethod
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@color/base_blue"
+        android:gravity="center"
+        android:text="layout滑动" />
+
+    <com.ruihe.demo.common.customview.MoveViewByScroller
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/base_blue"
+        android:gravity="center"
+        android:text="scroller滑动" />-->
+
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/lay_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" />
+
+        </HorizontalScrollView>
+    </ScrollView>
+</LinearLayout>

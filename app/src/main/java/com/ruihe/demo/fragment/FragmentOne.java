@@ -28,10 +28,10 @@ public class FragmentOne extends BaseFragment {
     public void getFragmentView(View view, Bundle savedInstanceState) {
 
 
-        tvSortIntroduce = (TextView) view.findViewById(R.id.tv_sort_introduce);
-        tvSortBefore = (TextView) view.findViewById(R.id.tv_sort_before);
-        tvSortAfter = (TextView) view.findViewById(R.id.tv_sort_after);
-        lySortType = (LinearLayout) view.findViewById(R.id.ly_sort_type);
+        tvSortIntroduce = view.findViewById(R.id.tv_sort_introduce);
+        tvSortBefore = view.findViewById(R.id.tv_sort_before);
+        tvSortAfter = view.findViewById(R.id.tv_sort_after);
+        lySortType = view.findViewById(R.id.ly_sort_type);
 
         holder.mTitleView.addRightText(new View.OnClickListener() {
             @Override
@@ -73,7 +73,7 @@ public class FragmentOne extends BaseFragment {
         lySortType.removeAllViewsInLayout();
         for (int i = 0; i < mSortTypes.length; i++) {
             View item = View.inflate(holder, R.layout.item_sort_view, null);
-            TextView tvSortName = (TextView) item.findViewById(R.id.tv_sort_name);
+            TextView tvSortName = item.findViewById(R.id.tv_sort_name);
             tvSortName.setText(mSortTypes[i]);
             tvSortName.setTag(i);
             tvSortName.setOnClickListener(mOnSortItemListener);

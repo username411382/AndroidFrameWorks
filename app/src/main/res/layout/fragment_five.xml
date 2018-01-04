@@ -59,6 +59,7 @@
         android:gravity="center"
         android:text="自定义View"
         android:textColor="@color/white" />
+
     <TextView
         android:id="@+id/tv_pay_view"
         android:layout_width="100dp"
@@ -67,5 +68,19 @@
         android:gravity="center"
         android:text="webView支付"
         android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/tv_soft_input"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:background="@drawable/selector_five_page_text_view"
+        android:gravity="center"
+        android:text="软键盘"
+        android:textColor="@color/white" />
+
+    <com.ruihe.demo.common.view.FlowLayout
+        android:id="@+id/lay_flow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
