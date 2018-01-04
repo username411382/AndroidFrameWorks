@@ -71,6 +71,7 @@ public class FragmentFour extends BaseFragment {
 
     @Override
     public void onAttached() {
+        //test work branch
     }
 
     @Override
