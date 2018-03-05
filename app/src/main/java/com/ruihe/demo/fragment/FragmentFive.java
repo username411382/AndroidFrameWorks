@@ -57,8 +57,6 @@ public class FragmentFive extends BaseFragment implements View.OnClickListener {
     @Override
     public void onDetached() {
 
-
-
     }
 
 
