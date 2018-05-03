@@ -37,11 +37,11 @@ public class MyApplication extends Application {
         FileDownloader.init(getApplicationContext());
 
         //融云初始化
-        RongIMUtil.initRongIMClient(getApplicationContext());
+      //  RongIMUtil.initRongIMClient(getApplicationContext());
 
         Fresco.initialize(this);
 
         //全局异常处理
-        CrashHandler.getInstance().init(this);
+       // CrashHandler.getInstance().init(this);
     }
 }

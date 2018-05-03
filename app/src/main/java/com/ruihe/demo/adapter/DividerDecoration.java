@@ -9,7 +9,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.ruihe.demo.R;
 
+
+/**recycleView分割线
+ * https://blog.csdn.net/lmj623565791/article/details/45059587
+ */
 public class DividerDecoration extends RecyclerView.ItemDecoration {
 
     private static final int[] ATTRS = new int[]{
@@ -25,6 +30,7 @@ public class DividerDecoration extends RecyclerView.ItemDecoration {
     public DividerDecoration(Context context) {
         final TypedArray a = context.obtainStyledAttributes(ATTRS);
         mDivider = a.getDrawable(0);
+        //mDivider = context.getResources().getDrawable(R.drawable.shape_map_shot);
         a.recycle();
     }
 
@@ -50,6 +56,7 @@ public class DividerDecoration extends RecyclerView.ItemDecoration {
         }
     }
 
+    //画竖线
     public void drawVertical(Canvas c, RecyclerView parent) {
         final int left = parent.getPaddingLeft();
         final int right = parent.getWidth() - parent.getPaddingRight();
@@ -67,6 +74,7 @@ public class DividerDecoration extends RecyclerView.ItemDecoration {
         }
     }
 
+    //画横线, 这里的parent其实是显示在屏幕显示的这部分
     public void drawHorizontal(Canvas c, RecyclerView parent) {
         final int top = parent.getPaddingTop();
         final int bottom = parent.getHeight() - parent.getPaddingBottom();
@@ -84,12 +92,20 @@ public class DividerDecoration extends RecyclerView.ItemDecoration {
         }
     }
 
+    /**由于Divider也有长宽高，每一个Item需要向下或者向右偏移
+     * @param outRect
+     * @param view
+     * @param parent
+     * @param state
+     */
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
         if (getOrientation(parent) == VERTICAL_LIST) {
+            //画横线，就是往下偏移一个分割线的高度
             outRect.set(0, 0, 0, mDivider.getIntrinsicHeight());
         } else {
+            //画竖线，就是往右偏移一个分割线的宽度
             outRect.set(0, 0, mDivider.getIntrinsicWidth(), 0);
         }
     }

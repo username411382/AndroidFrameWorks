@@ -35,6 +35,7 @@ public class FragmentFive extends BaseFragment implements View.OnClickListener {
     @Override
     public void getFragmentView(View view, Bundle savedInstanceState) {
         layFlow = view.findViewById(R.id.lay_flow);
+        view.findViewById(R.id.tv_shopping_car).setOnClickListener(this);
         bindData();
     }
 
@@ -49,7 +50,6 @@ public class FragmentFive extends BaseFragment implements View.OnClickListener {
     private void bindData() {
         holder.mTitleView.removeAllMenu();
         holder.mTitleView.setTitle(R.string.main_fifth);
-
 
     }
 
