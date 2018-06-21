@@ -12,6 +12,8 @@ import com.ruihe.demo.R;
 import com.ruihe.demo.common.ActivitiesContainer;
 import com.ruihe.demo.common.view.TitleView;
 
+import qiu.niorgai.StatusBarCompat;
+
 
 /**
  * 所有活动的基类
@@ -22,18 +24,17 @@ public abstract class BaseActivity extends FragmentActivity {
     public static final String INTENT_BUNDLE_EXTRA = "intent_bundle";
     public TitleView mTitleView;
 
-
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(getViewId());
-
         mTitleView = (TitleView) findViewById(R.id.common_title_view);
         onActivityViewCreated();
         // 启动activity时添加Activity到堆栈
         ActivitiesContainer.getInstance().addActivity(this);
+        StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colorLightBlue));
     }
 
     @Override

@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.LinearLayout;
 
 import com.ruihe.demo.R;
@@ -18,6 +17,7 @@ import com.ruihe.demo.fragment.FragmentThree;
 import com.ruihe.demo.fragment.FragmentTwo;
 
 import io.rong.imlib.RongIMClient;
+import qiu.niorgai.StatusBarCompat;
 
 /**
  * 描述：

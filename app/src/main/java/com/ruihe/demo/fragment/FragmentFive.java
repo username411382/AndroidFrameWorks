@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.ruihe.demo.R;
 import com.ruihe.demo.activity.ActivityAnimation;
+import com.ruihe.demo.activity.ActivityRecycleLoadMore;
 import com.ruihe.demo.activity.ActivityShowCustomView;
 import com.ruihe.demo.activity.ActivityMain;
 import com.ruihe.demo.activity.ActivityPay;
@@ -36,6 +37,7 @@ public class FragmentFive extends BaseFragment implements View.OnClickListener {
     public void getFragmentView(View view, Bundle savedInstanceState) {
         layFlow = view.findViewById(R.id.lay_flow);
         view.findViewById(R.id.tv_shopping_car).setOnClickListener(this);
+        view.findViewById(R.id.tv_load_more).setOnClickListener(this);
         bindData();
     }
 
@@ -90,6 +92,9 @@ public class FragmentFive extends BaseFragment implements View.OnClickListener {
 
             case R.id.tv_pay_view:
                 holder.redirectToActivity(holder, ActivityPay.class);
+                break;
+            case R.id.tv_load_more://加载更多
+                holder.redirectToActivity(holder, ActivityRecycleLoadMore.class);
                 break;
             default:
                 break;

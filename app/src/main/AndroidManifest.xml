@@ -77,6 +77,8 @@
         <!--监听软键盘弹起-->
         <activity android:name=".activity.ActivityObservedSoftInput" />
 
+        <activity android:name=".activity.ActivityRecycleLoadMore"/>
+
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="fopVkGIAlfoBklbtRHUxqbG0ECl3LTnz" />
