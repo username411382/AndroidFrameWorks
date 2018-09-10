@@ -2,4 +2,14 @@
 <resources>
     <item type="id" name="id_volley_load_image_tag" />
     <item type="id" name="id_volley_resize_image_tag" />
+
+
+    <!-- zbar -->
+    <item type="id" name="auto_focus" />
+    <item type="id" name="decode" />
+    <item type="id" name="decode_failed" />
+    <item type="id" name="decode_succeeded" />
+    <item type="id" name="restart_preview" />
+    <item type="id" name="quit" />
+
 </resources>

@@ -11,6 +11,7 @@ import android.view.Window;
 import com.ruihe.demo.R;
 import com.ruihe.demo.common.ActivitiesContainer;
 import com.ruihe.demo.common.view.TitleView;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import qiu.niorgai.StatusBarCompat;
 
@@ -23,6 +24,7 @@ public abstract class BaseActivity extends FragmentActivity {
 
     public static final String INTENT_BUNDLE_EXTRA = "intent_bundle";
     public TitleView mTitleView;
+    private RxPermissions mRxPermissions;
 
     @Override
     protected void onCreate(Bundle arg0) {
@@ -35,6 +37,7 @@ public abstract class BaseActivity extends FragmentActivity {
         // 启动activity时添加Activity到堆栈
         ActivitiesContainer.getInstance().addActivity(this);
         StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colorLightBlue));
+        mRxPermissions = new RxPermissions(this);
     }
 
     @Override
@@ -74,6 +77,11 @@ public abstract class BaseActivity extends FragmentActivity {
     public abstract int getViewId();
 
     public abstract void onActivityViewCreated();
-
+    /**
+     * 获取权限请求类
+     */
+    protected RxPermissions getRxPermissions() {
+        return mRxPermissions;
+    }
 
 }

@@ -31,4 +31,8 @@
     <string name="security_task_total_time">时间</string>
     <string name="security_task_total_distance">米</string>
 
+    <!--扫码-->
+    <string name="txt_run_home_scan_code_des">将二维码或条码放入框内,即可自动扫描</string>
+    <string name="txt_run_home_scan_code_open_camera_fail">无法访问相机，请检查"系统设置->应用程序"是否已打开摄像头权限。</string>
+
 </resources>

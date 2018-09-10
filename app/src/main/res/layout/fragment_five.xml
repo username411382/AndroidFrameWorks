@@ -3,89 +3,112 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/tv_shopping_car"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/selector_five_page_text_view"
-        android:gravity="center"
-        android:text="购物车"
-        android:textColor="@color/white" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_sort"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:background="@drawable/selector_five_page_text_view"
-        android:gravity="center"
-        android:text="动画"
-        android:textColor="@color/white" />
+        <TextView
+            android:id="@+id/tv_shopping_car"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/selector_five_page_text_view"
+            android:gravity="center"
+            android:text="购物车"
+            android:textColor="@color/white" />
 
-    <TextView
-        android:id="@+id/tv_custom_pull_to_refresh"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:background="@drawable/selector_five_page_text_view"
-        android:gravity="center"
-        android:text="自定义\n下拉刷新"
-        android:textColor="@color/white" />
+        <TextView
+            android:id="@+id/tv_sort"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:background="@drawable/selector_five_page_text_view"
+            android:gravity="center"
+            android:text="动画"
+            android:textColor="@color/white" />
 
-    <TextView
-        android:id="@+id/tv_first_user"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:background="@drawable/selector_five_page_text_view"
-        android:gravity="center"
-        android:text="用户一"
-        android:textColor="@color/white" />
+        <TextView
+            android:id="@+id/tv_custom_pull_to_refresh"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:background="@drawable/selector_five_page_text_view"
+            android:gravity="center"
+            android:text="自定义\n下拉刷新"
+            android:textColor="@color/white" />
 
-    <TextView
-        android:id="@+id/tv_second_user"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:background="@drawable/selector_five_page_text_view"
-        android:gravity="center"
-        android:text="用户二"
-        android:textColor="@color/white" />
+        <TextView
+            android:id="@+id/tv_first_user"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:background="@drawable/selector_five_page_text_view"
+            android:gravity="center"
+            android:text="用户一"
+            android:textColor="@color/white" />
 
-    <TextView
-        android:id="@+id/tv_custom_view"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:background="@drawable/selector_five_page_text_view"
-        android:gravity="center"
-        android:text="自定义View"
-        android:textColor="@color/white" />
+        <TextView
+            android:id="@+id/tv_second_user"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:background="@drawable/selector_five_page_text_view"
+            android:gravity="center"
+            android:text="用户二"
+            android:textColor="@color/white" />
 
-    <TextView
-        android:id="@+id/tv_pay_view"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:background="@drawable/selector_five_page_text_view"
-        android:gravity="center"
-        android:text="webView支付"
-        android:textColor="@color/white" />
+        <TextView
+            android:id="@+id/tv_custom_view"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:background="@drawable/selector_five_page_text_view"
+            android:gravity="center"
+            android:text="自定义View"
+            android:textColor="@color/white" />
 
-    <TextView
-        android:id="@+id/tv_soft_input"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:background="@drawable/selector_five_page_text_view"
-        android:gravity="center"
-        android:text="软键盘"
-        android:textColor="@color/white" />
-    <TextView
-        android:id="@+id/tv_load_more"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:background="@drawable/selector_five_page_text_view"
-        android:gravity="center"
-        android:text="recycleView加载更多"
-        android:textColor="@color/white" />
+        <TextView
+            android:id="@+id/tv_pay_view"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:background="@drawable/selector_five_page_text_view"
+            android:gravity="center"
+            android:text="webView支付"
+            android:textColor="@color/white" />
 
+        <TextView
+            android:id="@+id/tv_soft_input"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:background="@drawable/selector_five_page_text_view"
+            android:gravity="center"
+            android:text="软键盘"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_load_more"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:background="@drawable/selector_five_page_text_view"
+            android:gravity="center"
+            android:text="recycleView加载更多"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_scan_code"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/selector_five_page_text_view"
+            android:gravity="center"
+            android:text="扫码"
+            android:textColor="@color/white" />
+    </LinearLayout>
 
     <com.ruihe.demo.common.view.FlowLayout
         android:id="@+id/lay_flow"
