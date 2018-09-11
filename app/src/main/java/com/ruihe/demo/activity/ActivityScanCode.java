@@ -39,13 +39,11 @@ public class ActivityScanCode extends CaptureActivity implements View.OnClickLis
     @Override
     public void onActivityViewCreated() {
         super.onActivityViewCreated();
-        initVariable();
         initView();
     }
     @Override
     protected void onPause() {
         super.onPause();
-
     }
 
     @Override
@@ -56,10 +54,6 @@ public class ActivityScanCode extends CaptureActivity implements View.OnClickLis
     protected void onDestroy() {
         super.onDestroy();
         mAnimation.cancel();
-    }
-
-    private void initVariable() {
-
     }
 
     private void initView() {
@@ -96,7 +90,6 @@ public class ActivityScanCode extends CaptureActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
             default:
                 break;
         }

@@ -4,6 +4,7 @@ package com.zbar.lib.decode;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
 
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.DecodeHintType;
@@ -22,7 +23,7 @@ import java.util.Hashtable;
 
 final class DecodeHandler extends Handler {
 
-    CaptureActivity activity = null;
+    CaptureActivity activity;
     private final MultiFormatReader multiFormatReader;
 
     DecodeHandler(CaptureActivity activity, Hashtable<DecodeHintType, Object> hints) {
@@ -36,8 +37,10 @@ final class DecodeHandler extends Handler {
         switch (message.what) {
             case R.id.decode:
                 decode((byte[]) message.obj, message.arg1, message.arg2);
+                Log.d("DecodeHandler", "handleMessage");
                 break;
             case R.id.quit:
+                Log.d("DecodeHandler", "handleMessage quit");
                 Looper.myLooper().quit();
                 break;
         }
@@ -53,27 +56,35 @@ final class DecodeHandler extends Handler {
         width = height;
         height = tmp;
 
+        int[] location = new int[2];
+        activity.mCropLayout.getLocationOnScreen(location);
+        int left = location[0];
+        int top = location[1];
+        Log.d("DecodeHandler", "left："+left);
+        Log.d("DecodeHandler", "top："+top);
         PlanarYUVLuminanceSource source = CameraManager.get().buildLuminanceSource(rotatedData, width, height
-                , activity.mCropLayout.getLeft()
-                , activity.mCropLayout.getTop()
+                , left
+                , top
                 , DensityUtil.dip2px(activity, 250)
                 , DensityUtil.dip2px(activity, 250));
         BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
         Result rawResult = null;
+        Log.d("DecodeHandler", "handleMessage1");
         try {
             rawResult = multiFormatReader.decodeWithState(bitmap);
         } catch (ReaderException re) {
             // continue
+            Log.d("DecodeHandler", "ReaderException扫码异常:" + re.getMessage());
         } finally {
             multiFormatReader.reset();
         }
-
 	/*	ZbarManager manager = new ZbarManager();
 		String result = manager.decode(rotatedData, width, height, true,
 				activity.getX(), activity.getY(), activity.getCropWidth(),
 				activity.getCropHeight());*/
 
         if (rawResult != null) {
+            Log.d("DecodeHandler", "handleMessage2"+rawResult.getText());
             if (null != activity.getHandler()) {
                 Message msg = new Message();
                 msg.obj = rawResult.getText();

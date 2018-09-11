@@ -97,10 +97,10 @@ public abstract class CaptureActivity extends BaseActivity implements Callback {
     @Override
     public void onActivityViewCreated() {
         // 初始化 CameraManager
-        CameraManager.init(getApplication());
         mActivity = this;
         hasSurface = false;
         inactivityTimer = new InactivityTimer(mActivity);
+        CameraManager.init(getApplication());
     }
 
 
