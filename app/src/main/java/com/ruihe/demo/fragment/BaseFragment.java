@@ -9,6 +9,10 @@ import android.view.ViewGroup;
 
 import com.ruihe.demo.activity.BaseActivity;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 /**
  * 描述：所有碎片的基类
  * Created by ruihe on 2016/4/28.
@@ -17,6 +21,7 @@ public abstract class BaseFragment extends Fragment {
 
 
     public BaseActivity holder;
+    private Unbinder mUnbinder;
 
 
     @Override
@@ -66,5 +71,16 @@ public abstract class BaseFragment extends Fragment {
 
     public abstract void onDetached();
 
+    protected void setUnBinder(Unbinder unBinder) {
+        mUnbinder = unBinder;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mUnbinder != null) {
+            mUnbinder.unbind();
+        }
+    }
 
 }

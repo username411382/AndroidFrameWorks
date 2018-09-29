@@ -8,10 +8,14 @@
     <color name="txt_gray">#cccccc</color>
     <color name="bg_clickable_pressed_gray">#ebebeb</color>
     <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="black1">#0e0f13</color>
     <color name="pressed_black">#4000</color>
     <color name="transparent">#00000000</color>
     <color name="base_blue">#288eff</color>
     <color name="bg_default_color">#dedede</color>
+    <color name="color_3_half">#80999999</color>
+    <color name="color_3">#999999</color>
 
 
     <!--自定义对话框颜色背景-->
@@ -29,6 +33,7 @@
     <color name="yellow">#F99503</color>
     <color name="gray_color">#ffe8ecef</color>
     <color name="bg_sort_color">#EDEDED</color>
+    <color name="red">#80ff6600</color>
 
     <!--聊天-->
     <color name="chat_bg">#dedede</color>

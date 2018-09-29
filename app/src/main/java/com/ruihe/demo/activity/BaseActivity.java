@@ -13,6 +13,8 @@ import com.ruihe.demo.common.ActivitiesContainer;
 import com.ruihe.demo.common.view.TitleView;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import qiu.niorgai.StatusBarCompat;
 
 
@@ -25,6 +27,7 @@ public abstract class BaseActivity extends FragmentActivity {
     public static final String INTENT_BUNDLE_EXTRA = "intent_bundle";
     public TitleView mTitleView;
     private RxPermissions mRxPermissions;
+    private Unbinder mUnbinder;
 
     @Override
     protected void onCreate(Bundle arg0) {
@@ -33,11 +36,12 @@ public abstract class BaseActivity extends FragmentActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(getViewId());
         mTitleView = (TitleView) findViewById(R.id.common_title_view);
+        mRxPermissions = new RxPermissions(this);
         onActivityViewCreated();
         // 启动activity时添加Activity到堆栈
         ActivitiesContainer.getInstance().addActivity(this);
         StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colorLightBlue));
-        mRxPermissions = new RxPermissions(this);
+
     }
 
     @Override
@@ -57,6 +61,9 @@ public abstract class BaseActivity extends FragmentActivity {
     protected void onDestroy() {
         // 结束Activity&从栈中移除该Activity
         ActivitiesContainer.getInstance().removeActivity(this);
+        if (mUnbinder != null) {
+            mUnbinder.unbind();
+        }
         super.onDestroy();
     }
 
@@ -77,11 +84,17 @@ public abstract class BaseActivity extends FragmentActivity {
     public abstract int getViewId();
 
     public abstract void onActivityViewCreated();
+
     /**
      * 获取权限请求类
      */
     protected RxPermissions getRxPermissions() {
         return mRxPermissions;
     }
+
+    protected void setUnBinder(Unbinder unBinder) {
+        mUnbinder = unBinder;
+    }
+
 
 }

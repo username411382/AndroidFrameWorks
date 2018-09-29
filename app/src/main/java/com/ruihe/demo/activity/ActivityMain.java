@@ -47,6 +47,7 @@ public class ActivityMain extends BaseActivity implements View.OnClickListener {
 
     private void initVariable() {
         mActivity = this;
+        ActivityRandom.redirectToActivity(this);
         mFragmentManager = getSupportFragmentManager();
         mFragments = new Fragment[5];
         mLyPages = new LinearLayout[5];

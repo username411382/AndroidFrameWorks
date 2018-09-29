@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.ruihe.demo.R;
 import com.ruihe.demo.activity.ActivityAnimation;
+import com.ruihe.demo.activity.ActivityRandom;
 import com.ruihe.demo.activity.ActivityRecycleLoadMore;
 import com.ruihe.demo.activity.ActivityScanCode;
 import com.ruihe.demo.activity.ActivityShowCustomView;
@@ -40,6 +41,7 @@ public class FragmentFive extends BaseFragment implements View.OnClickListener {
         view.findViewById(R.id.tv_shopping_car).setOnClickListener(this);
         view.findViewById(R.id.tv_load_more).setOnClickListener(this);
         view.findViewById(R.id.tv_scan_code).setOnClickListener(this);
+        view.findViewById(R.id.tv_random).setOnClickListener(this);
         bindData();
     }
 
@@ -100,6 +102,9 @@ public class FragmentFive extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.tv_scan_code://扫码
                 ActivityScanCode.redirectToActivity(holder);
+                break;
+            case R.id.tv_random://随机事件
+                ActivityRandom.redirectToActivity(holder);
                 break;
             default:
                 break;

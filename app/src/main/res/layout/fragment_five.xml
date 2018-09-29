@@ -108,6 +108,17 @@
             android:gravity="center"
             android:text="扫码"
             android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_random"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/selector_five_page_text_view"
+            android:gravity="center"
+            android:text="随机事件"
+            android:textColor="@color/white" />
+
     </LinearLayout>
 
     <com.ruihe.demo.common.view.FlowLayout
