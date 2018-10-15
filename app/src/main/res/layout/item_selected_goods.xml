@@ -24,6 +24,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <EditText
+        android:id="@+id/et_num"
+        android:layout_marginLeft="15dp"
+        android:layout_width="100dp"
+        android:background="#dedede"
+        android:hint="数量"
+        android:inputType="text"
+        android:layout_height="45dp" />
+
     <LinearLayout
         android:gravity="right"
         android:layout_toRightOf="@id/tvPrice"

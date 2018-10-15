@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.alibaba.fastjson.JSON;
 import com.ruihe.demo.R;
 import com.ruihe.demo.common.utils.Constants.MainPage;
 import com.ruihe.demo.common.chat.util.RongIMUtil;
@@ -16,6 +17,11 @@ import com.ruihe.demo.fragment.FragmentOne;
 import com.ruihe.demo.fragment.FragmentThree;
 import com.ruihe.demo.fragment.FragmentTwo;
 
+import java.util.ArrayList;
+
+import cn.qqtheme.framework.entity.City;
+import cn.qqtheme.framework.entity.Province;
+import cn.qqtheme.framework.util.ConvertUtils;
 import io.rong.imlib.RongIMClient;
 import qiu.niorgai.StatusBarCompat;
 
@@ -72,6 +78,26 @@ public class ActivityMain extends BaseActivity implements View.OnClickListener {
 
         //连接融云
         //connectRongIM(Constants.userTokens[0]);
+        try {
+            ArrayList<Province> provinces = new ArrayList<>();
+            String json = ConvertUtils.toString(mActivity.getAssets().open("city.json"));
+            provinces.addAll(JSON.parseArray(json, Province.class));
+
+            for (int i = 0; i < provinces.size(); i++) {
+                if (provinces.get(i).getAreaName().equals("贵州省")) {
+                    for (int j = 0; j < provinces.get(i).getCities().size(); j++) {
+                        City city = provinces.get(i).getCities().get(j);
+                        Log.d("ruihe", "city: " + city.getAreaName());
+                    }
+
+                }
+
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 

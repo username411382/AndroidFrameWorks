@@ -1,10 +1,13 @@
 package com.ruihe.demo.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.ruihe.demo.R;
@@ -35,8 +38,42 @@ public class AdapterSelect extends RecyclerView.Adapter<AdapterSelect.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        GoodsItem item = dataList.valueAt(position);
+    public void onBindViewHolder(final ViewHolder holder, int position) {
+        final GoodsItem item = dataList.valueAt(position);
+
+        holder.etNum.setText(item.num);
+
+
+        final TextWatcher textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                item.num = holder.etNum.getText().toString().trim();
+            }
+        };
+
+
+        holder.etNum.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    holder.etNum.addTextChangedListener(textWatcher);
+                } else {
+                    holder.etNum.removeTextChangedListener(textWatcher);
+                }
+            }
+        });
+
+
         holder.bindData(item);
     }
 
@@ -51,6 +88,7 @@ public class AdapterSelect extends RecyclerView.Adapter<AdapterSelect.ViewHolder
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private GoodsItem item;
         private TextView tvCost, tvCount, tvAdd, tvMinus, tvName;
+        private EditText etNum;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -59,6 +97,7 @@ public class AdapterSelect extends RecyclerView.Adapter<AdapterSelect.ViewHolder
             tvCount = (TextView) itemView.findViewById(R.id.count);
             tvMinus = (TextView) itemView.findViewById(R.id.tvMinus);
             tvAdd = (TextView) itemView.findViewById(R.id.tvAdd);
+            etNum = itemView.findViewById(R.id.et_num);
             tvMinus.setOnClickListener(this);
             tvAdd.setOnClickListener(this);
         }

@@ -11,6 +11,7 @@ public class GoodsItem {
     public String typeName;
     public double price;
     public int count;
+    public String num;
 
     public GoodsItem(int id, double price, String name, int typeId, String typeName) {
         this.id = id;

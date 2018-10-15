@@ -39,5 +39,6 @@ dependencies {
     // Lifecycle
     implementation 'android.arch.lifecycle:extensions:1.1.1'
     implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
-
+    implementation 'com.google.zxing:core:3.2.1'
+    implementation 'cn.qqtheme.framework:WheelPicker:latest.release'
 }

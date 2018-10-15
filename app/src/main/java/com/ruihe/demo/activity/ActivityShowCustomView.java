@@ -1,6 +1,8 @@
 package com.ruihe.demo.activity;
 
 
+import android.support.v7.widget.RecyclerView;
+
 import com.ruihe.demo.R;
 
 /**
@@ -11,6 +13,9 @@ import com.ruihe.demo.R;
 public class ActivityShowCustomView extends BaseActivity {
 
 
+
+
+
     @Override
     public int getViewId() {
         return R.layout.activity_show_custom_view;
@@ -18,6 +23,9 @@ public class ActivityShowCustomView extends BaseActivity {
 
     @Override
     public void onActivityViewCreated() {
+
+        RecyclerView recyclerView = findViewById(R.id.rcl_view);
+
 
 
     }
