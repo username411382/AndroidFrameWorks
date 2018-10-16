@@ -2,19 +2,11 @@ package com.ruihe.demo.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.ScaleAnimation;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
-import com.ruihe.demo.R;
-import com.ruihe.demo.common.utils.DensityUtil;
 import com.ruihe.demo.common.utils.ToastUtil;
-import com.zbar.lib.CaptureActivity;
+import com.zxing.CaptureActivity;
 
 
 /**
@@ -28,19 +20,12 @@ public class ActivityScanCode extends CaptureActivity implements View.OnClickLis
         context.startActivity(intent);
     }
 
-    private ImageView ivOpenLight;
-    private ScaleAnimation mAnimation;
 
     @Override
-    public int getViewId() {
-        return R.layout.activity_scan;
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
-    @Override
-    public void onActivityViewCreated() {
-        super.onActivityViewCreated();
-        initView();
-    }
     @Override
     protected void onPause() {
         super.onPause();
@@ -53,38 +38,14 @@ public class ActivityScanCode extends CaptureActivity implements View.OnClickLis
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mAnimation.cancel();
-    }
-
-    private void initView() {
-        mTitleView.setTitle("扫码");
-        ImageView ivQrLineView = findViewById(R.id.capture_scan_line);
-        RelativeLayout rlContainer = findViewById(R.id.capture_container);
-        RelativeLayout rlCropLayout = findViewById(R.id.capture_crop_layout);
-
-        mContainer = rlContainer;
-        mCropLayout = rlCropLayout;
-        mAnimation = new ScaleAnimation(1.0f, 1.0f, 0.0f, 1.0f);
-        mAnimation.setRepeatCount(-1);
-        mAnimation.setRepeatMode(Animation.RESTART);
-        mAnimation.setInterpolator(new LinearInterpolator());
-        mAnimation.setDuration(1200);
-        ivQrLineView.startAnimation(mAnimation);
-        FrameLayout frameLayout = (FrameLayout) mTitleView.addRightDrawableMenu(this, R.drawable.ic_scan_flash_light_off,30
-                ,30, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        light(ivOpenLight);
-                    }
-                });
-        ivOpenLight = (ImageView) frameLayout.getChildAt(0);
     }
 
 
     @Override
-    public void onScanSuccess(String result) {
-        ToastUtil.show(result);
-        finish();
+    protected void handleResult(String resultString) {
+        ToastUtil.show(resultString);
+        restartPreview();
+
     }
 
     @Override

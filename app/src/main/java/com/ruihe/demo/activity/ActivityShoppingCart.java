@@ -29,6 +29,7 @@ import com.ruihe.demo.adapter.AdapterSelect;
 import com.ruihe.demo.adapter.AdapterType;
 import com.ruihe.demo.adapter.DividerDecoration;
 import com.ruihe.demo.bean.GoodsItem;
+import com.ruihe.demo.common.utils.DensityUtil;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -349,6 +350,15 @@ public class ActivityShoppingCart extends BaseActivity implements View.OnClickLi
         rvSelected.setLayoutManager(new LinearLayoutManager(this));
         TextView clear = (TextView) view.findViewById(R.id.clear);
         clear.setOnClickListener(this);
+        rvSelected.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState==RecyclerView.SCROLL_STATE_DRAGGING){
+                    DensityUtil.closeSoftInput(ActivityShoppingCart.this);
+                }
+            }
+        });
         selectAdapter = new AdapterSelect(this, selectedList);
         rvSelected.setAdapter(selectAdapter);
         return view;

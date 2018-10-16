@@ -1,8 +1,4 @@
 apply plugin: 'com.android.application'
-static def releaseTime() {
-    return new Date().format("hhmmssMMdd")
-}
-
 
 android {
     compileSdkVersion setup.compileSdk
@@ -21,16 +17,6 @@ android {
         }
     }
 
-    android.applicationVariants.all { variant ->
-        variant.outputs.all {
-            if (variant.buildType.name == "debug") {
-                outputFileName = "AndroidFrameWorks_debug_v${defaultConfig.versionName}_${releaseTime()}.apk"
-            } else if (variant.buildType.name == "release") {
-                outputFileName = "AndroidFrameWorks_release_v${defaultConfig.versionName}_${releaseTime()}.apk"
-            }
-        }
-    }
-
     buildToolsVersion '26.0.2'
 }
 
@@ -44,7 +30,6 @@ dependencies {
     compile "com.android.support:recyclerview-v7:${versions.supportLib}"
     compile "com.android.support:support-v4:${versions.supportLib}"
     compile "com.android.support:appcompat-v7:${versions.supportLib}"
-    implementation "com.android.support:design:${versions.supportLib}"
     compile('com.github.niorgai:StatusBarCompat:2.1.4', {
         exclude group: 'com.android.support'
     })
@@ -54,9 +39,6 @@ dependencies {
     // Lifecycle
     implementation 'android.arch.lifecycle:extensions:1.1.1'
     implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
-    implementation 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-
-    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.15'
-
+    implementation 'com.google.zxing:core:3.2.1'
+    implementation 'cn.qqtheme.framework:WheelPicker:latest.release'
 }

@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-package com.zbar.lib.camera;
+package com.zxing.camera;
 
 import android.graphics.Bitmap;
 
 import com.google.zxing.LuminanceSource;
 
 /**
- * 二维码和条形码解析
  * This object extends LuminanceSource around an array of YUV data returned from the camera driver,
  * with the option to crop to a rectangle within the full data. This can be used to exclude
  * superfluous pixels around the perimeter and speed up decoding.

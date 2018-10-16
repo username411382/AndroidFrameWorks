@@ -75,6 +75,10 @@
         <activity android:name=".common.chat.activity.ActivityChat" />
         <activity android:name=".activity.ActivityPay" />
 
+        <activity
+            android:name=".activity.CircleViewFlowExample"
+            android:screenOrientation="portrait" />
+
         <!--监听软键盘弹起-->
         <activity android:name=".activity.ActivityObservedSoftInput" />
 
