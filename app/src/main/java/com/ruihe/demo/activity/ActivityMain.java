@@ -56,6 +56,10 @@ public class ActivityMain extends BaseActivity implements View.OnClickListener {
         mFragmentManager = getSupportFragmentManager();
         mFragments = new Fragment[5];
         mLyPages = new LinearLayout[5];
+
+        // TODO: 2019/1/14  工作分支提交到主分支
+
+        //dev 分支合并了
     }
 
     private void initView() {
