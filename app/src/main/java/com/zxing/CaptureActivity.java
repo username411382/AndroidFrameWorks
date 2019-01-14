@@ -232,8 +232,8 @@ public class CaptureActivity extends Activity implements Callback {
     }
 
     protected void initView() {
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_scan);
 
         viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
