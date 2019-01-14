@@ -26,7 +26,7 @@ import io.rong.imlib.RongIMClient;
 import qiu.niorgai.StatusBarCompat;
 
 /**
- * 描述：主页面 分支加上的
+ * 描述：主页面 分支加上的。但是主分支又把它切换回去了
  * Created by ruihe on 2016/4/28.
  */
 public class ActivityMain extends BaseActivity implements View.OnClickListener {
