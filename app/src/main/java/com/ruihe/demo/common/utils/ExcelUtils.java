@@ -1,5 +1,7 @@
 package com.ruihe.demo.common.utils;
 
+import android.os.Message;
+
 import com.lidroid.xutils.util.LogUtils;
 
 import java.io.File;
@@ -29,23 +31,39 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class ExcelUtils {
     /**
+     * 文件生成结果监听
+     */
+    public interface FileResultListener {
+        /**
+         * 生成成功
+         *
+         * @param filePath 文件路径
+         */
+        void onCreateSuccess(String filePath);
+
+        /**
+         * 生成失败
+         */
+        void onCreateFail();
+    }
+
+    /**
      * 读取Excel文件
      * a）Workbook、Sheet、Row、Cell等为接口；
      * b）HSSFWorkbook、HSSFSheet、HSSFRow、HSSFCell为97-2003版本对应的处理实现类；
      * c）XSSFWorkbook、XSSFSheet、XSSFRow、XSSFCell为2007+版本对应的处理实现类；
      *
      * @param file
-     * @throws FileNotFoundException
      */
-    public static void readExcel(File file) throws FileNotFoundException {
+    public static void readExcel(File file, FileResultListener fileResultListener) throws Exception {
         if (file == null) {
             Log.logLongInfo("NullFile读取Excel出错，文件为空文件");
-            return;
+            throw new Exception("NullFile读取Excel出错，文件为空文件");
         }
 
         if (!checkIfExcelFile(file)) {
             ToastUtil.show("非法格式");
-            return;
+            throw new Exception("非法格式");
         }
 
         InputStream stream = new FileInputStream(file);
@@ -96,10 +114,15 @@ public class ExcelUtils {
             raf.seek(file.length());
             raf.write(sb.toString().getBytes());
             raf.close();
-            ToastUtil.show("生成成功");
+            if (fileResultListener != null) {
+                fileResultListener.onCreateSuccess(vcfFile.getPath());
+            }
         } catch (Exception e) {
             /* proper exception handling to be here */
             Log.logLongInfo(e.toString());
+            if (fileResultListener != null) {
+                fileResultListener.onCreateFail();
+            }
         }
 
     }

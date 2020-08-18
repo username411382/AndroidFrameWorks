@@ -10,6 +10,7 @@
         android:id="@+id/common_title_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="exit"
         app:mytitle="Excel转.vcf(电话簿)" />
 
     <TextView
@@ -17,20 +18,43 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:lineSpacingExtra="5dp"
-        android:text="操作说明:\n1、导入Excel\n2、打开生成的.vcf即可导入电话簿"
-        android:textColor="#999"
-        android:textSize="16sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:lineSpacingExtra="5dp"
-        android:text="点击选择Excel文件(.xls)"
-        android:layout_marginTop="20dp"
-        android:onClick="pickExcelFile"
+        android:text="操作说明:\n1、点击选择Excel文件(.xls)\n2、点击转换为电话簿(.vcf)\n3、打开生成的.vcf即可导入电话簿"
         android:textColor="#999"
         android:textSize="18sp" />
 
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:gravity="center"
+       android:layout_height="wrap_content"
+       android:orientation="vertical">
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:lineSpacingExtra="5dp"
+           android:text="点击选择Excel文件(.xls)"
+           android:layout_marginTop="20dp"
+           android:onClick="pickExcelFile"
+           android:textColor="#000"
+           android:textSize="18sp" />
+       <TextView
+           android:id="@+id/tv_pick_file_name"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:lineSpacingExtra="5dp"
+           android:text="已选择Excel文件(.xls)名称:"
+           android:layout_marginTop="5dp"
+           android:onClick="pickExcelFile"
+           android:textColor="#999"
+           android:textSize="16sp" />
 
-
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:lineSpacingExtra="5dp"
+           android:text="点击转换为电话簿(.vcf)"
+           android:layout_marginTop="20dp"
+           android:onClick="buildVcf"
+           android:textColor="#000"
+           android:textSize="18sp" />
+   </LinearLayout>
 </LinearLayout>

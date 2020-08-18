@@ -104,6 +104,8 @@ public class ActivityMain extends BaseActivity implements View.OnClickListener {
             e.printStackTrace();
         }
 
+        redirectToActivity(holder,ActivityCreateVcf.class);
+
     }
 
     public void connectRongIM(String token) {

@@ -38,6 +38,8 @@ public abstract class BaseActivity extends FragmentActivity {
     public TitleView mTitleView;
     private RxPermissions mRxPermissions;
     private Unbinder mUnbinder;
+    protected BaseActivity holder;
+
 
     @Override
     protected void onCreate(Bundle arg0) {
@@ -45,13 +47,13 @@ public abstract class BaseActivity extends FragmentActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(getViewId());
+        holder = this;
         mTitleView = (TitleView) findViewById(R.id.common_title_view);
         mRxPermissions = new RxPermissions(this);
         onActivityViewCreated();
         // 启动activity时添加Activity到堆栈
         ActivitiesContainer.getInstance().addActivity(this);
         StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colorLightBlue));
-
     }
 
     @Override
@@ -108,7 +110,7 @@ public abstract class BaseActivity extends FragmentActivity {
 
 
     @SuppressLint("CheckResult")
-    protected void requestStorePermission(){
+    protected void requestStorePermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             getRxPermissions().requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE).subscribe(new Consumer<Permission>() {
                 @Override
