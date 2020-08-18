@@ -19,6 +19,8 @@ android {
         targetSdkVersion setup.targetSdk
         versionCode 1
         versionName "1.0.0"
+        multiDexEnabled true
+
     }
     buildTypes {
         release {
@@ -57,6 +59,7 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'eu.the4thfloor.volley:com.android.volley:2015.05.28'
+    implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.liulishuo.filedownloader:library:0.2.7'
     implementation 'se.emilsjolander:stickylistheaders:2.7.0'
     implementation 'com.flipboard:bottomsheet-core:1.5.1'
@@ -75,10 +78,13 @@ dependencies {
     implementation 'android.arch.lifecycle:extensions:1.1.1'
     implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
     implementation 'com.jakewharton:butterknife:8.8.1'
+    implementation files('libs\\poi-3.12-android-a.jar')
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'cn.qqtheme.framework:WheelPicker:1.5.6'
     implementation 'com.google.zxing:core:3.2.1'
 
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.15'
+    implementation 'com.leon:lfilepickerlibrary:1.7.0'
+
 
 }

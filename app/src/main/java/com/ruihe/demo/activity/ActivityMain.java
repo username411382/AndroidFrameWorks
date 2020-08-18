@@ -70,6 +70,7 @@ public class ActivityMain extends BaseActivity implements View.OnClickListener {
         mLyPages[4] = (LinearLayout) findViewById(R.id.ly_five);
     }
 
+
     private void initListener() {
         for (LinearLayout lyPage : mLyPages) {
             lyPage.setOnClickListener(this);

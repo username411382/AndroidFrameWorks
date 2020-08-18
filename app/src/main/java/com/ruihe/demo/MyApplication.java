@@ -2,6 +2,8 @@ package com.ruihe.demo;
 
 import android.app.Application;
 
+import androidx.multidex.MultiDexApplication;
+
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -13,7 +15,7 @@ import com.ruihe.demo.common.utils.CrashHandler;
  * 描述：全局的Application
  * Created by ruihe on 2016/4/28.
  */
-public class MyApplication extends Application {
+public class MyApplication extends MultiDexApplication {
 
     private static MyApplication instance;
     private RequestQueue mQueue;

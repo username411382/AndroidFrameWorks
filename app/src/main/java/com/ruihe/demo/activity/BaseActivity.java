@@ -1,20 +1,30 @@
 package com.ruihe.demo.activity;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.FragmentActivity;
 import android.view.Window;
 
+import com.ruihe.demo.MyApplication;
 import com.ruihe.demo.R;
 import com.ruihe.demo.common.ActivitiesContainer;
 import com.ruihe.demo.common.view.TitleView;
+import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.reactivex.functions.Consumer;
 import qiu.niorgai.StatusBarCompat;
 
 
@@ -96,5 +106,41 @@ public abstract class BaseActivity extends FragmentActivity {
         mUnbinder = unBinder;
     }
 
+
+    @SuppressLint("CheckResult")
+    protected void requestStorePermission(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getRxPermissions().requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE).subscribe(new Consumer<Permission>() {
+                @Override
+                public void accept(Permission permission) throws Exception {
+
+                    if (!permission.granted) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(BaseActivity.this);
+                        builder.setTitle("提示");
+                        builder.setMessage("请开启存储权限");
+                        builder.setCancelable(false);
+                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent();
+                                intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                Uri uri = Uri.fromParts("package", MyApplication.getInstance().getPackageName(), null);
+                                intent.setData(uri);
+                                startActivity(intent);
+                                finish();
+                            }
+                        });
+                        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        });
+                        builder.create().show();
+                    }
+                }
+            });
+        }
+    }
 
 }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#dedede"
+    android:orientation="vertical">
+
+    <com.ruihe.demo.common.view.TitleView
+        android:id="@+id/common_title_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:mytitle="Excel转.vcf(电话簿)" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:lineSpacingExtra="5dp"
+        android:text="操作说明:\n1、导入Excel\n2、打开生成的.vcf即可导入电话簿"
+        android:textColor="#999"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="5dp"
+        android:text="点击选择Excel文件(.xls)"
+        android:layout_marginTop="20dp"
+        android:onClick="pickExcelFile"
+        android:textColor="#999"
+        android:textSize="18sp" />
+
+
+
+</LinearLayout>
